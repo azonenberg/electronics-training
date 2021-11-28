@@ -1,0 +1,180 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L device:R R1
+U 1 1 61A2D029
+P 3400 3750
+F 0 "R1" V 3300 3750 50  0000 C CNN
+F 1 "9M" V 3400 3750 50  0000 C CNN
+F 2 "" V 3330 3750 50  0001 C CNN
+F 3 "" H 3400 3750 50  0001 C CNN
+	1    3400 3750
+	0    1    1    0   
+$EndComp
+$Comp
+L device:C_Variable C2
+U 1 1 61A2D4C3
+P 4650 3900
+F 0 "C2" H 4765 3946 50  0000 L CNN
+F 1 "Compensation" H 4765 3855 50  0000 L CNN
+F 2 "" H 4650 3900 50  0001 C CNN
+F 3 "" H 4650 3900 50  0001 C CNN
+	1    4650 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L device:C C3
+U 1 1 61A2DF99
+P 5700 3900
+F 0 "C3" H 5815 3946 50  0000 L CNN
+F 1 "10-15 pF" H 5815 3855 50  0000 L CNN
+F 2 "" H 5738 3750 50  0001 C CNN
+F 3 "" H 5700 3900 50  0001 C CNN
+	1    5700 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L device:R R2
+U 1 1 61A2E6F9
+P 6350 3900
+F 0 "R2" H 6420 3946 50  0000 L CNN
+F 1 "1M" H 6420 3855 50  0000 L CNN
+F 2 "" V 6280 3900 50  0001 C CNN
+F 3 "" H 6350 3900 50  0001 C CNN
+	1    6350 3900
+	1    0    0    -1  
+$EndComp
+Connection ~ 5700 4050
+Wire Wire Line
+	5700 4050 6350 4050
+Wire Wire Line
+	5700 3750 6350 3750
+Connection ~ 5700 3750
+Wire Wire Line
+	3550 3750 4650 3750
+$Comp
+L device:C C1
+U 1 1 61A2F424
+P 3400 3500
+F 0 "C1" V 3148 3500 50  0000 C CNN
+F 1 "10 pF" V 3239 3500 50  0000 C CNN
+F 2 "" H 3438 3350 50  0001 C CNN
+F 3 "" H 3400 3500 50  0001 C CNN
+	1    3400 3500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3250 3750 3250 3500
+Wire Wire Line
+	3550 3500 3550 3750
+Connection ~ 3550 3750
+$Comp
+L Connector:Conn_01x01 J1
+U 1 1 61A30969
+P 2450 3750
+F 0 "J1" H 2368 3525 50  0000 C CNN
+F 1 "TIP" H 2368 3616 50  0000 C CNN
+F 2 "" H 2450 3750 50  0001 C CNN
+F 3 "~" H 2450 3750 50  0001 C CNN
+	1    2450 3750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2650 3750 3250 3750
+Connection ~ 3250 3750
+$Comp
+L device:L L1
+U 1 1 61A312E7
+P 3400 4050
+F 0 "L1" V 3219 4050 50  0000 C CNN
+F 1 "GROUNDLEAD" V 3310 4050 50  0000 C CNN
+F 2 "" H 3400 4050 50  0001 C CNN
+F 3 "" H 3400 4050 50  0001 C CNN
+	1    3400 4050
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Conn_01x01 J2
+U 1 1 61A32221
+P 2450 4050
+F 0 "J2" H 2350 3950 50  0000 C CNN
+F 1 "GROUND" H 2350 4200 50  0000 C CNN
+F 2 "" H 2450 4050 50  0001 C CNN
+F 3 "~" H 2450 4050 50  0001 C CNN
+	1    2450 4050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2650 4050 3250 4050
+Wire Wire Line
+	3550 4050 4650 4050
+Text Label 6650 4050 0    50   ~ 0
+SCOPEGROUND
+Wire Wire Line
+	6650 4050 6350 4050
+Connection ~ 6350 4050
+Text Label 6650 3750 0    50   ~ 0
+SCOPEFRONTEND
+Wire Wire Line
+	6650 3750 6350 3750
+Connection ~ 6350 3750
+Text Notes 3900 4250 0    79   ~ 16
+Cable
+Text Notes 4600 4250 0    79   ~ 16
+BNC box
+Text Notes 5900 4250 0    79   ~ 16
+Scope
+Text Notes 3050 4250 0    79   ~ 16
+Handpiece
+Wire Notes Line
+	2250 3150 2250 4400
+Wire Notes Line
+	2250 4400 3750 4400
+Wire Notes Line
+	3750 4400 3750 3150
+Wire Notes Line
+	3750 3150 2250 3150
+Wire Notes Line
+	3850 3150 3850 4400
+Wire Notes Line
+	3850 4400 4400 4400
+Wire Notes Line
+	4400 4400 4400 3150
+Wire Notes Line
+	4400 3150 3850 3150
+Wire Notes Line
+	4500 3150 4500 4400
+Wire Notes Line
+	4500 4400 5300 4400
+Wire Notes Line
+	5300 4400 5300 3150
+Wire Notes Line
+	5300 3150 4500 3150
+Wire Wire Line
+	4650 3750 5700 3750
+Connection ~ 4650 3750
+Wire Wire Line
+	4650 4050 5700 4050
+Connection ~ 4650 4050
+Wire Notes Line
+	5350 3150 5350 4400
+Wire Notes Line
+	5350 4400 7350 4400
+Wire Notes Line
+	7350 4400 7350 3150
+Wire Notes Line
+	7350 3150 5350 3150
+$EndSCHEMATC
