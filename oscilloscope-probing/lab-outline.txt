@@ -1,0 +1,21 @@
+Heisenbugs
+	Non-monotonic edge introduced by R-C probe breaks some digital system
+	Crystal oscillator horribly loaded, or stops entirely, by R-C probe
+		add R between XO and crystal on test board to reduce margin to make sure this happens
+		maybe compare relative freq of 32 kHz RTC and external crystal?
+	500R transmission line probe breaks I2C
+
+Characterizing an unknown probe??
+	Pico TA061
+	500 ohm DC loading (transmission line probe)
+	Lots of overshoot/peaking
+	Huge input C (as transmission line probes go)
+
+Test board
+	STM32F031 w/ external crystal
+	DS125DF111 (retimer, but also does 10G PRBS generation)
+	Test point on buffered MCU clock output for crystal output
+	Figure out some way to inject power supply noise into an oscillator (ring)
+		SMA noise input AC coupled into rail, drive from SSG
+	I2C I/O expander + LED blinky
+	Some kind of noisy thing you can use an EM probe on
