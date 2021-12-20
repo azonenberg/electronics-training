@@ -1,0 +1,147 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector:Conn_01x01 J1
+U 1 1 61A47F94
+P 2800 2950
+F 0 "J1" H 2718 3167 50  0000 C CNN
+F 1 "TIP" H 2718 3076 50  0000 C CNN
+F 2 "" H 2800 2950 50  0001 C CNN
+F 3 "~" H 2800 2950 50  0001 C CNN
+	1    2800 2950
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01 J2
+U 1 1 61A48B1F
+P 2800 3550
+F 0 "J2" H 2718 3767 50  0000 C CNN
+F 1 "GND" H 2718 3676 50  0000 C CNN
+F 2 "" H 2800 3550 50  0001 C CNN
+F 3 "~" H 2800 3550 50  0001 C CNN
+	1    2800 3550
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01 J4
+U 1 1 61A496B7
+P 5900 3550
+F 0 "J4" H 5818 3325 50  0000 C CNN
+F 1 "SCOPEGND" H 5818 3416 50  0000 C CNN
+F 2 "" H 5900 3550 50  0001 C CNN
+F 3 "~" H 5900 3550 50  0001 C CNN
+	1    5900 3550
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x01 J3
+U 1 1 61A49E7C
+P 5900 2950
+F 0 "J3" H 5818 2725 50  0000 C CNN
+F 1 "SCOPEIN" H 5818 2816 50  0000 C CNN
+F 2 "" H 5900 2950 50  0001 C CNN
+F 3 "~" H 5900 2950 50  0001 C CNN
+	1    5900 2950
+	1    0    0    1   
+$EndComp
+$Comp
+L device:R R3
+U 1 1 61A4A744
+P 5450 3300
+F 0 "R3" H 5520 3346 50  0000 L CNN
+F 1 "50" H 5520 3255 50  0000 L CNN
+F 2 "" V 5380 3300 50  0001 C CNN
+F 3 "" H 5450 3300 50  0001 C CNN
+	1    5450 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5450 3150 5450 2950
+Wire Wire Line
+	5450 2950 5700 2950
+Wire Wire Line
+	5450 3450 5450 3550
+Wire Wire Line
+	5450 3550 5700 3550
+Wire Wire Line
+	3000 3550 3500 3550
+Connection ~ 5450 3550
+$Comp
+L device:R R2
+U 1 1 61A4BA48
+P 3500 3300
+F 0 "R2" H 3350 3350 50  0000 L CNN
+F 1 "50/DNP" H 3150 3250 50  0000 L CNN
+F 2 "" V 3430 3300 50  0001 C CNN
+F 3 "" H 3500 3300 50  0001 C CNN
+	1    3500 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 3450 3500 3550
+Connection ~ 3500 3550
+Wire Wire Line
+	3500 3550 5450 3550
+$Comp
+L device:R R1
+U 1 1 61A4C043
+P 3350 2950
+F 0 "R1" V 3143 2950 50  0000 C CNN
+F 1 "450" V 3234 2950 50  0000 C CNN
+F 2 "" V 3280 2950 50  0001 C CNN
+F 3 "" H 3350 2950 50  0001 C CNN
+	1    3350 2950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3200 2950 3000 2950
+Wire Wire Line
+	3500 2950 3500 3150
+Wire Wire Line
+	3500 2950 5450 2950
+Connection ~ 3500 2950
+Connection ~ 5450 2950
+Wire Notes Line
+	2600 2600 3750 2600
+Wire Notes Line
+	3750 2600 3750 3850
+Wire Notes Line
+	3750 3850 2600 3850
+Wire Notes Line
+	2600 3850 2600 2600
+Wire Notes Line
+	5200 2600 5200 3850
+Wire Notes Line
+	5200 3850 6150 3850
+Wire Notes Line
+	6150 3850 6150 2600
+Wire Notes Line
+	6150 2600 5200 2600
+Wire Notes Line
+	3850 2600 3850 3850
+Wire Notes Line
+	3850 3850 5100 3850
+Wire Notes Line
+	5100 3850 5100 2600
+Wire Notes Line
+	5100 2600 3850 2600
+Text Notes 4150 3750 0    79   ~ 16
+50Ω coax
+Text Notes 5350 3750 0    79   ~ 16
+Scope
+Text Notes 3050 3750 0    79   ~ 16
+Handpiece
+$EndSCHEMATC
