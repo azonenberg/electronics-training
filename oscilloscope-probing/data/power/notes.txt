@@ -1,0 +1,9 @@
+Orient board with Ethernet at bottom of right edge
+
+C2: RP4030
+Probe across C154 under Zynq
+Ground top
+Signal bottom
+
+C3: Pico TA061
+Left side of R105 (just left of RJ45)
