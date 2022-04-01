@@ -1,0 +1,6 @@
+[submodule "oscilloscope-probing/lab/firmware/stm32-cpp"]
+	path = oscilloscope-probing/lab/firmware/stm32-cpp
+	url = ../stm32-cpp
+[submodule "oscilloscope-probing/lab/firmware/embedded-cli"]
+	path = oscilloscope-probing/lab/firmware/embedded-cli
+	url = ../embedded-cli
