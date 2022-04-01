@@ -515,7 +515,7 @@ void NextEmphasis()
 			break;
 
 		case EMPHASIS_12P0:
-			g_emphasis = EMPHASIS_0P9;
+			g_emphasis = EMPHASIS_0;
 			break;
 	}
 }
