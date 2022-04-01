@@ -33,13 +33,12 @@
 UART* 						g_uart;
 I2C*						g_i2c;
 Logger 						g_log;
-//UARTOutputStream			g_uartStream;
 Timer*						g_timer10KHz;
-//BringupCLISessionContext	g_sessionContext;
 
 //I2C addresses
 #define U3_I2C_ADDR 0x40
 #define U4_I2C_ADDR 0x42
+#define U6_I2C_ADDR 0x30
 
 //Operating modes
 enum DATA_RATE
@@ -73,6 +72,8 @@ enum EMPHASIS
 	EMPHASIS_6P0,
 	EMPHASIS_12P0
 } g_emphasis = EMPHASIS_0;
+
+void RetimerWrite(uint8_t regid, uint8_t value, uint8_t mask = 0xff);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Entry point
@@ -119,10 +120,6 @@ int main()
 	g_log.Initialize(g_uart, &timer);
 	g_log("UART logging ready\n");
 
-	//Initialize CLI
-	//g_uartStream.Initialize(g_uart);
-	//g_sessionContext.Initialize(&g_uartStream, "admin");
-
 	//Set up I2C.
 	//Prescale divide by 8 (6 MHz, 166.6 ns/tick)
 	//Divide I2C clock by 16 after that to get 375 kHz
@@ -137,9 +134,6 @@ int main()
 
 	//Enable interrupts only after all setup work is done
 	EnableInterrupts();
-
-	//Show the initial prompt
-	//g_sessionContext.PrintPrompt();
 
 	//Push initial LED config
 	UpdateLEDs();
@@ -294,7 +288,145 @@ void UpdateLEDs()
 
 void UpdateSignalGenerator()
 {
+	//Disable channel B
+	RetimerWrite(0xff, 0x05);
+	RetimerWrite(0x15, 0x18);
 
+	//Configure channel A
+	RetimerWrite(0xff, 0x04);			//Select channel A
+	RetimerWrite(0x00, 0x04, 0x04);		//Reset
+	RetimerWrite(0x14, 0x80, 0x80);		//Force signal detect on
+	RetimerWrite(0x09, 0x04, 0x04);		//Override divider select
+	RetimerWrite(0x09, 0x80, 0x80);		//Reserved (VCO cap count override flag per table 20 line 5)
+	RetimerWrite(0x08, 0x12, 0x1f);		//CDR cap count
+
+	//VCO frequency programming: select 10.3125 Gbps or 10 Gbps depending on group selection
+	if(g_rate == RATE_10G3125)
+	{
+		RetimerWrite(0x60, 0x90);
+		RetimerWrite(0x61, 0xb3);
+		RetimerWrite(0x62, 0x90);
+		RetimerWrite(0x63, 0xb3);
+		RetimerWrite(0x64, 0xdd);
+	}
+
+	//VCO frequency: 10.0 Gbps
+	else
+	{
+		//PPM config
+		RetimerWrite(0x60, 0x00);
+		RetimerWrite(0x61, 0xb2);
+		RetimerWrite(0x62, 0x00);
+		RetimerWrite(0x63, 0xb2);
+		RetimerWrite(0x64, 0xcc);
+	}
+
+	//Subrate control
+	switch(g_rate)
+	{
+		case RATE_10G3125:
+			RetimerWrite(0x18, 0x00, 0x70);		//VCO divider ratio: /1
+			break;
+
+		case RATE_5G0:
+			RetimerWrite(0x18, 0x10, 0x70);		//VCO divider ratio: /2
+			break;
+
+		case RATE_2G5:
+			RetimerWrite(0x18, 0x20, 0x70);		//VCO divider ratio: /4
+			break;
+
+		case RATE_1G25:
+			RetimerWrite(0x18, 0x30, 0x70);		//VCO divider ratio: /8
+			break;
+	}
+
+
+	RetimerWrite(0x09, 0x08, 0x08);		//Reserved (Charge pump power down override per table 20 line 8)
+	RetimerWrite(0x1b, 0x00, 0x03);		//Reserved (Disable both charge pumps per table 20 line 9)
+	RetimerWrite(0x09, 0x40, 0x40);		//Reserved (override loop filter DAC per table 20 line 10)
+	//RetimerWrite(0x1f, 0x12, 0x1f);		//Reserved (Loop filter DAC value per table 20 line 11)
+
+	if(g_rate == RATE_10G3125)
+	{
+		RetimerWrite(0x1f, 0x17, 0x1f);		//This value vs the table 20 value seems to give more accurate freq
+											//on my board
+	}
+	else
+	{
+		RetimerWrite(0x1f, 0x0e, 0x1f);		//This value vs the table 20 value seems to give more accurate freq
+											//on my board
+	}
+
+	RetimerWrite(0x1e, 0x10, 0x10);		//Enable PRBS generator
+
+	//Enable PRBS generator clock and select pattern
+	if(g_pattern == PATTERN_PRBS9)
+		RetimerWrite(0x30, 0x08, 0x0f);
+	else
+		RetimerWrite(0x30, 0x0a, 0x0f);
+
+	//Select output drive strength
+	switch(g_swing)
+	{
+		case SWING_600M:
+			RetimerWrite(0x2d, 0x00, 0x07);
+			break;
+
+		case SWING_800M:
+			RetimerWrite(0x2d, 0x02, 0x07);
+			break;
+
+		case SWING_1000M:
+			RetimerWrite(0x2d, 0x04, 0x07);
+			break;
+
+		case SWING_1200M:
+			RetimerWrite(0x2d, 0x06, 0x07);
+			break;
+	}
+
+	//Select output emphasis
+	switch(g_emphasis)
+	{
+		case EMPHASIS_0:
+			RetimerWrite(0x15, 0x00, 0x47);
+			break;
+
+		case EMPHASIS_0P9:
+			RetimerWrite(0x15, 0x41, 0x47);
+			break;
+
+		case EMPHASIS_2P0:
+			RetimerWrite(0x15, 0x42, 0x47);
+			break;
+
+		case EMPHASIS_3P3:
+			RetimerWrite(0x15, 0x44, 0x47);
+			break;
+
+		case EMPHASIS_6P0:
+			RetimerWrite(0x15, 0x04, 0x47);
+			break;
+
+		case EMPHASIS_12P0:
+			RetimerWrite(0x15, 0x07, 0x47);
+			break;
+	}
+
+	RetimerWrite(0x09, 0x20, 0x20);		//Override loopthru select
+	RetimerWrite(0x1e, 0x80, 0xe0);		//Output mux: select PRBS
+	RetimerWrite(0x0d, 0x20, 0x20);		//Load PRBS seed
+}
+
+void RetimerWrite(uint8_t regid, uint8_t value, uint8_t mask)
+{
+	g_i2c->BlockingWrite8(U6_I2C_ADDR, regid);
+
+	uint8_t tmp;
+	g_i2c->BlockingRead(U6_I2C_ADDR, &tmp, 1);
+
+	g_i2c->BlockingWrite16(U6_I2C_ADDR, (regid << 8) | (tmp & ~mask) | (value & mask) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

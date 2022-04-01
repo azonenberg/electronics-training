@@ -39,14 +39,10 @@
 #include <util/Logger.h>
 #include <string.h>
 #include <stdlib.h>
-#include <cli/UARTOutputStream.h>
-//#include "BringupCLISessionContext.h"
 
 extern UART* 			g_uart;
 extern I2C*				g_i2c;
 extern Logger	 		g_log;
-//extern UARTOutputStream g_uartStream;
-//extern BringupCLISessionContext g_cliContext;
 extern Timer*			g_timer10KHz;
 
 void SleepMs(uint32_t ms);
