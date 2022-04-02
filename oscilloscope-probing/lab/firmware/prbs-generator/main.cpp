@@ -128,6 +128,9 @@ int main()
 	static I2C i2c(&I2C1, 8, 8);
 	g_i2c = &i2c;
 
+	//Wait a while to make sure everything is powered up OK
+	SleepMs(250);
+
 	//Set up both I/O expanders to have all pins as outputs
 	g_i2c->BlockingWrite16(U3_I2C_ADDR, 0x0100);
 	g_i2c->BlockingWrite16(U4_I2C_ADDR, 0x0100);
