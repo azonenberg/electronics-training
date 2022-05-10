@@ -2,7 +2,8 @@ CFLAGS=-g -mcpu=cortex-m0 -DSTM32F031 -Os
 CXXFLAGS=$(CFLAGS) --std=c++17 -fno-exceptions -fno-rtti -g --specs=nano.specs \
 	-I../stm32-cpp/devices/inc/ \
 	-I../stm32-cpp/src/ \
-	-I../
+	-I../ \
+	-flto
 CC=arm-none-eabi-gcc
 CXX=arm-none-eabi-g++
 all:

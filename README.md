@@ -1,6 +1,6 @@
 Open source classes on electrical engineering and electronic hardware design
 
-Each class is intended to be approximately a half day when offered consecutively in a conference/workshop format: 2
+Each class is intended to be approximately a half day when offered consecutively in a conference/workshop format: 3
 hours of lecture and 2 hour of lab.
 
 # Current focus
