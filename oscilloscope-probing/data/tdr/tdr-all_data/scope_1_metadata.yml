@@ -1,0 +1,316 @@
+waveforms:
+  wfm0:
+    timestamp: 1700118081
+    time_fsec: 272000000000000
+    id: 0
+    pinned: true
+    label: Baseline
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm1:
+    timestamp: 1700118135
+    time_fsec: 272000000000000
+    id: 1
+    pinned: true
+    label: PT5
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm2:
+    timestamp: 1700118190
+    time_fsec: 272000000000000
+    id: 2
+    pinned: true
+    label: PP022
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm3:
+    timestamp: 1700118256
+    time_fsec: 272000000000000
+    id: 3
+    pinned: true
+    label: Fingertip
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm4:
+    timestamp: 1700118279
+    time_fsec: 272000000000000
+    id: 4
+    pinned: true
+    label: 921
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm5:
+    timestamp: 1700118332
+    time_fsec: 272000000000000
+    id: 5
+    pinned: true
+    label: TA061
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm6:
+    timestamp: 1700118389
+    time_fsec: 272000000000000
+    id: 6
+    pinned: true
+    label: ZS1500
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm7:
+    timestamp: 1700118480
+    time_fsec: 272000000000000
+    id: 7
+    pinned: true
+    label: PP066
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm8:
+    timestamp: 1700118584
+    time_fsec: 272000000000000
+    id: 8
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm9:
+    timestamp: 1700118584
+    time_fsec: 272000000000000
+    id: 9
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm10:
+    timestamp: 1700118585
+    time_fsec: 272000000000000
+    id: 10
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm11:
+    timestamp: 1700118585
+    time_fsec: 272000000000000
+    id: 11
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm12:
+    timestamp: 1700118585
+    time_fsec: 272000000000000
+    id: 12
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm13:
+    timestamp: 1700118585
+    time_fsec: 272000000000000
+    id: 13
+    pinned: false
+    label: ""
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+  wfm14:
+    timestamp: 1700118585
+    time_fsec: 272000000000000
+    id: 14
+    pinned: true
+    label: D420-A QL
+    channels:
+      ch1s0:
+        index: 1
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
+      ch2s0:
+        index: 2
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1

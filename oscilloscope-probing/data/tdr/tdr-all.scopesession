@@ -1,0 +1,223 @@
+version: 2
+metadata:
+  appver: ngscopeclient 0.1-343efd23
+  appdate: Nov 15 2023 00:48:45
+  created: 2023-11-15 11:15:16 PM
+instruments:
+  inst1:
+    nick: sda
+    name: SDA816ZI-A
+    vendor: LECROY
+    serial: LCRY0425N48460
+    id: 1
+    types:
+      - oscilloscope
+    channels:
+      ch0:
+        id: 2
+        index: 0
+        color: "#ffff00"
+        nick: C1
+        name: C1
+        types:
+          - oscilloscope
+        inputs: ~
+        inmux: 0
+        type: analog
+        invert: false
+        enabled: 0
+        xunit: fs
+        attenuation: 3.0530499999999998
+        bwlimit: 0
+        yunit: V
+        vrange: 1.02400005
+        offset: -0.0260000005
+        coupling: dc_50
+      ch1:
+        id: 3
+        index: 1
+        color: "#ff6abc"
+        nick: TDT
+        name: C2
+        types:
+          - oscilloscope
+        inputs: ~
+        inmux: 0
+        type: analog
+        invert: false
+        enabled: 1
+        xunit: fs
+        attenuation: 1
+        bwlimit: 0
+        yunit: V
+        vrange: 1.60000002
+        offset: 0
+        coupling: dc_50
+      ch2:
+        id: 4
+        index: 2
+        color: "#00ffff"
+        nick: TDR
+        name: C3
+        types:
+          - oscilloscope
+        inputs: ~
+        inmux: 0
+        type: analog
+        invert: false
+        enabled: 1
+        xunit: fs
+        attenuation: 3.1619999999999999
+        bwlimit: 0
+        yunit: V
+        vrange: 1.0167464
+        offset: -0.00677830586
+        coupling: dc_50
+      ch3:
+        id: 5
+        index: 3
+        color: "#00c100"
+        nick: C4
+        name: C4
+        types:
+          - oscilloscope
+        inputs: ~
+        inmux: 0
+        type: analog
+        invert: false
+        enabled: 0
+        xunit: fs
+        attenuation: 3.775563
+        bwlimit: 0
+        yunit: V
+        vrange: 1.05599999
+        offset: 0
+        coupling: dc_50
+      ch4:
+        id: 6
+        index: 4
+        color: "#808080"
+        nick: Ext
+        name: Ext
+        types:
+          - oscilloscope
+        inputs: ~
+        type: trigger
+        enabled: 0
+        xunit: fs
+    rate: 40000000000
+    depth: 400000
+    interleave: false
+    triggerpos: 3500000000
+    trigger:
+      inputs:
+        din: 3/0
+      parameters:
+        Edge: Rising
+        Level: 0 mV
+      id: 7
+      type: Edge
+    transport: vicp
+    args: sda.scada.poulsbo.antikernel.net:1861
+    driver: lecroy
+    triggerdeskew: 0
+    type: oscilloscope
+triggergroups:
+  group8:
+    primary: 1
+    secondaries: ~
+    filters: ~
+    default: true
+decodes:
+  filter9:
+    inputs:
+      din: 4/0
+    parameters: ~
+    id: 9
+    protocol: Memory
+    color: "#a6cee3"
+    nick: TDR_Baseline
+    name: Memory_1
+    streams:
+      stream0:
+        index: 0
+        vrange: 1.0167464
+        offset: -0.00677830586
+  filter10:
+    inputs:
+      IN+: 4/0
+      IN-: 9/0
+    parameters: ~
+    id: 10
+    protocol: Subtract
+    color: "#1f78b4"
+    nick: TDR_Residual
+    name: Subtract_1
+    streams:
+      stream0:
+        index: 0
+        vrange: 0.327295601
+        offset: -0.00446094573
+ui_config:
+  window:
+    height: 1023
+    width: 1920
+    fullscreen: false
+  areas:
+    area12:
+      id: 12
+      streams:
+        stream0:
+          persistence: false
+          channel: 3
+          stream: 0
+          colorRamp: eye-gradient-viridis
+    area13:
+      id: 13
+      streams:
+        stream0:
+          persistence: false
+          channel: 4
+          stream: 0
+          colorRamp: eye-gradient-viridis
+        stream1:
+          persistence: false
+          channel: 9
+          stream: 0
+          colorRamp: eye-gradient-viridis
+    area15:
+      id: 15
+      streams:
+        stream0:
+          persistence: false
+          channel: 10
+          stream: 0
+          colorRamp: eye-gradient-viridis
+  groups:
+    group11:
+      timebaseResolution: fs
+      pixelsPerXUnit: 0.000253125007
+      xAxisOffset: 47889088
+      name: Waveform Group 1
+      cursorConfig: none
+      xcursor0: 51542092
+      xcursor1: 0
+      areas:
+        area12:
+          id: 12
+        area13:
+          id: 13
+    group14:
+      timebaseResolution: fs
+      pixelsPerXUnit: 7.50000036e-05
+      xAxisOffset: 45070410
+      name: Waveform Group 2
+      cursorConfig: none
+      xcursor0: 0
+      xcursor1: 0
+      areas:
+        area15:
+          id: 15
+  markers: ~
+  dialogs:
+    history: true

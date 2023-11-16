@@ -1,0 +1,12 @@
+waveforms:
+  filt9:
+    timestamp: 1700118063
+    time_fsec: 272000000000000
+    id: 9
+    streams:
+      s0:
+        stream: 0
+        timescale: 5000
+        trigphase: 0
+        flags: 0
+        format: densev1
