@@ -1,8 +1,8 @@
 version: 2
 metadata:
-  appver: ngscopeclient 0.1-343efd23
-  appdate: Nov 17 2023 23:40:01
-  created: 2023-11-18 01:36:32
+  appver: ngscopeclient 0.1-dev+8421c6684
+  appdate: Nov 20 2024 20:28:40
+  created: 2024-11-24 12:40:48 PM
 instruments:
   inst1:
     nick: sda
@@ -22,18 +22,15 @@ instruments:
         types:
           - oscilloscope
         inputs: ~
-        inmux: 0
         type: analog
-        invert: false
         enabled: 0
         xunit: fs
-        attenuation: 3.0530499999999998
+        attenuation: 3.0530500411987305
         bwlimit: 0
         yunit: V
         vrange: 1.02400005
         offset: -0.0260000005
         coupling: dc_50
-        navg: 1
       ch1:
         id: 3
         index: 1
@@ -43,9 +40,7 @@ instruments:
         types:
           - oscilloscope
         inputs: ~
-        inmux: 0
         type: analog
-        invert: false
         enabled: 1
         xunit: fs
         attenuation: 1
@@ -54,7 +49,6 @@ instruments:
         vrange: 1.60000002
         offset: 0
         coupling: dc_50
-        navg: 16
       ch2:
         id: 4
         index: 2
@@ -64,18 +58,15 @@ instruments:
         types:
           - oscilloscope
         inputs: ~
-        inmux: 0
         type: analog
-        invert: false
         enabled: 1
         xunit: fs
-        attenuation: 3.1619999999999999
+        attenuation: 3.1619999408721924
         bwlimit: 0
         yunit: V
         vrange: 1.0167464
         offset: -0.00677830586
         coupling: dc_50
-        navg: 16
       ch3:
         id: 5
         index: 3
@@ -85,18 +76,15 @@ instruments:
         types:
           - oscilloscope
         inputs: ~
-        inmux: 0
         type: analog
-        invert: false
         enabled: 0
         xunit: fs
-        attenuation: 3.775563
+        attenuation: 3.7755630016326904
         bwlimit: 0
         yunit: V
         vrange: 1.05599999
         offset: 0
         coupling: dc_50
-        navg: 1
       ch4:
         id: 6
         index: 4
@@ -112,23 +100,29 @@ instruments:
     rate: 40000000000
     depth: 4000
     interleave: false
-    triggerpos: 50000000
-    samplemode: equivalent
+    triggerpos: 0
+    samplemode: realtime
     trigger:
       inputs:
         din: 3/0
       parameters:
-        Edge: Rising
-        Level: 0 mV
+        Edge:
+          type: unitless (linear)
+          value: Rising
+        Level:
+          type: fs
+          value: 0 fs
+        Lower Level:
+          type: V
+          value: 0 mV
       id: 11
       type: Edge
     transport: vicp
     args: sda.scada.poulsbo.antikernel.net:1861
     driver: lecroy
     triggerdeskew: 0
-    type: oscilloscope
 triggergroups:
-  group12:
+  group27:
     primary: 1
     secondaries: ~
     filters: ~
@@ -144,11 +138,29 @@ decodes:
     color: "#1f78b4"
     nick: TDR_Residual
     name: Subtract_1
+    xunit: fs
     streams:
       stream0:
         index: 0
         vrange: 0.327295601
         offset: -0.00446094573
+        yunit: V
+  filter46:
+    inputs:
+      din: 34/0
+    parameters: ~
+    id: 46
+    protocol: Memory
+    color: "#6f72fd"
+    nick: PT5
+    name: Memory_5
+    xunit: fs
+    streams:
+      stream0:
+        index: 0
+        vrange: 13.7885056
+        offset: -47.6445503
+        yunit: Ω
   filter9:
     inputs:
       din: 4/0
@@ -158,11 +170,45 @@ decodes:
     color: "#a6cee3"
     nick: TDR_Baseline
     name: Memory_1
+    xunit: fs
     streams:
       stream0:
         index: 0
         vrange: 1.0167464
         offset: -0.00677830586
+        yunit: V
+  filter38:
+    inputs:
+      din: 34/0
+    parameters: ~
+    id: 38
+    protocol: Memory
+    color: "#fb9a99"
+    nick: ZS1500
+    name: Memory_3
+    xunit: fs
+    streams:
+      stream0:
+        index: 0
+        vrange: 13.7885056
+        offset: -47.6445503
+        yunit: Ω
+  filter42:
+    inputs:
+      din: 34/0
+    parameters: ~
+    id: 42
+    protocol: Memory
+    color: "#e31a1c"
+    nick: D420
+    name: Memory_4
+    xunit: fs
+    streams:
+      stream0:
+        index: 0
+        vrange: 13.7885056
+        offset: -47.6445503
+        yunit: Ω
   filter18:
     inputs:
       din: 3/0
@@ -172,19 +218,49 @@ decodes:
     color: "#b2df8a"
     nick: TDT_Baseline
     name: Memory_2
+    xunit: fs
     streams:
       stream0:
         index: 0
         vrange: 1.60000002
         offset: 0
+        yunit: V
+  filter34:
+    inputs:
+      voltage: 10/0
+    parameters:
+      Output Format:
+        type: unitless (linear)
+        value: Impedance
+      Port impedance:
+        type: Ω
+        value: 50 Ω
+      Step end:
+        type: V
+        value: 0 mV
+      Step start:
+        type: V
+        value: -800 mV
+    id: 34
+    protocol: TDR
+    color: "#33a02c"
+    nick: TDRImpedance(TDR_Residual)
+    name: TDRImpedance(TDR_Residual)
+    xunit: fs
+    streams:
+      stream0:
+        index: 0
+        vrange: 13.7885056
+        offset: -47.6445503
+        yunit: Ω
 ui_config:
   window:
     height: 1023
     width: 1920
     fullscreen: false
   areas:
-    area14:
-      id: 14
+    area29:
+      id: 29
       streams:
         stream0:
           persistence: false
@@ -196,8 +272,8 @@ ui_config:
           channel: 18
           stream: 0
           colorRamp: eye-gradient-viridis
-    area15:
-      id: 15
+    area30:
+      id: 30
       streams:
         stream0:
           persistence: false
@@ -209,39 +285,89 @@ ui_config:
           channel: 9
           stream: 0
           colorRamp: eye-gradient-viridis
-    area17:
-      id: 17
+    area50:
+      id: 50
+      streams:
+        stream0:
+          persistence: false
+          channel: 34
+          stream: 0
+          colorRamp: eye-gradient-viridis
+    area32:
+      id: 32
       streams:
         stream0:
           persistence: false
           channel: 10
           stream: 0
           colorRamp: eye-gradient-viridis
+    area52:
+      id: 52
+      streams:
+        stream0:
+          persistence: false
+          channel: 38
+          stream: 0
+          colorRamp: eye-gradient-viridis
+        stream1:
+          persistence: false
+          channel: 42
+          stream: 0
+          colorRamp: eye-gradient-viridis
+        stream2:
+          persistence: false
+          channel: 46
+          stream: 0
+          colorRamp: eye-gradient-viridis
   groups:
-    group13:
+    group28:
       timebaseResolution: fs
       pixelsPerXUnit: 0.000253125007
       xAxisOffset: 47945384
       name: Waveform Group 1
+      id: Waveform Group 1
       cursorConfig: none
       xcursor0: 51542092
       xcursor1: 0
       areas:
-        area14:
-          id: 14
-        area15:
-          id: 15
-    group16:
+        area29:
+          id: 29
+        area30:
+          id: 30
+        area50:
+          id: 50
+    group31:
       timebaseResolution: fs
-      pixelsPerXUnit: 7.50000036e-05
-      xAxisOffset: 45139244
+      pixelsPerXUnit: 0.000168750004
+      xAxisOffset: 46711936
       name: Waveform Group 2
+      id: Waveform Group 2
       cursorConfig: none
       xcursor0: 50985637
       xcursor1: 50985637
       areas:
-        area17:
-          id: 17
+        area32:
+          id: 32
+    group51:
+      timebaseResolution: fs
+      pixelsPerXUnit: 0.000253125007
+      xAxisOffset: 48552424
+      name: Waveform Group 3
+      id: Waveform Group 3
+      cursorConfig: none
+      xcursor0: 0
+      xcursor1: 0
+      areas:
+        area52:
+          id: 52
   markers: ~
   dialogs:
+    streambrowser: true
+    filterpalette: true
     history: true
+    filtergraph: true
+  workspaces:
+    - id: 33
+      title: New Workspace
+    - id: 26
+      title: Filter graph
