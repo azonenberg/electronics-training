@@ -1,0 +1,1327 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "aa2d82c6-7ba7-4266-9b47-ed3339e6c556")
+	(paper "A3")
+	(lib_symbols
+		(symbol "device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "r res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_* R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 69.85) (xy 127 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "060228f7-c85e-4114-9118-7367a61377af")
+	)
+	(wire
+		(pts
+			(xy 31.75 24.13) (xy 50.8 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0bc6410f-7fec-492c-a768-e7af5c0db499")
+	)
+	(wire
+		(pts
+			(xy 76.2 34.29) (xy 88.9 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1032b3ee-7ebc-4efc-9c02-477b8e0d2a97")
+	)
+	(wire
+		(pts
+			(xy 115.57 19.05) (xy 127 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "114d65db-dca4-4199-9ade-ed4342792419")
+	)
+	(wire
+		(pts
+			(xy 76.2 59.69) (xy 127 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "125854a7-7ec6-42df-9b1a-6aba27d1e82d")
+	)
+	(wire
+		(pts
+			(xy 76.2 52.07) (xy 127 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13bf36a6-0038-4960-9a10-c64164253063")
+	)
+	(wire
+		(pts
+			(xy 76.2 49.53) (xy 127 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "239d8fcc-1706-4d15-b1bb-2c11bef56a9f")
+	)
+	(wire
+		(pts
+			(xy 31.75 19.05) (xy 50.8 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25dca657-4fbf-4bd4-8949-6dd173e6d902")
+	)
+	(wire
+		(pts
+			(xy 76.2 62.23) (xy 127 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27f29e05-4cc8-49ab-88b2-f1896ca632aa")
+	)
+	(wire
+		(pts
+			(xy 43.18 67.31) (xy 127 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b5578f4-9c93-4b7d-948c-a95ca921821b")
+	)
+	(wire
+		(pts
+			(xy 76.2 24.13) (xy 88.9 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46289e2a-d00b-42a6-8e33-88f0047b5827")
+	)
+	(wire
+		(pts
+			(xy 31.75 67.31) (xy 35.56 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "519f4e7a-ca08-4d24-b66d-1727a751978c")
+	)
+	(wire
+		(pts
+			(xy 76.2 54.61) (xy 127 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a58148e-4089-4d4f-a41a-e4565f392401")
+	)
+	(wire
+		(pts
+			(xy 76.2 21.59) (xy 88.9 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73c839b4-e43c-4460-b3ee-5977972d288d")
+	)
+	(wire
+		(pts
+			(xy 31.75 69.85) (xy 35.56 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85771c5c-022e-4263-8fcc-ffcfafefc488")
+	)
+	(wire
+		(pts
+			(xy 76.2 36.83) (xy 88.9 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5c872ac-db3c-4254-bd6b-cb24a03ae8d8")
+	)
+	(wire
+		(pts
+			(xy 76.2 31.75) (xy 88.9 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a984d300-4680-4a2d-8638-6c6b2d69012f")
+	)
+	(wire
+		(pts
+			(xy 76.2 19.05) (xy 88.9 19.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9abde94-0c1a-4d99-8581-bb28f7664982")
+	)
+	(wire
+		(pts
+			(xy 31.75 72.39) (xy 35.56 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abed7142-7853-472c-b70e-77685879db9c")
+	)
+	(wire
+		(pts
+			(xy 43.18 72.39) (xy 127 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b20ae0a8-165e-47de-aea4-b5a89c2e7c7e")
+	)
+	(wire
+		(pts
+			(xy 31.75 74.93) (xy 35.56 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2d72920-b3f8-4474-9386-06ea9e3119e8")
+	)
+	(wire
+		(pts
+			(xy 43.18 74.93) (xy 127 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbb64dd0-14f6-4766-a869-c8a1e73e5dd0")
+	)
+	(wire
+		(pts
+			(xy 31.75 21.59) (xy 50.8 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e95e4a20-183f-476d-9277-7079907624fd")
+	)
+	(wire
+		(pts
+			(xy 76.2 26.67) (xy 88.9 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb775013-8d12-46f7-b377-2090c15c8fa4")
+	)
+	(label "GND"
+		(at 127 41.91 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1861bd99-f32e-4e09-a696-5671c7b5a900")
+	)
+	(label "3V3"
+		(at 127 39.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2111318a-3957-4231-86f0-21e444562556")
+	)
+	(label "3V3"
+		(at 76.2 19.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "95d8a639-4961-430b-983e-af9898592e6e")
+	)
+	(label "GND"
+		(at 88.9 41.91 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cadcc613-5af8-4c56-b0e3-d610b3ab6a0f")
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 39.37 67.31 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0b3231e5-3606-4f5e-82d0-a190135e767a")
+		(property "Reference" "R22"
+			(at 44.45 66.04 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 39.37 67.31 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 69.088 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 39.37 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "12347146-71d4-4a42-b5d8-e6fe485def4f")
+		)
+		(pin "2"
+			(uuid "86d78ab2-d110-47b3-8d0f-4f2f03df2814")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(reference "R22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 39.37 72.39 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a7b911a7-13fd-4653-99ce-d7fabe5fa8a2")
+		(property "Reference" "R24"
+			(at 44.45 71.12 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 39.37 72.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 74.168 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 39.37 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc468c10-d075-4b0a-84e2-b8d8c35ce49c")
+		)
+		(pin "2"
+			(uuid "2f9701bf-7a28-47fc-a4fb-af9f2e29a074")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(reference "R24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 39.37 69.85 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "adc4bb7b-1036-4911-8315-611ebae22853")
+		(property "Reference" "R23"
+			(at 44.45 68.58 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 39.37 69.85 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 71.628 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 39.37 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "36931ace-8ead-4f9c-8ea3-c3cd938ad17c")
+		)
+		(pin "2"
+			(uuid "02f30b49-a1a6-4fe8-9666-1ce4be0c9b3f")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(reference "R23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 39.37 74.93 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dbec2a43-a93b-491e-9fb6-87a6d68298ab")
+		(property "Reference" "R25"
+			(at 44.45 73.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 39.37 74.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 39.37 76.708 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 39.37 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 39.37 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "444403ec-acdf-4416-bae9-a28075cef9d9")
+		)
+		(pin "2"
+			(uuid "fe90ca75-3353-4183-b66e-66a6b4733655")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(reference "R25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 17.78)
+		(size 26.67 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "0bfb76d3-6ffd-4dad-b770-9eb95813c83a")
+		(property "Sheetname" "FPGA support"
+			(at 88.9 17.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpgasupport.kicad_sch"
+			(at 88.9 43.7646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "1V0" input
+			(at 88.9 26.67 180)
+			(uuid "bb872e42-260d-4f27-b35d-620c3eea1338")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1V2" input
+			(at 88.9 24.13 180)
+			(uuid "5e28ffe8-fd27-4cf2-b319-3cdfb458d941")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "1V8" input
+			(at 88.9 21.59 180)
+			(uuid "3db31084-d84d-47e2-ab97-70df33ddadbe")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_CCLK" output
+			(at 115.57 19.05 0)
+			(uuid "9a7675d6-ca0f-4e2d-a2a7-c28d2b18e54b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "FPGA_DONE" output
+			(at 88.9 31.75 180)
+			(uuid "c16c0fd7-0798-413c-b9ed-0117fef0e15e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_INIT" bidirectional
+			(at 88.9 34.29 180)
+			(uuid "8faac5ec-7430-453e-afd4-e31be6709bbb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_RST_N" input
+			(at 88.9 36.83 180)
+			(uuid "6caabdc4-6792-4acf-b7c0-809b5c03153b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GND" input
+			(at 88.9 41.91 180)
+			(uuid "a0747db6-9061-4839-803d-4445c2dc4b27")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "3V3" input
+			(at 88.9 19.05 180)
+			(uuid "da0d7435-7b35-4b82-981c-40c93dc33e5b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 50.8 17.78)
+		(size 25.4 45.72)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "7f5e8da7-d7e2-46c6-9076-78cb27b9675a")
+		(property "Sheetname" "Power Supply"
+			(at 50.8 17.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "psu.kicad_sch"
+			(at 50.8 64.0846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "1V0" output
+			(at 76.2 26.67 0)
+			(uuid "5c3cdf12-0fe6-4331-a09a-21880d155e49")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "1V2" output
+			(at 76.2 24.13 0)
+			(uuid "042cee69-a5c0-456e-b87f-a0bb2df6c063")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "1V8" output
+			(at 76.2 21.59 0)
+			(uuid "2c98b997-697b-4386-ba8e-da3b9adac993")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3V3" output
+			(at 76.2 19.05 0)
+			(uuid "2a3b30c7-62f2-4137-8d0c-a90804e67b8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3V3_SB" input
+			(at 50.8 21.59 180)
+			(uuid "19b2d577-5a82-483a-a40e-a66167612b5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_DONE" input
+			(at 76.2 31.75 0)
+			(uuid "2f51ee44-7d0b-4d99-bf92-24ecbd65c27d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "FPGA_INIT" bidirectional
+			(at 76.2 34.29 0)
+			(uuid "f4fac73a-b7f2-4df2-a27f-a79e68451ed2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "FPGA_RST_N" output
+			(at 76.2 36.83 0)
+			(uuid "8f6ffd1f-afd9-4abd-848b-f30c0917f1c2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GND" input
+			(at 50.8 24.13 180)
+			(uuid "a7327fbf-ccb8-494a-95b7-b7a295e3b888")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MCU_DONE" input
+			(at 76.2 54.61 0)
+			(uuid "d9f93d85-9d0f-426a-97e0-07f712a6012e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "MCU_RST_N" output
+			(at 76.2 52.07 0)
+			(uuid "0d75663f-fcb2-4a6d-ad03-348f4df54ff8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VBUS" input
+			(at 50.8 19.05 180)
+			(uuid "8cb4d990-4704-429e-8f7f-e96f2b988d6d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MCU_BOOT0" output
+			(at 76.2 49.53 0)
+			(uuid "66827c29-0df6-4555-aa92-3ece04f4fe35")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SUPER_I2C_SCL" bidirectional
+			(at 76.2 59.69 0)
+			(uuid "c1d5c55a-b781-400e-ab42-e6571a049fd4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SUPER_I2C_SDA" bidirectional
+			(at 76.2 62.23 0)
+			(uuid "18c623ee-5b34-4e23-856a-0f915a60b982")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 127 17.78)
+		(size 25.4 58.42)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a3b16bfb-b7c6-40a4-acca-70d1a835c16b")
+		(property "Sheetname" "MCU"
+			(at 127 17.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 127 76.7846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3V3" input
+			(at 127 39.37 180)
+			(uuid "96dc41a0-5ea4-4260-880e-553bbaeec945")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GND" input
+			(at 127 41.91 180)
+			(uuid "d5e5c6dd-f190-47e6-a8c5-7f6aac78de26")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "FPGA_CCLK" input
+			(at 127 19.05 180)
+			(uuid "a12df1b2-5f3b-4935-8613-6fb629621db1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MCU_BOOT0" input
+			(at 127 49.53 180)
+			(uuid "5a9173af-5b4d-4dce-91c6-4020d4f8b547")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MCU_RST_N" input
+			(at 127 52.07 180)
+			(uuid "e7fa25e6-99bb-4cd0-8d9b-ac1ed872ad51")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "MCU_DONE" output
+			(at 127 54.61 180)
+			(uuid "427c65bd-b146-442b-a6e0-a57d03e3e6b8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SUPER_I2C_SCL" bidirectional
+			(at 127 59.69 180)
+			(uuid "4751768e-df71-48f6-b2d3-6c1f8f847b36")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SUPER_I2C_SDA" bidirectional
+			(at 127 62.23 180)
+			(uuid "69a85ed2-2c44-4ede-a50c-bbccfa3d640a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "UART_CTS_N" input
+			(at 127 67.31 180)
+			(uuid "4b203bd7-b5a2-4460-bdbe-32703b37969c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "UART_RTS_N" output
+			(at 127 69.85 180)
+			(uuid "79736202-15b5-4a50-8ff5-a62d87c7cba1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "UART_RX" input
+			(at 127 72.39 180)
+			(uuid "600be8b1-1479-4be5-9e2f-f78e65362f09")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "UART_TX" output
+			(at 127 74.93 180)
+			(uuid "9bbf2790-ad0c-42b1-833f-49d83437679a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 172.72 17.78)
+		(size 29.845 46.355)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a5c6d6a0-0eb9-4128-8a96-febfa5d4e510")
+		(property "Sheetname" "Test signals"
+			(at 172.72 17.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "testsignals.kicad_sch"
+			(at 172.72 64.7196 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 16.51 17.78)
+		(size 15.24 58.42)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c8f34d2e-868d-481d-b747-85b27fae8b71")
+		(property "Sheetname" "USB power inlet and UART"
+			(at 16.51 17.0684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "usb.kicad_sch"
+			(at 16.51 76.7846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "GND" output
+			(at 31.75 24.13 0)
+			(uuid "9f961612-c411-4b2b-b1c5-7bac93f6f49a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "UART_CTS_N" input
+			(at 31.75 69.85 0)
+			(uuid "efbb9315-733c-4980-99cd-026b01a77712")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "UART_RTS_N" output
+			(at 31.75 67.31 0)
+			(uuid "351abdc1-5e29-4ce1-8a4a-d842d3585d45")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "UART_RX" input
+			(at 31.75 74.93 0)
+			(uuid "0115f3c5-84c8-488a-b400-a8d6e0093b8a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "UART_TX" output
+			(at 31.75 72.39 0)
+			(uuid "36c2f1c5-7830-4664-9ffa-8c7a8d4b328b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VBUS" output
+			(at 31.75 19.05 0)
+			(uuid "f91ab4eb-e200-41da-83e8-e7f1a8884ab4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3V3_SB" output
+			(at 31.75 21.59 0)
+			(uuid "6e897156-aff7-4ab2-8f10-a2628aff5add")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
