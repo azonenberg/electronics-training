@@ -22916,7 +22916,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 111.76 209.55 0)
 			(effects
 				(font
@@ -23831,7 +23831,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 111.76 256.54 0)
 			(effects
 				(font
@@ -24881,7 +24881,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 31.75 80.518 90)
 			(effects
 				(font
@@ -24949,7 +24949,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 254 78.74 0)
 			(effects
 				(font
@@ -26063,7 +26063,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 185.42 274.828 90)
 			(effects
 				(font
@@ -26130,7 +26130,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 33.528 90)
 			(effects
 				(font
@@ -26479,7 +26479,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 162.56 43.18 0)
 			(effects
 				(font
@@ -27461,7 +27461,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 39.37 63.5 0)
 			(effects
 				(font
@@ -28374,7 +28374,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 185.42 264.668 90)
 			(effects
 				(font
@@ -28712,7 +28712,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 254 209.55 0)
 			(effects
 				(font
@@ -29697,7 +29697,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 111.76 157.48 0)
 			(effects
 				(font
@@ -30680,7 +30680,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 56.388 90)
 			(effects
 				(font
@@ -31090,7 +31090,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_U.FL_TE_1909763-1"
 			(at 325.12 160.02 0)
 			(effects
 				(font
@@ -31159,7 +31159,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 111.76 63.5 0)
 			(effects
 				(font
@@ -32142,12 +32142,13 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_484_22x22_FULLARRAY_1MM"
 			(at 353.06 158.75 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -33862,7 +33863,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 36.068 90)
 			(effects
 				(font
@@ -33922,7 +33923,7 @@
 				)
 			)
 		)
-		(property "Value" "W25Q80BV"
+		(property "Value" "S25FL064LABMFI013"
 			(at 177.8 239.5025 0)
 			(effects
 				(font
@@ -33930,12 +33931,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:SOIC_8_5.3MM"
 			(at 177.8 254 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -34016,7 +34018,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 254 172.72 0)
 			(effects
 				(font
@@ -35001,7 +35003,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 39.37 209.55 0)
 			(effects
 				(font
@@ -35915,7 +35917,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 254 148.59 0)
 			(effects
 				(font
@@ -37871,7 +37873,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 38.608 90)
 			(effects
 				(font
@@ -37940,7 +37942,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 39.37 162.56 0)
 			(effects
 				(font
@@ -39268,7 +39270,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 111.76 110.49 0)
 			(effects
 				(font
@@ -40368,7 +40370,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 39.37 110.49 0)
 			(effects
 				(font
@@ -41281,7 +41283,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 185.42 269.748 90)
 			(effects
 				(font
@@ -41351,7 +41353,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x6_REFLOW"
 			(at 374.65 171.45 0)
 			(effects
 				(font
@@ -41430,7 +41432,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 41.148 90)
 			(effects
 				(font
@@ -41497,7 +41499,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 341.63 30.988 90)
 			(effects
 				(font
@@ -41775,7 +41777,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
 			(at 83.82 170.18 0)
 			(effects
 				(font
@@ -42187,7 +42189,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:BGA_265_14x14_DEPOP_0.8MM"
 			(at 39.37 256.54 0)
 			(effects
 				(font

@@ -590,7 +590,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 39.37 69.088 90)
 			(effects
 				(font
@@ -660,7 +660,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MECHANICAL_CLEARANCEHOLE_4_40"
 			(at 16.51 91.44 0)
 			(effects
 				(font
@@ -724,7 +724,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MECHANICAL_CLEARANCEHOLE_4_40"
 			(at 16.51 97.79 0)
 			(effects
 				(font
@@ -785,7 +785,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 39.37 74.168 90)
 			(effects
 				(font
@@ -852,7 +852,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 39.37 71.628 90)
 			(effects
 				(font
@@ -922,7 +922,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MECHANICAL_CLEARANCEHOLE_4_40"
 			(at 16.51 104.14 0)
 			(effects
 				(font
@@ -986,7 +986,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:MECHANICAL_CLEARANCEHOLE_4_40"
 			(at 16.51 85.09 0)
 			(effects
 				(font
@@ -1047,7 +1047,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
 			(at 39.37 76.708 90)
 			(effects
 				(font
