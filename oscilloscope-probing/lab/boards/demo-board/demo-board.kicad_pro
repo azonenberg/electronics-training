@@ -25,7 +25,32 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "footprint_link_issues|368300|431800|66a99640-b1af-4f6c-8b57-26c7e1dad299|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "lib_symbol_mismatch|368300|431800|66a99640-b1af-4f6c-8b57-26c7e1dad299|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "pin_to_pin|660400|1231900|e80776b1-f2d8-4610-8daf-deb77350d94e|7f3e28ce-5c35-418d-ae63-f05dc47c3e48|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a",
+        ""
+      ],
+      [
+        "pin_to_pin|660400|241300|88a2c65f-761f-4801-9d44-f16baaabaa1a|c60add0d-8d16-48aa-8424-7d80f1aa8b82|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a",
+        ""
+      ],
+      [
+        "pin_to_pin|660400|406400|c60add0d-8d16-48aa-8424-7d80f1aa8b82|3c8f35f8-aebc-4289-95f9-06264c5689d8|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a",
+        ""
+      ],
+      [
+        "pin_to_pin|660400|571500|3c8f35f8-aebc-4289-95f9-06264c5689d8|9a6b214e-a17e-4713-b407-1d7f2bcbcf72|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a|/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a",
+        ""
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -432,6 +457,10 @@
     [
       "a5c6d6a0-0eb9-4128-8a96-febfa5d4e510",
       "Test signals"
+    ],
+    [
+      "933c232c-1044-4b1b-afd2-cb556fba4478",
+      "E-paper display"
     ]
   ],
   "text_variables": {}

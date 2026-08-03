@@ -6081,7 +6081,7 @@
 		)
 		(uuid "f0309d67-02b6-4ee1-b232-67e69877fbf7")
 	)
-	(label "2V5"
+	(label "1V2"
 		(at 120.65 238.76 180)
 		(effects
 			(font
@@ -6373,8 +6373,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "08889d2a-8ea1-4351-859a-3171cbdef19e")
-		(property "Reference" "C5"
-			(at 239.141 243.0053 0)
+		(property "Reference" "C117"
+			(at 239.141 242.6278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6383,7 +6383,7 @@
 			)
 		)
 		(property "Value" "0.47 uF"
-			(at 239.141 245.5422 0)
+			(at 239.141 245.0521 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6427,7 +6427,7 @@
 		(instances
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a"
-					(reference "C5")
+					(reference "C117")
 					(unit 1)
 				)
 			)
@@ -6798,7 +6798,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "192aad15-4613-4adc-8b9b-b88a24400872")
-		(property "Reference" "R3"
+		(property "Reference" "R58"
 			(at 41.91 252.984 90)
 			(effects
 				(font
@@ -6850,7 +6850,7 @@
 		(instances
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a"
-					(reference "R3")
+					(reference "R58")
 					(unit 1)
 				)
 			)
@@ -10178,8 +10178,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a01f1298-c2d8-4142-bcc0-afa019f9ebaa")
-		(property "Reference" "C4"
-			(at 211.201 243.0053 0)
+		(property "Reference" "C116"
+			(at 211.201 242.6278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10188,7 +10188,7 @@
 			)
 		)
 		(property "Value" "0.47 uF"
-			(at 211.201 245.5422 0)
+			(at 211.201 245.0521 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10232,7 +10232,7 @@
 		(instances
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a"
-					(reference "C4")
+					(reference "C116")
 					(unit 1)
 				)
 			)
@@ -12324,8 +12324,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f73dd466-c2b4-44a9-8a9f-ae8f75be6231")
-		(property "Reference" "C6"
-			(at 212.09 262.1112 90)
+		(property "Reference" "C118"
+			(at 212.09 261.6665 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12333,7 +12333,7 @@
 			)
 		)
 		(property "Value" "0.1 uF"
-			(at 212.09 264.6481 90)
+			(at 212.09 264.0908 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12376,7 +12376,7 @@
 		(instances
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/7f5e8da7-d7e2-46c6-9076-78cb27b9675a"
-					(reference "C6")
+					(reference "C118")
 					(unit 1)
 				)
 			)
