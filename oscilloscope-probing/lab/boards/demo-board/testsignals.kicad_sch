@@ -11489,6 +11489,26 @@
 	)
 	(wire
 		(pts
+			(xy 255.27 212.09) (xy 273.05 212.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b838b5c2-0e0e-4b7e-9e89-ac255f9cb3ee")
+	)
+	(wire
+		(pts
+			(xy 251.46 217.17) (xy 276.86 217.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c387ecd0-51b6-4622-92d0-6b2c8894079a")
+	)
+	(wire
+		(pts
 			(xy 304.8 166.37) (xy 290.83 166.37)
 		)
 		(stroke
@@ -11656,6 +11676,16 @@
 			(justify right bottom)
 		)
 		(uuid "1763a1e7-4648-41b2-9c4f-65e7e9e34d81")
+	)
+	(label "GND"
+		(at 255.27 217.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "178494ea-0efa-456d-bcc1-48304959116a")
 	)
 	(label "GTP_TX0_P"
 		(at 335.28 66.04 180)
@@ -11946,6 +11976,16 @@
 			(justify left bottom)
 		)
 		(uuid "b44dbeed-af7e-4a86-bec5-ca5d4782c5f2")
+	)
+	(label "2XTHRU"
+		(at 255.27 212.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b4f923d6-76c8-4ec6-af07-c0f9f546d092")
 	)
 	(label "GND"
 		(at 44.45 201.93 180)
@@ -12645,6 +12685,76 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "J11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 251.46 212.09 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "270bac99-6cc4-4bbc-8dd2-56c8d8f1fb81")
+		(property "Reference" "J21"
+			(at 248.92 211.171 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 248.92 213.5953 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+			(at 251.46 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 251.46 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a0b0daa5-71f8-425b-a3e7-77c02deea048")
+		)
+		(pin "1"
+			(uuid "ad2bcbcf-59ae-479c-bc02-25e6ca1c2306")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J21")
 					(unit 1)
 				)
 			)
@@ -22230,6 +22340,76 @@
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "U4")
 					(unit 7)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 276.86 212.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ee27317a-dde3-42dc-9ecf-c1da822c8985")
+		(property "Reference" "J20"
+			(at 279.4 211.171 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 279.4 213.5953 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+			(at 276.86 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 276.86 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 276.86 212.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "93a538d8-440a-4452-b5c9-3ddcbdf44e3a")
+		)
+		(pin "1"
+			(uuid "90edb5bc-cab4-41b5-9ddf-c0d5c61e319f")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J20")
+					(unit 1)
 				)
 			)
 		)

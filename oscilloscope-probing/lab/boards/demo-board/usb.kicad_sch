@@ -2198,7 +2198,7 @@
 	)
 	(wire
 		(pts
-			(xy 74.93 80.01) (xy 88.9 80.01)
+			(xy 95.25 78.74) (xy 109.22 78.74)
 		)
 		(stroke
 			(width 0)
@@ -2208,7 +2208,7 @@
 	)
 	(wire
 		(pts
-			(xy 74.93 87.63) (xy 88.9 87.63)
+			(xy 95.25 86.36) (xy 109.22 86.36)
 		)
 		(stroke
 			(width 0)
@@ -2235,6 +2235,26 @@
 			(type default)
 		)
 		(uuid "9f60980b-124b-4720-9ffb-eaf71cba1ad1")
+	)
+	(wire
+		(pts
+			(xy 55.88 86.36) (xy 60.96 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a31a0481-7278-4f8c-8a37-892dea0295b6")
+	)
+	(wire
+		(pts
+			(xy 55.88 88.9) (xy 60.96 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a861f361-d7ed-4f70-89c2-2b1c9e487534")
 	)
 	(wire
 		(pts
@@ -2298,6 +2318,26 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 83.82) (xy 60.96 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7df3d49-3797-4edc-a1d9-9adb3e98e17e")
+	)
+	(wire
+		(pts
+			(xy 55.88 81.28) (xy 60.96 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e877b254-a196-4be6-a2c8-e4b7da11d5a7")
+	)
+	(wire
+		(pts
 			(xy 52.07 27.94) (xy 60.96 27.94)
 		)
 		(stroke
@@ -2327,7 +2367,7 @@
 		(uuid "2576ed9f-6fdf-41a3-896a-8bc07108fd03")
 	)
 	(label "3V3_SB"
-		(at 74.93 91.44 180)
+		(at 95.25 90.17 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2377,7 +2417,7 @@
 		(uuid "4c087c5e-dd80-47cf-a789-635e1f77c9de")
 	)
 	(label "VBUS"
-		(at 74.93 80.01 180)
+		(at 95.25 78.74 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2417,7 +2457,7 @@
 		(uuid "8523da8d-5938-4126-b0e0-c197890e3067")
 	)
 	(label "GND"
-		(at 74.93 99.06 180)
+		(at 95.25 97.79 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2467,7 +2507,7 @@
 		(uuid "ac5eab46-8374-4fcc-8670-9b7ba175e1d2")
 	)
 	(label "GND"
-		(at 74.93 87.63 180)
+		(at 95.25 86.36 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2539,7 +2579,7 @@
 	)
 	(hierarchical_label "UART_RTS_N"
 		(shape output)
-		(at 48.26 81.28 0)
+		(at 60.96 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2550,7 +2590,7 @@
 	)
 	(hierarchical_label "UART_CTS_N"
 		(shape input)
-		(at 48.26 88.9 0)
+		(at 60.96 88.9 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2561,7 +2601,7 @@
 	)
 	(hierarchical_label "UART_RX"
 		(shape input)
-		(at 48.26 86.36 0)
+		(at 60.96 86.36 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2594,7 +2634,7 @@
 	)
 	(hierarchical_label "UART_TX"
 		(shape output)
-		(at 48.26 83.82 0)
+		(at 60.96 83.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2668,6 +2708,73 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
 					(reference "C207")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 52.07 88.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0c25f0cc-4d96-4ada-ac6f-cb5c062f79c2")
+		(property "Reference" "R62"
+			(at 57.15 87.63 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 52.07 88.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 52.07 90.678 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 52.07 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 52.07 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "396b4701-b3af-42c9-9df0-be18db94db97")
+		)
+		(pin "2"
+			(uuid "ce1510f0-b35b-44f3-b646-ebd182fe9754")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "R62")
 					(unit 1)
 				)
 			)
@@ -3098,6 +3205,73 @@
 		)
 	)
 	(symbol
+		(lib_id "device:R")
+		(at 52.07 81.28 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "406e84ce-ba8c-48b2-a1e5-66f8580e8be6")
+		(property "Reference" "R59"
+			(at 57.15 80.01 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 52.07 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 52.07 83.058 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 52.07 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 52.07 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c1cf92be-9d78-43b2-b860-6d4eaba9024a")
+		)
+		(pin "2"
+			(uuid "8f028480-afcd-4334-8505-774f420d1688")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "R59")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "conn:CONN_01X01")
 		(at 41.91 151.13 0)
 		(unit 1)
@@ -3483,7 +3657,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 74.93 95.25 0)
+		(at 95.25 93.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3492,7 +3666,7 @@
 		(fields_autoplaced yes)
 		(uuid "721bbed4-b207-44cf-9ebe-da525c133f6d")
 		(property "Reference" "C3"
-			(at 77.851 94.0378 0)
+			(at 98.171 92.7678 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3501,7 +3675,7 @@
 			)
 		)
 		(property "Value" "0.47 uF"
-			(at 77.851 96.4621 0)
+			(at 98.171 95.1921 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3510,7 +3684,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 75.8952 99.06 0)
+			(at 96.2152 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3519,7 +3693,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 74.93 95.25 0)
+			(at 95.25 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3528,7 +3702,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 74.93 95.25 0)
+			(at 95.25 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3654,7 +3828,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 74.93 83.82 0)
+		(at 95.25 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3663,7 +3837,7 @@
 		(fields_autoplaced yes)
 		(uuid "83c7ad74-56ff-4721-b9e2-4884c55abdf6")
 		(property "Reference" "C1"
-			(at 77.851 82.6078 0)
+			(at 98.171 81.3378 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3672,7 +3846,7 @@
 			)
 		)
 		(property "Value" "4.7 uF"
-			(at 77.851 85.0321 0)
+			(at 98.171 83.7621 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3681,7 +3855,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0603_CAP_NOSILK"
-			(at 75.8952 87.63 0)
+			(at 96.2152 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3690,7 +3864,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 74.93 83.82 0)
+			(at 95.25 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3699,7 +3873,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 74.93 83.82 0)
+			(at 95.25 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3864,6 +4038,140 @@
 	)
 	(symbol
 		(lib_id "device:R")
+		(at 52.07 86.36 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bb40b9c2-889e-4f10-89b4-d505c6bf1f65")
+		(property "Reference" "R61"
+			(at 57.15 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 52.07 86.36 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 52.07 88.138 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 52.07 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 52.07 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "02e0ae9c-1dfe-40b6-9232-25121b0b471c")
+		)
+		(pin "2"
+			(uuid "f34620a8-b13e-4a0b-80e3-aa4695281ccc")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "R61")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 52.07 83.82 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c595d619-0912-42c6-84d5-4feaac4e138c")
+		(property "Reference" "R60"
+			(at 57.15 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 52.07 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 52.07 85.598 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 52.07 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 52.07 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7688fae-9741-4fe3-8958-1951bd8a1f71")
+		)
+		(pin "2"
+			(uuid "563a992b-8a15-4572-9df7-3c0ef6b31487")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "R60")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
 		(at 60.96 33.02 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3931,7 +4239,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 88.9 83.82 0)
+		(at 109.22 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3940,7 +4248,7 @@
 		(fields_autoplaced yes)
 		(uuid "df497652-023d-46f8-ac1b-c9ad3d07b478")
 		(property "Reference" "C2"
-			(at 91.821 82.6078 0)
+			(at 112.141 81.3378 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3949,7 +4257,7 @@
 			)
 		)
 		(property "Value" "0.47 uF"
-			(at 91.821 85.0321 0)
+			(at 112.141 83.7621 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3958,7 +4266,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 89.8652 87.63 0)
+			(at 110.1852 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3967,7 +4275,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 83.82 0)
+			(at 109.22 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3976,7 +4284,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 88.9 83.82 0)
+			(at 109.22 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
