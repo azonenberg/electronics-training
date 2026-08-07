@@ -18292,6 +18292,12 @@
 		(uuid "b89d33a8-be08-4052-8eec-09395173cbf4")
 	)
 	(junction
+		(at 318.77 237.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b91c8d1c-42b4-4f8e-be5e-a03f285b4a03")
+	)
+	(junction
 		(at 158.75 185.42)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -18422,6 +18428,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d9e50c84-c196-4fcc-a10b-8dc441811f98")
+	)
+	(junction
+		(at 318.77 245.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dd18ffe2-7c0b-4e66-bde5-cc13bb1e44b6")
 	)
 	(junction
 		(at 303.53 167.64)
@@ -19294,6 +19306,16 @@
 			(type default)
 		)
 		(uuid "2bf95937-b6e1-41c5-8249-cc449b10ada5")
+	)
+	(wire
+		(pts
+			(xy 318.77 245.11) (xy 334.01 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e33895e-c8a8-4990-947d-d90c1191d772")
 	)
 	(wire
 		(pts
@@ -20494,6 +20516,16 @@
 			(type default)
 		)
 		(uuid "dd4af581-6af6-4b2a-93bb-7d272b292b10")
+	)
+	(wire
+		(pts
+			(xy 318.77 237.49) (xy 334.01 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd7f3eda-51e1-4ee1-9a06-a7051e27a2da")
 	)
 	(wire
 		(pts
@@ -27363,6 +27395,76 @@
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
 					(reference "U5")
 					(unit 11)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 334.01 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "33a1a366-af0e-48e8-a364-169c91e42eb0")
+		(property "Reference" "C123"
+			(at 336.931 240.3915 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0.47 uF"
+			(at 336.931 243.1666 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
+			(at 334.9752 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 334.01 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 334.01 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "821efc0b-b183-464a-acaf-ccd4d4ea003e")
+		)
+		(pin "2"
+			(uuid "32c8dd2b-0ce0-4cc5-827b-804f5482be93")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
+					(reference "C123")
+					(unit 1)
 				)
 			)
 		)

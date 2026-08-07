@@ -10440,13 +10440,13 @@
 		(uuid "f4682257-3d81-47fc-a886-6f821b603e33")
 	)
 	(junction
-		(at 260.35 175.26)
+		(at 161.29 172.72)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8011aa85-dbc1-436d-bf39-cc05ba497eb9")
 	)
 	(junction
-		(at 260.35 167.64)
+		(at 161.29 165.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8ada4cf3-65dc-4ff9-8110-5e9aa6c72d3d")
@@ -10552,10 +10552,6 @@
 		(uuid "241d712d-bac3-4d7c-ab07-22312727a28f")
 	)
 	(no_connect
-		(at 191.77 30.48)
-		(uuid "25110940-250a-4d5d-9099-b01a6ecb9ac6")
-	)
-	(no_connect
 		(at 262.89 68.58)
 		(uuid "2547eb5c-1208-492c-853d-bd789d676bef")
 	)
@@ -10568,7 +10564,7 @@
 		(uuid "266b1803-874a-44e0-860d-e828489d8a19")
 	)
 	(no_connect
-		(at 191.77 25.4)
+		(at 43.18 27.94)
 		(uuid "275ddee5-3e20-4b21-bef0-e889538a6a16")
 	)
 	(no_connect
@@ -11000,6 +10996,10 @@
 		(uuid "b2b776cc-8569-4a7c-9a42-c7eb411c2a5f")
 	)
 	(no_connect
+		(at 191.77 20.32)
+		(uuid "b3203f37-7139-4acf-896c-27bb68a8d1fd")
+	)
+	(no_connect
 		(at 123.19 35.56)
 		(uuid "b4d22186-d427-4cf1-a7b9-cdcd6abf0c4e")
 	)
@@ -11080,7 +11080,7 @@
 		(uuid "ca6c6c80-4d94-4187-933c-e8cf5f51a52a")
 	)
 	(no_connect
-		(at 191.77 22.86)
+		(at 43.18 25.4)
 		(uuid "cc1089b7-648d-4526-97f9-b5fd7298dea4")
 	)
 	(no_connect
@@ -11116,7 +11116,7 @@
 		(uuid "d780b2ed-d67d-495a-87c9-a75136a2d805")
 	)
 	(no_connect
-		(at 191.77 27.94)
+		(at 43.18 30.48)
 		(uuid "d8a3224b-14c5-4129-9f27-ec065a8de99e")
 	)
 	(no_connect
@@ -11172,7 +11172,7 @@
 		(uuid "e3a14b78-0b77-4259-a188-e5520aa8ce4a")
 	)
 	(no_connect
-		(at 191.77 20.32)
+		(at 43.18 22.86)
 		(uuid "e4619208-a822-4288-b7bb-a2aa8054d176")
 	)
 	(no_connect
@@ -11309,7 +11309,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 186.69) (xy 273.05 186.69)
+			(xy 154.94 184.15) (xy 173.99 184.15)
 		)
 		(stroke
 			(width 0)
@@ -11329,7 +11329,7 @@
 	)
 	(wire
 		(pts
-			(xy 260.35 175.26) (xy 246.38 175.26)
+			(xy 161.29 172.72) (xy 147.32 172.72)
 		)
 		(stroke
 			(width 0)
@@ -11339,7 +11339,7 @@
 	)
 	(wire
 		(pts
-			(xy 260.35 172.72) (xy 260.35 175.26)
+			(xy 161.29 170.18) (xy 161.29 172.72)
 		)
 		(stroke
 			(width 0)
@@ -11349,7 +11349,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 27.94) (xy 43.18 27.94)
+			(xy 186.69 27.94) (xy 191.77 27.94)
 		)
 		(stroke
 			(width 0)
@@ -11379,7 +11379,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 198.12) (xy 273.05 198.12)
+			(xy 154.94 195.58) (xy 173.99 195.58)
 		)
 		(stroke
 			(width 0)
@@ -11399,7 +11399,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 25.4) (xy 43.18 25.4)
+			(xy 186.69 25.4) (xy 191.77 25.4)
 		)
 		(stroke
 			(width 0)
@@ -11409,7 +11409,7 @@
 	)
 	(wire
 		(pts
-			(xy 304.8 176.53) (xy 290.83 176.53)
+			(xy 205.74 173.99) (xy 191.77 173.99)
 		)
 		(stroke
 			(width 0)
@@ -11419,7 +11419,7 @@
 	)
 	(wire
 		(pts
-			(xy 260.35 167.64) (xy 260.35 170.18)
+			(xy 161.29 165.1) (xy 161.29 167.64)
 		)
 		(stroke
 			(width 0)
@@ -11429,7 +11429,7 @@
 	)
 	(wire
 		(pts
-			(xy 290.83 176.53) (xy 290.83 172.72)
+			(xy 191.77 173.99) (xy 191.77 170.18)
 		)
 		(stroke
 			(width 0)
@@ -11439,7 +11439,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 167.64) (xy 260.35 167.64)
+			(xy 147.32 165.1) (xy 161.29 165.1)
 		)
 		(stroke
 			(width 0)
@@ -11459,7 +11459,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 30.48) (xy 43.18 30.48)
+			(xy 186.69 30.48) (xy 191.77 30.48)
 		)
 		(stroke
 			(width 0)
@@ -11479,7 +11479,7 @@
 	)
 	(wire
 		(pts
-			(xy 290.83 166.37) (xy 290.83 170.18)
+			(xy 191.77 163.83) (xy 191.77 167.64)
 		)
 		(stroke
 			(width 0)
@@ -11489,7 +11489,7 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 212.09) (xy 273.05 212.09)
+			(xy 156.21 209.55) (xy 173.99 209.55)
 		)
 		(stroke
 			(width 0)
@@ -11499,7 +11499,7 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 217.17) (xy 276.86 217.17)
+			(xy 152.4 214.63) (xy 177.8 214.63)
 		)
 		(stroke
 			(width 0)
@@ -11509,7 +11509,7 @@
 	)
 	(wire
 		(pts
-			(xy 304.8 166.37) (xy 290.83 166.37)
+			(xy 205.74 163.83) (xy 191.77 163.83)
 		)
 		(stroke
 			(width 0)
@@ -11539,7 +11539,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 22.86) (xy 43.18 22.86)
+			(xy 186.69 22.86) (xy 191.77 22.86)
 		)
 		(stroke
 			(width 0)
@@ -11588,7 +11588,7 @@
 		(uuid "ff51239f-4081-41ca-9bd1-c6da369f9900")
 	)
 	(label "GTP_REF_P"
-		(at 312.42 166.37 0)
+		(at 213.36 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11608,7 +11608,7 @@
 		(uuid "0e27736a-2265-43e0-932d-7da9400f219e")
 	)
 	(label "GTP_REF_AC_N"
-		(at 290.83 176.53 0)
+		(at 191.77 173.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11658,7 +11658,7 @@
 		(uuid "12e72dd1-a02c-4e0e-8b03-61fcf07c1976")
 	)
 	(label "GTP_TX0_N"
-		(at 246.38 198.12 180)
+		(at 147.32 195.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11678,7 +11678,7 @@
 		(uuid "1763a1e7-4648-41b2-9c4f-65e7e9e34d81")
 	)
 	(label "GND"
-		(at 255.27 217.17 0)
+		(at 156.21 214.63 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11698,7 +11698,7 @@
 		(uuid "3ef2fe91-5745-428d-9b55-a4e90382edc1")
 	)
 	(label "GTP_TX0_AC_N"
-		(at 254 198.12 0)
+		(at 154.94 195.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11708,7 +11708,7 @@
 		(uuid "3efbc3ab-eb88-4e5f-88bd-3f74dd14da77")
 	)
 	(label "COAX_1"
-		(at 30.48 22.86 180)
+		(at 179.07 22.86 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11748,7 +11748,7 @@
 		(uuid "46a34cae-e14d-4c1d-a536-8b98660ca1cc")
 	)
 	(label "GTP_REF_AC_P"
-		(at 290.83 166.37 0)
+		(at 191.77 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11838,7 +11838,7 @@
 		(uuid "6a818a2b-3bbd-463c-818e-b3cab2c3890f")
 	)
 	(label "GTP_TX0_AC_P"
-		(at 254 186.69 0)
+		(at 154.94 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11858,7 +11858,7 @@
 		(uuid "712c6786-5e40-4b29-a864-42b199ab1114")
 	)
 	(label "COAX_2"
-		(at 30.48 25.4 180)
+		(at 179.07 25.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11878,7 +11878,7 @@
 		(uuid "74a3e95d-7285-4520-a24c-0f9e16b4224f")
 	)
 	(label "COAX_3"
-		(at 30.48 27.94 180)
+		(at 179.07 27.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11898,7 +11898,7 @@
 		(uuid "8669f473-ff23-4abf-884c-d5eb4ea9cbc8")
 	)
 	(label "GTP_TX0_P"
-		(at 246.38 186.69 180)
+		(at 147.32 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11918,7 +11918,7 @@
 		(uuid "951e95c2-74f4-40d6-8709-fc0a7598501a")
 	)
 	(label "GND"
-		(at 276.86 203.2 0)
+		(at 177.8 200.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11968,7 +11968,7 @@
 		(uuid "b15898aa-8957-43ac-b16d-ea652b1296cb")
 	)
 	(label "GTP_REF_N"
-		(at 312.42 176.53 0)
+		(at 213.36 173.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11978,7 +11978,7 @@
 		(uuid "b44dbeed-af7e-4a86-bec5-ca5d4782c5f2")
 	)
 	(label "2XTHRU"
-		(at 255.27 212.09 0)
+		(at 156.21 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12138,7 +12138,7 @@
 		(uuid "f30e5eb4-26c3-4431-9f90-723b4deca8d1")
 	)
 	(label "GND"
-		(at 276.86 191.77 0)
+		(at 177.8 189.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12158,7 +12158,7 @@
 		(uuid "f421ca64-96aa-41df-abd0-2e316dbcbfb7")
 	)
 	(label "COAX_4"
-		(at 30.48 30.48 180)
+		(at 179.07 30.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12245,7 +12245,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 246.38 175.26 180)
+		(at 147.32 172.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12256,7 +12256,7 @@
 	)
 	(hierarchical_label "3V3"
 		(shape input)
-		(at 246.38 167.64 180)
+		(at 147.32 165.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12267,7 +12267,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_COAXIAL")
-		(at 276.86 198.12 0)
+		(at 177.8 195.58 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12276,7 +12276,7 @@
 		(fields_autoplaced yes)
 		(uuid "01aac45e-1f04-446d-99d0-e4e32dd8363e")
 		(property "Reference" "J17"
-			(at 279.4 197.201 0)
+			(at 180.34 194.661 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12285,7 +12285,7 @@
 			)
 		)
 		(property "Value" "SMA-J-P-H-ST-EM1"
-			(at 279.4 199.6253 0)
+			(at 180.34 197.0853 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12294,7 +12294,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
-			(at 276.86 198.12 0)
+			(at 177.8 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12303,7 +12303,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 276.86 198.12 0)
+			(at 177.8 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12312,7 +12312,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
-			(at 276.86 198.12 0)
+			(at 177.8 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12337,7 +12337,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 308.61 176.53 90)
+		(at 209.55 173.99 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12346,7 +12346,7 @@
 		(fields_autoplaced yes)
 		(uuid "05255e0f-e8b4-41e8-9070-79c6270d19c5")
 		(property "Reference" "C95"
-			(at 308.61 170.2265 90)
+			(at 209.55 167.6865 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12354,7 +12354,7 @@
 			)
 		)
 		(property "Value" "0.1 uF"
-			(at 308.61 172.6508 90)
+			(at 209.55 170.1108 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12362,7 +12362,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 312.42 175.5648 0)
+			(at 213.36 173.0248 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12371,7 +12371,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 308.61 176.53 0)
+			(at 209.55 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12380,7 +12380,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 308.61 176.53 0)
+			(at 209.55 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12692,7 +12692,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_COAXIAL")
-		(at 251.46 212.09 0)
+		(at 152.4 209.55 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12701,7 +12701,7 @@
 		(dnp no)
 		(uuid "270bac99-6cc4-4bbc-8dd2-56c8d8f1fb81")
 		(property "Reference" "J21"
-			(at 248.92 211.171 0)
+			(at 149.86 208.631 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12710,7 +12710,7 @@
 			)
 		)
 		(property "Value" "SMA-J-P-H-ST-EM1"
-			(at 248.92 213.5953 0)
+			(at 149.86 211.0553 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12719,7 +12719,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
-			(at 251.46 212.09 0)
+			(at 152.4 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12728,7 +12728,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 251.46 212.09 0)
+			(at 152.4 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12737,7 +12737,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
-			(at 251.46 212.09 0)
+			(at 152.4 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12832,7 +12832,7 @@
 	)
 	(symbol
 		(lib_id "osc-azonenberg:OSC_LVDS")
-		(at 267.97 176.53 0)
+		(at 168.91 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12840,7 +12840,7 @@
 		(dnp no)
 		(uuid "362c10a0-3fe9-48ff-bba2-c5bcb43dc191")
 		(property "Reference" "U9"
-			(at 275.59 161.7396 0)
+			(at 176.53 159.1996 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -12848,7 +12848,7 @@
 			)
 		)
 		(property "Value" "SIT9121AI-2BF-XXS156.250000G"
-			(at 268.986 164.338 0)
+			(at 169.926 161.798 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -12856,7 +12856,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:OSCILLATOR_LVDS_3.2x2.5"
-			(at 267.97 176.53 0)
+			(at 168.91 173.99 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -12865,7 +12865,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 267.97 176.53 0)
+			(at 168.91 173.99 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -12873,7 +12873,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 267.97 176.53 0)
+			(at 168.91 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14832,7 +14832,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 34.29 22.86 90)
+		(at 182.88 22.86 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14840,7 +14840,7 @@
 		(dnp no)
 		(uuid "5b282015-ddcd-4e3c-80e6-65bb81718db5")
 		(property "Reference" "R54"
-			(at 39.37 21.59 90)
+			(at 187.96 21.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14848,7 +14848,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 34.29 22.86 90)
+			(at 182.88 22.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14856,7 +14856,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 34.29 24.638 90)
+			(at 182.88 24.638 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14865,7 +14865,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 22.86 0)
+			(at 182.88 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14874,7 +14874,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 34.29 22.86 0)
+			(at 182.88 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14899,7 +14899,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 34.29 27.94 90)
+		(at 182.88 27.94 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14907,7 +14907,7 @@
 		(dnp no)
 		(uuid "5cdbce97-9fbf-457a-9062-cabfdbed3657")
 		(property "Reference" "R56"
-			(at 39.37 26.67 90)
+			(at 187.96 26.67 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14915,7 +14915,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 34.29 27.94 90)
+			(at 182.88 27.94 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14923,7 +14923,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 34.29 29.718 90)
+			(at 182.88 29.718 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14932,7 +14932,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 27.94 0)
+			(at 182.88 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14941,7 +14941,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 34.29 27.94 0)
+			(at 182.88 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14966,7 +14966,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 250.19 186.69 90)
+		(at 151.13 184.15 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14975,7 +14975,7 @@
 		(fields_autoplaced yes)
 		(uuid "69269a1d-ff33-429d-aee1-c8a528f7eacd")
 		(property "Reference" "C114"
-			(at 250.19 180.3865 90)
+			(at 151.13 177.8465 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14983,7 +14983,7 @@
 			)
 		)
 		(property "Value" "0.1 uF"
-			(at 250.19 182.8108 90)
+			(at 151.13 180.2708 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14991,7 +14991,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 254 185.7248 0)
+			(at 154.94 183.1848 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15000,7 +15000,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 250.19 186.69 0)
+			(at 151.13 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15009,7 +15009,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 250.19 186.69 0)
+			(at 151.13 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15034,7 +15034,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_COAXIAL")
-		(at 276.86 186.69 0)
+		(at 177.8 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15043,7 +15043,7 @@
 		(fields_autoplaced yes)
 		(uuid "6f5c05ba-4cf4-4f35-8a36-7acc1cfde94f")
 		(property "Reference" "J16"
-			(at 279.4 185.771 0)
+			(at 180.34 183.231 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15052,7 +15052,7 @@
 			)
 		)
 		(property "Value" "SMA-J-P-H-ST-EM1"
-			(at 279.4 188.1953 0)
+			(at 180.34 185.6553 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15061,7 +15061,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
-			(at 276.86 186.69 0)
+			(at 177.8 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15070,7 +15070,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 276.86 186.69 0)
+			(at 177.8 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15079,7 +15079,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
-			(at 276.86 186.69 0)
+			(at 177.8 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15104,7 +15104,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 246.38 171.45 0)
+		(at 147.32 168.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15113,7 +15113,7 @@
 		(fields_autoplaced yes)
 		(uuid "6fff7282-28c4-4e5e-9564-f005d85ce78f")
 		(property "Reference" "C90"
-			(at 249.301 170.2378 0)
+			(at 150.241 167.6978 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15122,7 +15122,7 @@
 			)
 		)
 		(property "Value" "0.47 uF"
-			(at 249.301 172.6621 0)
+			(at 150.241 170.1221 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15131,7 +15131,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 247.3452 175.26 0)
+			(at 148.2852 172.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15140,7 +15140,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 246.38 171.45 0)
+			(at 147.32 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15149,7 +15149,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 246.38 171.45 0)
+			(at 147.32 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16890,7 +16890,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 34.29 25.4 90)
+		(at 182.88 25.4 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16898,7 +16898,7 @@
 		(dnp no)
 		(uuid "9fbbc1d0-2f2d-4331-b553-c834b15d13d0")
 		(property "Reference" "R55"
-			(at 39.37 24.13 90)
+			(at 187.96 24.13 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16906,7 +16906,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 34.29 25.4 90)
+			(at 182.88 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16914,7 +16914,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 34.29 27.178 90)
+			(at 182.88 27.178 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16923,7 +16923,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 25.4 0)
+			(at 182.88 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16932,7 +16932,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 34.29 25.4 0)
+			(at 182.88 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20480,7 +20480,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 308.61 166.37 90)
+		(at 209.55 163.83 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -20489,7 +20489,7 @@
 		(fields_autoplaced yes)
 		(uuid "d2b4ac1f-a601-41b1-b840-7d128c45223d")
 		(property "Reference" "C92"
-			(at 308.61 160.0665 90)
+			(at 209.55 157.5265 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20497,7 +20497,7 @@
 			)
 		)
 		(property "Value" "0.1 uF"
-			(at 308.61 162.4908 90)
+			(at 209.55 159.9508 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20505,7 +20505,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 312.42 165.4048 0)
+			(at 213.36 162.8648 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20514,7 +20514,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 308.61 166.37 0)
+			(at 209.55 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20523,7 +20523,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 308.61 166.37 0)
+			(at 209.55 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20692,7 +20692,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 34.29 30.48 90)
+		(at 182.88 30.48 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -20700,7 +20700,7 @@
 		(dnp no)
 		(uuid "de3064cd-3544-42ea-800d-a62ec773735e")
 		(property "Reference" "R57"
-			(at 39.37 29.21 90)
+			(at 187.96 29.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20708,7 +20708,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 34.29 30.48 90)
+			(at 182.88 30.48 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20716,7 +20716,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 34.29 32.258 90)
+			(at 182.88 32.258 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20725,7 +20725,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 34.29 30.48 0)
+			(at 182.88 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20734,7 +20734,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 34.29 30.48 0)
+			(at 182.88 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22346,7 +22346,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_COAXIAL")
-		(at 276.86 212.09 0)
+		(at 177.8 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22355,7 +22355,7 @@
 		(fields_autoplaced yes)
 		(uuid "ee27317a-dde3-42dc-9ecf-c1da822c8985")
 		(property "Reference" "J20"
-			(at 279.4 211.171 0)
+			(at 180.34 208.631 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22364,7 +22364,7 @@
 			)
 		)
 		(property "Value" "SMA-J-P-H-ST-EM1"
-			(at 279.4 213.5953 0)
+			(at 180.34 211.0553 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22373,7 +22373,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
-			(at 276.86 212.09 0)
+			(at 177.8 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22382,7 +22382,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 276.86 212.09 0)
+			(at 177.8 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22391,7 +22391,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
-			(at 276.86 212.09 0)
+			(at 177.8 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22416,7 +22416,7 @@
 	)
 	(symbol
 		(lib_id "device:C")
-		(at 250.19 198.12 90)
+		(at 151.13 195.58 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22425,7 +22425,7 @@
 		(fields_autoplaced yes)
 		(uuid "f00ae1cf-fd33-490f-9e26-7a4a7c9fd872")
 		(property "Reference" "C115"
-			(at 250.19 191.8165 90)
+			(at 151.13 189.2765 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22433,7 +22433,7 @@
 			)
 		)
 		(property "Value" "0.1 uF"
-			(at 250.19 194.2408 90)
+			(at 151.13 191.7008 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22441,7 +22441,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
-			(at 254 197.1548 0)
+			(at 154.94 194.6148 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22450,7 +22450,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 250.19 198.12 0)
+			(at 151.13 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22459,7 +22459,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 250.19 198.12 0)
+			(at 151.13 195.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)

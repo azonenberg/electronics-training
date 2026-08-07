@@ -2313,7 +2313,7 @@
 		(uuid "5685fd94-fa64-4d8b-bfc7-9bed373340f5")
 	)
 	(label "DPY_BUSY_N"
-		(at 41.91 40.64 180)
+		(at 41.91 38.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2333,7 +2333,7 @@
 		(uuid "667691a4-af17-4440-a95b-36ef3ffc606a")
 	)
 	(label "DPY_SPI_CS_N"
-		(at 41.91 38.1 180)
+		(at 41.91 30.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2363,7 +2363,7 @@
 		(uuid "78024414-263b-4d51-8f29-0f8a1ba9260d")
 	)
 	(label "DPY_RST_N"
-		(at 41.91 33.02 180)
+		(at 41.91 35.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2383,7 +2383,7 @@
 		(uuid "795a1344-99fd-4752-9ece-5badd07afcba")
 	)
 	(label "DPY_DC"
-		(at 41.91 25.4 180)
+		(at 41.91 33.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2483,7 +2483,7 @@
 		(uuid "d17c2ed7-8175-481a-bc79-da0738ca51a2")
 	)
 	(label "DPY_SPI_DATA"
-		(at 41.91 30.48 180)
+		(at 41.91 25.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2493,7 +2493,7 @@
 		(uuid "d61be48c-7b8f-464e-bda0-2f918ee05d0c")
 	)
 	(label "DPY_BS"
-		(at 41.91 35.56 180)
+		(at 41.91 40.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)

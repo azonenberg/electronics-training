@@ -3976,8 +3976,8 @@
 		(uuid "4253ed2b-ffd0-40ab-921f-c20dbe194775")
 	)
 	(no_connect
-		(at 120.65 261.62)
-		(uuid "87ff23ea-23c8-480a-8342-2729a854c6a7")
+		(at 167.64 256.54)
+		(uuid "4708a963-4867-474e-b956-91c9bee8c7af")
 	)
 	(no_connect
 		(at 298.45 234.95)
@@ -6225,6 +6225,16 @@
 		)
 		(uuid "fd964a2a-3b30-4d94-9d95-397765c849bb")
 	)
+	(label "SUPER_JTAG_TDOT"
+		(at 298.45 222.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fda5e541-7260-4ab6-8a59-c46f0c6ba348")
+	)
 	(label "SUPER_RST_N"
 		(at 298.45 229.87 180)
 		(effects
@@ -6248,7 +6258,7 @@
 	)
 	(hierarchical_label "MCU_BOOT0"
 		(shape output)
-		(at 167.64 256.54 180)
+		(at 120.65 261.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)

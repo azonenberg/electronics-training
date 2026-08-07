@@ -4,6 +4,13 @@
 	(generator_version "9.0")
 	(uuid "2c779049-d065-4834-b776-bdab3c0b75fe")
 	(paper "A4")
+	(title_block
+		(title "Probing Demo Board")
+		(date "2026-08-06")
+		(rev "0.1")
+		(company "Antikernel Labs")
+		(comment 1 "Andrew D. Zonenberg")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_01X01"
 			(pin_names
@@ -2346,6 +2353,16 @@
 		)
 		(uuid "fde33185-c4db-4932-9fba-bcbb923bdbfd")
 	)
+	(label "GND"
+		(at 72.39 144.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "053259e9-fe46-4a0d-b71a-4db7f2f8e473")
+	)
 	(label "VBUS_RAW"
 		(at 107.95 45.72 180)
 		(effects
@@ -2566,6 +2583,16 @@
 		)
 		(uuid "dd23591e-c4e6-4742-b866-a0695286bf0d")
 	)
+	(label "GND"
+		(at 72.39 151.13 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e9f0778d-9605-43fc-8ccb-a60a441f9c35")
+	)
 	(hierarchical_label "3V3_SB"
 		(shape output)
 		(at 24.13 83.82 180)
@@ -2642,6 +2669,73 @@
 			(justify left)
 		)
 		(uuid "e4905daa-cadf-4989-8314-16ef06c21958")
+	)
+	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 77.47 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "018ad2c7-9bc1-4cd2-9ce9-c4799f7902b8")
+		(property "Reference" "TP19"
+			(at 79.375 149.9178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 79.375 152.3421 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 77.47 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 77.47 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 77.47 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "503effec-5a32-418f-869a-fce7cdb829f1")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "TP19")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "device:C")
@@ -2775,6 +2869,73 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
 					(reference "R62")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 77.47 144.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1d4f5ecf-4db6-4289-9181-522f3c39fc56")
+		(property "Reference" "TP18"
+			(at 79.375 143.5678 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 79.375 145.9921 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 77.47 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 77.47 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 77.47 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6b77ce01-f0b8-4f6f-afa1-ee8d8384fdb5")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/c8f34d2e-868d-481d-b747-85b27fae8b71"
+					(reference "TP18")
 					(unit 1)
 				)
 			)
