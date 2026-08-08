@@ -4,6 +4,13 @@
 	(generator_version "9.0")
 	(uuid "058c02c5-9086-4bb6-b5f1-7154c6f2bb5e")
 	(paper "A3")
+	(title_block
+		(title "Oscilloscope Demo Board")
+		(date "2026-08-08")
+		(rev "0.1")
+		(company "Antikernel Labs")
+		(comment 1 "Andrew D. Zonenberg")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_01X03"
 			(pin_names
@@ -3964,10 +3971,6 @@
 		(uuid "ffe50a16-07be-4a94-8b68-3db554ac7e1c")
 	)
 	(no_connect
-		(at 120.65 259.08)
-		(uuid "2f1a31f1-137b-4a64-8033-25f13b4a422d")
-	)
-	(no_connect
 		(at 298.45 245.11)
 		(uuid "2f6948db-eb33-4126-aeca-b400ec67ad20")
 	)
@@ -3998,10 +4001,6 @@
 	(no_connect
 		(at 298.45 237.49)
 		(uuid "c4cd968e-1d25-41fb-88a7-b0f1e96df49a")
-	)
-	(no_connect
-		(at 120.65 251.46)
-		(uuid "c5eb4f14-160f-4a8f-a253-0ff0f6ce7595")
 	)
 	(no_connect
 		(at 167.64 261.62)
@@ -5215,6 +5214,16 @@
 		)
 		(uuid "2d66034e-9fcb-4084-a2d0-316bee5d6ca9")
 	)
+	(label "SUPER_I2C_SDA"
+		(at 167.64 248.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d7b8853-edee-4945-8830-4d5f917a3cc5")
+	)
 	(label "SUPER_PWRGOOD_LED"
 		(at 38.1 255.27 180)
 		(effects
@@ -5484,6 +5493,16 @@
 			(justify right bottom)
 		)
 		(uuid "63338091-62b0-4d53-bdc2-c7629e1a308d")
+	)
+	(label "SUPER_I2C_SCL"
+		(at 167.64 246.38 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "681ac433-3587-4dcc-a007-305514ff38df")
 	)
 	(label "GND"
 		(at 58.42 255.27 0)
@@ -6247,7 +6266,7 @@
 	)
 	(hierarchical_label "FPGA_INIT"
 		(shape bidirectional)
-		(at 167.64 248.92 180)
+		(at 167.64 243.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6313,7 +6332,7 @@
 	)
 	(hierarchical_label "MCU_RST_N"
 		(shape output)
-		(at 167.64 243.84 180)
+		(at 120.65 251.46 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6401,7 +6420,7 @@
 	)
 	(hierarchical_label "FPGA_RST_N"
 		(shape output)
-		(at 167.64 246.38 180)
+		(at 120.65 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8382,6 +8401,7 @@
 		)
 		(pin "42"
 			(uuid "671584f4-123f-4396-9e27-11c10a0b8beb")
+			(alternate "I2C1_SCL")
 		)
 		(pin "19"
 			(uuid "550dd49d-1083-44c0-9bea-24712add2127")
@@ -8401,6 +8421,7 @@
 		)
 		(pin "43"
 			(uuid "7ff84a62-e80a-479b-a725-aeddc780875e")
+			(alternate "I2C1_SDA")
 		)
 		(pin "7"
 			(uuid "0edfe128-09dd-44de-bcc2-2988b200a336")
@@ -9908,6 +9929,7 @@
 		)
 		(pin "42"
 			(uuid "671584f4-123f-4396-9e27-11c10a0b8beb")
+			(alternate "I2C1_SCL")
 		)
 		(pin "19"
 			(uuid "550dd49d-1083-44c0-9bea-24712add2127")
@@ -9927,6 +9949,7 @@
 		)
 		(pin "43"
 			(uuid "7ff84a62-e80a-479b-a725-aeddc780875e")
+			(alternate "I2C1_SDA")
 		)
 		(pin "7"
 			(uuid "0edfe128-09dd-44de-bcc2-2988b200a336")
@@ -11766,6 +11789,7 @@
 		)
 		(pin "42"
 			(uuid "671584f4-123f-4396-9e27-11c10a0b8beb")
+			(alternate "I2C1_SCL")
 		)
 		(pin "19"
 			(uuid "550dd49d-1083-44c0-9bea-24712add2127")
@@ -11785,6 +11809,7 @@
 		)
 		(pin "43"
 			(uuid "7ff84a62-e80a-479b-a725-aeddc780875e")
+			(alternate "I2C1_SDA")
 		)
 		(pin "7"
 			(uuid "0edfe128-09dd-44de-bcc2-2988b200a336")
@@ -11989,6 +12014,7 @@
 		)
 		(pin "42"
 			(uuid "671584f4-123f-4396-9e27-11c10a0b8beb")
+			(alternate "I2C1_SCL")
 		)
 		(pin "19"
 			(uuid "550dd49d-1083-44c0-9bea-24712add2127")
@@ -12008,6 +12034,7 @@
 		)
 		(pin "43"
 			(uuid "7ff84a62-e80a-479b-a725-aeddc780875e")
+			(alternate "I2C1_SDA")
 		)
 		(pin "7"
 			(uuid "0edfe128-09dd-44de-bcc2-2988b200a336")
@@ -13015,6 +13042,7 @@
 		)
 		(pin "42"
 			(uuid "671584f4-123f-4396-9e27-11c10a0b8beb")
+			(alternate "I2C1_SCL")
 		)
 		(pin "19"
 			(uuid "550dd49d-1083-44c0-9bea-24712add2127")
@@ -13034,6 +13062,7 @@
 		)
 		(pin "43"
 			(uuid "7ff84a62-e80a-479b-a725-aeddc780875e")
+			(alternate "I2C1_SDA")
 		)
 		(pin "7"
 			(uuid "0edfe128-09dd-44de-bcc2-2988b200a336")

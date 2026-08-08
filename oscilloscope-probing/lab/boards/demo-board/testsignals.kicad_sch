@@ -4,6 +4,13 @@
 	(generator_version "9.0")
 	(uuid "a3b04933-786f-40a6-a60b-be3cd6e0c250")
 	(paper "A3")
+	(title_block
+		(title "Oscilloscope Demo Board")
+		(date "2026-08-08")
+		(rev "0.1")
+		(company "Antikernel Labs")
+		(comment 1 "Andrew D. Zonenberg")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_01X01"
 			(pin_names
@@ -11239,10 +11246,6 @@
 		(uuid "c8879b48-79b7-40bd-a2e7-bbfe9c634628")
 	)
 	(no_connect
-		(at 335.28 50.8)
-		(uuid "c894f153-36a8-4c8f-9b6a-4d6504c16368")
-	)
-	(no_connect
 		(at 43.18 73.66)
 		(uuid "c8c84617-f32b-40e3-abcb-772894dc0ac9")
 	)
@@ -11257,10 +11260,6 @@
 	(no_connect
 		(at 262.89 33.02)
 		(uuid "d1f2a9a8-9749-4e92-92b0-c860ae625602")
-	)
-	(no_connect
-		(at 335.28 53.34)
-		(uuid "d26c000d-96c6-451d-b9eb-9cd0c089abd5")
 	)
 	(no_connect
 		(at 191.77 43.18)
@@ -11466,6 +11465,26 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 209.55) (xy 173.99 209.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "072493cb-edc2-4140-9288-495ad6aa3f8b")
+	)
+	(wire
+		(pts
+			(xy 154.94 220.98) (xy 173.99 220.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "117c9b81-de12-498b-94ff-8a646333d202")
+	)
+	(wire
+		(pts
 			(xy 44.45 179.07) (xy 48.26 179.07)
 		)
 		(stroke
@@ -11513,6 +11532,16 @@
 			(type default)
 		)
 		(uuid "23b5df25-d22c-42ae-9a68-d961ecd0b375")
+	)
+	(wire
+		(pts
+			(xy 232.41 210.82) (xy 232.41 222.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "302c2cca-5154-423a-bd97-bf9d577c6e34")
 	)
 	(wire
 		(pts
@@ -11683,26 +11712,6 @@
 			(type default)
 		)
 		(uuid "aaeb57d9-3000-4dee-a014-95cdc0b40f21")
-	)
-	(wire
-		(pts
-			(xy 156.21 209.55) (xy 173.99 209.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b838b5c2-0e0e-4b7e-9e89-ac255f9cb3ee")
-	)
-	(wire
-		(pts
-			(xy 152.4 214.63) (xy 177.8 214.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c387ecd0-51b6-4622-92d0-6b2c8894079a")
 	)
 	(wire
 		(pts
@@ -11924,16 +11933,6 @@
 		)
 		(uuid "1763a1e7-4648-41b2-9c4f-65e7e9e34d81")
 	)
-	(label "GND"
-		(at 156.21 214.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "178494ea-0efa-456d-bcc1-48304959116a")
-	)
 	(label "FPGA_LED2"
 		(at 123.19 132.08 180)
 		(effects
@@ -11943,6 +11942,26 @@
 			(justify right bottom)
 		)
 		(uuid "1c14012c-5702-4f30-97e0-7e0af96855d6")
+	)
+	(label "GTP_TX1_P"
+		(at 335.28 50.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "21de9cc7-c8b3-4013-95ce-63dd340ac9c2")
+	)
+	(label "GTP_TX1_P"
+		(at 147.32 209.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "222549d3-9fde-4448-aa06-259cd6957a7b")
 	)
 	(label "GTP_TX0_P"
 		(at 335.28 66.04 180)
@@ -12034,6 +12053,16 @@
 		)
 		(uuid "4c6c4029-7aaa-4a18-b294-6bf73ccff8c6")
 	)
+	(label "GTP_TX1_AC_N"
+		(at 154.94 220.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "513b7d2f-cd55-4cbe-af18-bd5fd155707c")
+	)
 	(label "GND"
 		(at 284.48 246.38 0)
 		(effects
@@ -12094,6 +12123,16 @@
 		)
 		(uuid "5d472f35-f381-40e9-a33a-ebb230206bd0")
 	)
+	(label "GTP_TX1_N"
+		(at 335.28 53.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6237b6d1-1c18-470d-9d3b-5a21d9510b72")
+	)
 	(label "COAX_1"
 		(at 44.45 162.56 180)
 		(effects
@@ -12103,6 +12142,16 @@
 			(justify right bottom)
 		)
 		(uuid "65198c4b-dd79-4958-9e88-c1ca025f9351")
+	)
+	(label "GTP_TX1_N"
+		(at 147.32 220.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6687b981-eeb1-4972-9fb4-0e36c760a2e8")
 	)
 	(label "GND"
 		(at 200.66 245.11 0)
@@ -12284,16 +12333,6 @@
 		)
 		(uuid "b44dbeed-af7e-4a86-bec5-ca5d4782c5f2")
 	)
-	(label "2XTHRU"
-		(at 156.21 209.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b4f923d6-76c8-4ec6-af07-c0f9f546d092")
-	)
 	(label "GND"
 		(at 44.45 201.93 180)
 		(effects
@@ -12313,6 +12352,16 @@
 			(justify right bottom)
 		)
 		(uuid "b904d0d4-146a-41ff-b4ad-82d445d72e89")
+	)
+	(label "GND"
+		(at 236.22 227.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bb7da8ec-d946-4020-b458-e401a425bce5")
 	)
 	(label "GND"
 		(at 119.38 276.86 180)
@@ -12354,6 +12403,26 @@
 		)
 		(uuid "cc2ebae6-a151-4b6e-9e43-c3805ed8d368")
 	)
+	(label "GND"
+		(at 177.8 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cee7275b-5035-4856-aa6a-89a9273d5bd2")
+	)
+	(label "GTP_TX1_AC_P"
+		(at 154.94 209.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ceec85cb-b300-4f8d-aba1-2e11c25a1cbd")
+	)
 	(label "VBUS"
 		(at 152.4 269.24 180)
 		(effects
@@ -12374,6 +12443,16 @@
 		)
 		(uuid "d46d46ef-b78b-486a-a9bd-900c03d3bd1b")
 	)
+	(label "GND"
+		(at 177.8 214.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d6e9f45d-629d-4619-aaab-6b9e439492c0")
+	)
 	(label "LED_CTRL_5V0"
 		(at 68.58 242.57 0)
 		(effects
@@ -12385,6 +12464,16 @@
 		(uuid "d977297c-1151-4bca-85bd-14382dc19f47")
 	)
 	(label "GND"
+		(at 236.22 215.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "daa9a95c-d66e-4cd3-9a39-b30f65b5f01b")
+	)
+	(label "GND"
 		(at 152.4 276.86 180)
 		(effects
 			(font
@@ -12393,6 +12482,16 @@
 			(justify right bottom)
 		)
 		(uuid "e5800a5c-1889-4758-a680-db450cf8823c")
+	)
+	(label "2XTHRU"
+		(at 232.41 210.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e5db45a2-6e95-4ae4-b08b-a782aedc6360")
 	)
 	(label "GND"
 		(at 80.01 259.08 180)
@@ -13153,8 +13252,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_COAXIAL")
-		(at 152.4 209.55 0)
-		(mirror y)
+		(at 177.8 220.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13162,7 +13260,7 @@
 		(dnp no)
 		(uuid "270bac99-6cc4-4bbc-8dd2-56c8d8f1fb81")
 		(property "Reference" "J21"
-			(at 149.86 208.631 0)
+			(at 180.34 220.061 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13171,7 +13269,7 @@
 			)
 		)
 		(property "Value" "SMA-J-P-H-ST-EM1"
-			(at 149.86 211.0553 0)
+			(at 180.34 222.4853 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13180,7 +13278,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
-			(at 152.4 209.55 0)
+			(at 177.8 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13189,7 +13287,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 152.4 209.55 0)
+			(at 177.8 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13198,7 +13296,7 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
-			(at 152.4 209.55 0)
+			(at 177.8 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15360,6 +15458,74 @@
 		)
 	)
 	(symbol
+		(lib_id "device:C")
+		(at 151.13 220.98 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5994296d-245d-45d4-8c97-8ca1c69fba4b")
+		(property "Reference" "C125"
+			(at 151.13 214.6765 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1 uF"
+			(at 151.13 217.1008 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
+			(at 154.94 220.0148 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 151.13 220.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "bc49af8c-28be-4e52-acfe-bbf1acc4d1a6")
+		)
+		(pin "1"
+			(uuid "7d7d345c-9fb0-4803-b07a-b7d383c943f9")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "C125")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:R")
 		(at 182.88 22.86 90)
 		(unit 1)
@@ -16034,6 +16200,74 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:C")
+		(at 151.13 209.55 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9845255f-d1b6-4c3d-89b3-829efcf95fe4")
+		(property "Reference" "C124"
+			(at 151.13 203.2465 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0.1 uF"
+			(at 151.13 205.6708 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_CAP_NOSILK"
+			(at 154.94 208.5848 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 151.13 209.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "47a47e11-f2d1-44e7-a456-827aff166dbc")
+		)
+		(pin "1"
+			(uuid "49b65daa-f8fb-4c8f-a1f6-7c3aaa49d91e")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "C124")
 					(unit 1)
 				)
 			)
@@ -17892,6 +18126,76 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "R37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 236.22 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "af20fc25-aaad-4a96-98de-7546735e5d18")
+		(property "Reference" "J22"
+			(at 238.76 209.901 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 238.76 212.3253 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+			(at 236.22 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.22 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 236.22 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "67f7482f-9433-4cd9-be60-11b6af47b2aa")
+		)
+		(pin "1"
+			(uuid "0458fa76-6ab7-422b-a1e2-9497996a3923")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J22")
 					(unit 1)
 				)
 			)
@@ -21272,6 +21576,75 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "R65")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 236.22 222.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cfcbe85e-d46c-42a3-b91d-47f2859b267a")
+		(property "Reference" "J23"
+			(at 238.76 221.331 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 238.76 223.7553 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+			(at 236.22 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.22 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 236.22 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6ff6aa7b-ed74-4a52-a3af-8266beade320")
+		)
+		(pin "1"
+			(uuid "aeb34be6-0922-48b8-9c06-33bad79b9539")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J23")
 					(unit 1)
 				)
 			)

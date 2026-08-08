@@ -4,6 +4,13 @@
 	(generator_version "9.0")
 	(uuid "a1b175e2-5750-4df1-a2ba-26c162232501")
 	(paper "A3")
+	(title_block
+		(title "Oscilloscope Demo Board")
+		(date "2026-08-08")
+		(rev "0.1")
+		(company "Antikernel Labs")
+		(comment 1 "Andrew D. Zonenberg")
+	)
 	(lib_symbols
 		(symbol "conn:CONN_01X08"
 			(pin_names

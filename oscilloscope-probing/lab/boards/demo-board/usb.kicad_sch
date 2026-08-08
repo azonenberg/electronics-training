@@ -5,8 +5,8 @@
 	(uuid "2c779049-d065-4834-b776-bdab3c0b75fe")
 	(paper "A4")
 	(title_block
-		(title "Probing Demo Board")
-		(date "2026-08-06")
+		(title "Oscilloscope Demo Board")
+		(date "2026-08-08")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
