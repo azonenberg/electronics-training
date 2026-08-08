@@ -18619,10 +18619,6 @@
 		(uuid "12843e03-6766-48e5-b673-0cf3f3a0ab34")
 	)
 	(no_connect
-		(at 107.95 232.41)
-		(uuid "16884b89-4c1d-4bbc-bbfe-7601eceaac73")
-	)
-	(no_connect
 		(at 35.56 140.97)
 		(uuid "1bc83cd4-728a-4feb-8a11-c7443aacfcee")
 	)
@@ -18787,6 +18783,10 @@
 		(uuid "6ab510b9-63f4-49f1-89e9-f9777bafecdc")
 	)
 	(no_connect
+		(at 107.95 247.65)
+		(uuid "6d0772ab-93c9-4f6a-8056-13337c4eac2f")
+	)
+	(no_connect
 		(at 107.95 222.25)
 		(uuid "6d9ece16-3b7f-4fd1-9c65-bb4dce7080d6")
 	)
@@ -18863,6 +18863,10 @@
 		(uuid "a18cc45f-a5cc-4752-81b5-d426b60af072")
 	)
 	(no_connect
+		(at 107.95 250.19)
+		(uuid "a51392a1-dd25-4e1a-8f68-d8c5583f3dea")
+	)
+	(no_connect
 		(at 107.95 148.59)
 		(uuid "a547ab63-111f-423f-8cca-c4cbadfa6fb4")
 	)
@@ -18911,10 +18915,6 @@
 		(uuid "bf3e308d-47e8-449b-add1-e3b651e1ca7f")
 	)
 	(no_connect
-		(at 107.95 240.03)
-		(uuid "c2071b48-71d3-4d3f-b658-bff93e6c6853")
-	)
-	(no_connect
 		(at 35.56 101.6)
 		(uuid "c361d9c6-dba9-46e9-9b95-73a103631ff5")
 	)
@@ -18943,12 +18943,12 @@
 		(uuid "cbdd1c72-bcb8-4449-bb9d-d3420193ecc8")
 	)
 	(no_connect
-		(at 107.95 234.95)
-		(uuid "cdfc0ce2-37ff-40c2-a505-78183249d90e")
-	)
-	(no_connect
 		(at 107.95 57.15)
 		(uuid "d2c6dc61-bbc0-4199-8bf7-3c54e3e52e79")
+	)
+	(no_connect
+		(at 107.95 252.73)
+		(uuid "d8516384-3cdf-4423-b268-f7aadaa0d203")
 	)
 	(no_connect
 		(at 35.56 123.19)
@@ -20855,7 +20855,7 @@
 		(uuid "04f99aed-bb07-45f6-841a-d163b4bd526a")
 	)
 	(label "DPAD_S"
-		(at 107.95 247.65 180)
+		(at 107.95 242.57 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21095,7 +21095,7 @@
 		(uuid "2497d424-d0d2-41cb-b36e-f0fd47012849")
 	)
 	(label "DPAD_W"
-		(at 107.95 242.57 180)
+		(at 107.95 234.95 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21345,7 +21345,7 @@
 		(uuid "4c8ad67a-1f76-4a0e-b952-58e6386b981d")
 	)
 	(label "DPAD_SEL"
-		(at 107.95 252.73 180)
+		(at 107.95 240.03 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22355,7 +22355,7 @@
 		(uuid "d61787a8-fd56-4f18-85a1-6d23bb78b216")
 	)
 	(label "DPAD_N"
-		(at 107.95 250.19 180)
+		(at 107.95 232.41 180)
 		(effects
 			(font
 				(size 1.27 1.27)

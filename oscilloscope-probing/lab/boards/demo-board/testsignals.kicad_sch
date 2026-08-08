@@ -11102,10 +11102,6 @@
 		(uuid "9553cf6b-2294-4092-a9e4-b0d529c9df2d")
 	)
 	(no_connect
-		(at 123.19 144.78)
-		(uuid "9620624c-36fc-4b35-a9f0-a1912292b3ea")
-	)
-	(no_connect
 		(at 123.19 38.1)
 		(uuid "96349f6e-f22e-47c9-bef5-9b4d852b8a7e")
 	)
@@ -12552,6 +12548,16 @@
 			(justify right bottom)
 		)
 		(uuid "f07df309-6596-4f38-af66-bfc6e195d697")
+	)
+	(label "LED_CTRL"
+		(at 123.19 144.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f1fd3c9a-3b53-4149-9a04-f5ebfbfcea2e")
 	)
 	(label "GND"
 		(at 114.3 259.08 180)
