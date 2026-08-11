@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-08")
+		(date "2026-08-11")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")

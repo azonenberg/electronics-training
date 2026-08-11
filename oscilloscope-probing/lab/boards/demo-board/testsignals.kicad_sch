@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-08")
+		(date "2026-08-11")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -117,6 +117,266 @@
 						)
 					)
 					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "conn:CONN_01X06"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "CONN_01X06"
+				(at 2.54 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Connector, single row, 01x06, pin header"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin_Header_Straight_1X* Pin_Header_Angled_1X* Socket_Strip_Straight_1X* Socket_Strip_Angled_1X*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CONN_01X06_0_1"
+				(rectangle
+					(start -1.27 7.62)
+					(end 1.27 -7.62)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 6.477)
+					(end 0.254 6.223)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 3.937)
+					(end 0.254 3.683)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 1.397)
+					(end 0.254 1.143)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -1.143)
+					(end 0.254 -1.397)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -3.683)
+					(end 0.254 -3.937)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -6.223)
+					(end 0.254 -6.477)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CONN_01X06_1_1"
+				(pin passive line
+					(at -5.08 6.35 0)
+					(length 3.81)
+					(name "P1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 3.81 0)
+					(length 3.81)
+					(name "P2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 1.27 0)
+					(length 3.81)
+					(name "P3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -1.27 0)
+					(length 3.81)
+					(name "P4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -3.81 0)
+					(length 3.81)
+					(name "P5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -6.35 0)
+					(length 3.81)
+					(name "P6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10584,6 +10844,17 @@
 		)
 		(uuid "043684ba-c99e-46aa-a72b-b5353875355f")
 	)
+	(text "FTDI cable pinout"
+		(exclude_from_sim no)
+		(at 330.2 175.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2f4645f3-9ea8-4e17-9312-74231167e873")
+	)
 	(text "1V8"
 		(exclude_from_sim no)
 		(at 267.97 153.67 0)
@@ -10970,10 +11241,6 @@
 		(uuid "66650b21-5a2b-4e33-89e3-ac82a3bdabb8")
 	)
 	(no_connect
-		(at 123.19 101.6)
-		(uuid "67b56210-e8ac-4ea4-b032-5cdff7f06bf7")
-	)
-	(no_connect
 		(at 123.19 63.5)
 		(uuid "694cf073-6dc6-40b3-93d1-e409f9ec38cd")
 	)
@@ -11132,10 +11399,6 @@
 	(no_connect
 		(at 262.89 58.42)
 		(uuid "a291c770-c997-4e05-9d44-8d68217e0070")
-	)
-	(no_connect
-		(at 123.19 127)
-		(uuid "a4899ac9-1952-4d71-8d42-ef393b6ec5a4")
 	)
 	(no_connect
 		(at 335.28 60.96)
@@ -11370,10 +11633,6 @@
 		(uuid "eb1eeb05-dfc3-4df2-933b-adadb34dd456")
 	)
 	(no_connect
-		(at 123.19 104.14)
-		(uuid "eb996a47-6b16-48ff-a1d6-a50c81848f25")
-	)
-	(no_connect
 		(at 123.19 91.44)
 		(uuid "ebcc09f9-c5f2-43b3-b1f5-b78d4c4ac2ff")
 	)
@@ -11392,10 +11651,6 @@
 	(no_connect
 		(at 262.89 144.78)
 		(uuid "ed20bbfe-7085-4eb8-9b30-b727688b733e")
-	)
-	(no_connect
-		(at 123.19 106.68)
-		(uuid "f0e6434d-fb79-4869-9d5a-e5faa88a9c0e")
 	)
 	(no_connect
 		(at 123.19 20.32)
@@ -11448,6 +11703,10 @@
 	(no_connect
 		(at 123.19 114.3)
 		(uuid "fec039a6-8c8e-4661-aed6-67008a112907")
+	)
+	(no_connect
+		(at 340.36 165.1)
+		(uuid "ffde6fb7-c3d9-4963-98f7-aa47aabb3487")
 	)
 	(wire
 		(pts
@@ -11830,7 +12089,7 @@
 		(uuid "ff51239f-4081-41ca-9bd1-c6da369f9900")
 	)
 	(label "GTP_REF_P"
-		(at 213.36 163.83 0)
+		(at 213.36 173.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11939,6 +12198,16 @@
 		)
 		(uuid "1c14012c-5702-4f30-97e0-7e0af96855d6")
 	)
+	(label "GND"
+		(at 340.36 160.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "214bdd5b-c5fc-4560-915d-fa9e14fd036e")
+	)
 	(label "GTP_TX1_P"
 		(at 335.28 50.8 180)
 		(effects
@@ -11958,6 +12227,26 @@
 			(justify right bottom)
 		)
 		(uuid "222549d3-9fde-4448-aa06-259cd6957a7b")
+	)
+	(label "FPGA_UART_CTS_N"
+		(at 340.36 162.56 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2de195f6-7309-428a-a58f-3af7c37cebce")
+	)
+	(label "FPGA_UART_TX"
+		(at 340.36 167.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "35167bd8-df6d-466c-b5d6-8a38ec90f367")
 	)
 	(label "GTP_TX0_P"
 		(at 335.28 66.04 180)
@@ -12008,6 +12297,16 @@
 			(justify left bottom)
 		)
 		(uuid "41116287-c11c-4c75-8e47-360b96175170")
+	)
+	(label "FPGA_UART_CTS_N"
+		(at 123.19 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "42b96be6-5cfd-4f3f-a47d-1e978a09a3cc")
 	)
 	(label "VBUS"
 		(at 119.38 269.24 180)
@@ -12119,6 +12418,16 @@
 		)
 		(uuid "5d472f35-f381-40e9-a33a-ebb230206bd0")
 	)
+	(label "FPGA_UART_CTS_N"
+		(at 264.16 167.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5febf5c1-1d73-42d1-8150-5fe02953f594")
+	)
 	(label "GTP_TX1_N"
 		(at 335.28 53.34 180)
 		(effects
@@ -12128,6 +12437,26 @@
 			(justify right bottom)
 		)
 		(uuid "6237b6d1-1c18-470d-9d3b-5a21d9510b72")
+	)
+	(label "FPGA_UART_RX"
+		(at 264.16 175.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "62b4ca56-9cb5-4797-a523-36aae08a30e6")
+	)
+	(label "FPGA_UART_RTS_N"
+		(at 123.19 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6310e25d-5729-447a-a24d-35efc90d8310")
 	)
 	(label "COAX_1"
 		(at 44.45 162.56 180)
@@ -12239,6 +12568,16 @@
 		)
 		(uuid "8cc4a4cd-6f76-4335-bb1a-808824376fe7")
 	)
+	(label "FPGA_UART_TX"
+		(at 264.16 172.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "91c3c4e3-61be-4d08-8efc-0bbcfa514885")
+	)
 	(label "GTP_TX0_P"
 		(at 147.32 184.15 180)
 		(effects
@@ -12309,6 +12648,16 @@
 		)
 		(uuid "af1fbc0c-8dff-4b6e-80d8-67adac778a65")
 	)
+	(label "FPGA_UART_RTS_N"
+		(at 264.16 177.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b0962fe0-e04d-4ee5-ab5e-5bf672f75f92")
+	)
 	(label "VBUS"
 		(at 80.01 256.54 180)
 		(effects
@@ -12320,7 +12669,7 @@
 		(uuid "b15898aa-8957-43ac-b16d-ea652b1296cb")
 	)
 	(label "GTP_REF_N"
-		(at 213.36 173.99 0)
+		(at 213.36 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12339,6 +12688,16 @@
 		)
 		(uuid "b6fcae8b-3a6b-4ee4-94cc-dc56ab764cff")
 	)
+	(label "FPGA_UART_RTS_N"
+		(at 340.36 172.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b77eff1b-6acd-41d9-a097-3fc5526b7a39")
+	)
 	(label "VBUS"
 		(at 114.3 256.54 180)
 		(effects
@@ -12349,6 +12708,16 @@
 		)
 		(uuid "b904d0d4-146a-41ff-b4ad-82d445d72e89")
 	)
+	(label "FPGA_UART_RX"
+		(at 123.19 127 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb63141e-fd93-44d9-a56d-25891f2ae021")
+	)
 	(label "GND"
 		(at 236.22 227.33 0)
 		(effects
@@ -12358,6 +12727,16 @@
 			(justify left bottom)
 		)
 		(uuid "bb7da8ec-d946-4020-b458-e401a425bce5")
+	)
+	(label "FPGA_UART_RX"
+		(at 340.36 170.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bf27ce9e-1de1-47f0-b117-cbdd742e471b")
 	)
 	(label "GND"
 		(at 119.38 276.86 180)
@@ -12378,6 +12757,16 @@
 			(justify right bottom)
 		)
 		(uuid "c1cdd44e-af59-4b7a-92c3-713d9a5a1fa5")
+	)
+	(label "FPGA_UART_TX"
+		(at 123.19 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c9ea2ba9-514f-4b6c-835f-d80f30358907")
 	)
 	(label "CLIP_1"
 		(at 43.18 35.56 180)
@@ -17957,7 +18346,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
 			(at 200.66 270.51 0)
 			(effects
 				(font
@@ -18027,7 +18416,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
 			(at 200.66 250.19 0)
 			(effects
 				(font
@@ -18165,7 +18554,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
 			(at 236.22 210.82 0)
 			(effects
 				(font
@@ -21447,6 +21836,88 @@
 		)
 	)
 	(symbol
+		(lib_id "conn:CONN_01X06")
+		(at 345.44 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c94096c6-49a5-469e-a280-7cb01ba063c9")
+		(property "Reference" "J6"
+			(at 347.345 165.1578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CONN_01X06"
+			(at 347.345 167.5821 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_HEADER_2.54MM_1x6_REFLOW"
+			(at 345.44 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 345.44 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x06, pin header"
+			(at 345.44 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "2491c43a-3d53-4e06-9e11-b43fb488c0a1")
+		)
+		(pin "1"
+			(uuid "334847b6-f5cb-467f-af20-16cafd92a35d")
+		)
+		(pin "5"
+			(uuid "4beae7d2-b4d5-4bfc-b41e-ffe59e055704")
+		)
+		(pin "3"
+			(uuid "42fe7a94-d68b-45c0-9841-3cda6d37d4c6")
+		)
+		(pin "2"
+			(uuid "7228c2b8-fb60-4d20-b107-382dca7fbde0")
+		)
+		(pin "4"
+			(uuid "d6ad4b21-6639-4be6-a7b1-fca927bfea10")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "special-azonenberg:19-C47_RSGHBHC-5V01_2T")
 		(at 119.38 265.43 0)
 		(unit 1)
@@ -21614,7 +22085,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1"
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
 			(at 236.22 222.25 0)
 			(effects
 				(font
