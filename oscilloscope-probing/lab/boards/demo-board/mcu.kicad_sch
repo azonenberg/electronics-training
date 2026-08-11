@@ -18685,6 +18685,10 @@
 		(uuid "3acd6c6e-56a2-4a37-8a56-013c21ae010b")
 	)
 	(no_connect
+		(at 107.95 190.5)
+		(uuid "3dabc4b6-2013-4159-9ecd-1dcac7ae3f57")
+	)
+	(no_connect
 		(at 35.56 148.59)
 		(uuid "3eecb1ce-b0a8-413f-8f19-a4f41b4f64aa")
 	)
@@ -18731,6 +18735,10 @@
 	(no_connect
 		(at 35.56 109.22)
 		(uuid "5641bad4-c5eb-497b-b35f-4b743a1d1d59")
+	)
+	(no_connect
+		(at 107.95 24.13)
+		(uuid "57e0e90e-7356-4119-9f21-d432e7b7e5aa")
 	)
 	(no_connect
 		(at 107.95 140.97)
@@ -18913,10 +18921,6 @@
 		(uuid "c5d961bf-fa55-4f6f-ba6f-74da9967c953")
 	)
 	(no_connect
-		(at 107.95 153.67)
-		(uuid "c9e83b66-23e0-4e20-8729-2489fde0b43e")
-	)
-	(no_connect
 		(at 35.56 99.06)
 		(uuid "ca41dfef-cba3-4827-aaad-d704866ac931")
 	)
@@ -18955,10 +18959,6 @@
 	(no_connect
 		(at 107.95 146.05)
 		(uuid "e1372e4b-a18e-4fec-953e-88ec0488814f")
-	)
-	(no_connect
-		(at 35.56 161.29)
-		(uuid "e1b7e2cd-5500-4bd2-80b2-39fd5e0490ed")
 	)
 	(no_connect
 		(at 107.95 59.69)
@@ -19127,6 +19127,16 @@
 			(type default)
 		)
 		(uuid "076d6735-e674-4737-b994-f1e8ff5512e5")
+	)
+	(wire
+		(pts
+			(xy 24.13 161.29) (xy 35.56 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0995914e-f779-403b-93a1-0572818501f9")
 	)
 	(wire
 		(pts
@@ -20567,16 +20577,6 @@
 			(type default)
 		)
 		(uuid "df410a13-8d35-4516-8790-02151375b989")
-	)
-	(wire
-		(pts
-			(xy 88.9 190.5) (xy 107.95 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df990bbe-aab0-4f20-994e-2957967d2983")
 	)
 	(wire
 		(pts
@@ -22419,7 +22419,7 @@
 		(uuid "ce211392-0c0d-42fb-86b4-809f241c7c65")
 	)
 	(label "MCU_TRIG"
-		(at 88.9 190.5 0)
+		(at 24.13 161.29 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22909,7 +22909,7 @@
 	)
 	(hierarchical_label "MCU_DONE"
 		(shape output)
-		(at 107.95 24.13 180)
+		(at 107.95 153.67 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -41981,7 +41981,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_01X01")
-		(at 83.82 190.5 0)
+		(at 19.05 161.29 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -41990,7 +41990,7 @@
 		(dnp no)
 		(uuid "ea0d5f8e-1b14-454c-8e02-15fb604b6c09")
 		(property "Reference" "TP12"
-			(at 81.915 189.2878 0)
+			(at 21.59 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41999,7 +41999,7 @@
 			)
 		)
 		(property "Value" "TESTCLIP"
-			(at 81.915 191.7121 0)
+			(at 21.59 166.2543 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42008,7 +42008,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
-			(at 83.82 190.5 0)
+			(at 19.05 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42017,7 +42017,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 83.82 190.5 0)
+			(at 19.05 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42026,7 +42026,7 @@
 			)
 		)
 		(property "Description" "Connector, single row, 01x01, pin header"
-			(at 83.82 190.5 0)
+			(at 19.05 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)

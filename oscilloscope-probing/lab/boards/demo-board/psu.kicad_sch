@@ -6266,7 +6266,7 @@
 	)
 	(hierarchical_label "FPGA_INIT"
 		(shape bidirectional)
-		(at 167.64 243.84 180)
+		(at 120.65 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6420,7 +6420,7 @@
 	)
 	(hierarchical_label "FPGA_RST_N"
 		(shape output)
-		(at 120.65 259.08 180)
+		(at 167.64 243.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
