@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-11")
+		(date "2026-08-12")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -18593,6 +18593,10 @@
 		(uuid "005d7b71-d052-4506-af09-8bd48fd03a61")
 	)
 	(no_connect
+		(at 35.56 73.66)
+		(uuid "00fcce7b-28e7-4379-9dd2-b74098901043")
+	)
+	(no_connect
 		(at 35.56 54.61)
 		(uuid "066448b6-175e-4bb9-a8b2-445c6f1a1eee")
 	)
@@ -18605,16 +18609,16 @@
 		(uuid "0910a48e-6b04-473c-910e-578c04bb4ce5")
 	)
 	(no_connect
-		(at 35.56 156.21)
-		(uuid "0ada058e-647d-42be-8cd7-4e0faf381473")
-	)
-	(no_connect
 		(at 35.56 151.13)
 		(uuid "0eacbcba-5a69-41dd-8349-df20f8acd785")
 	)
 	(no_connect
 		(at 35.56 86.36)
 		(uuid "0f8021f5-9481-44db-ac08-bd4a4276f775")
+	)
+	(no_connect
+		(at 35.56 135.89)
+		(uuid "0fa99b16-4728-4f52-a995-74efa8f11058")
 	)
 	(no_connect
 		(at 158.75 36.83)
@@ -18633,12 +18637,8 @@
 		(uuid "1bc83cd4-728a-4feb-8a11-c7443aacfcee")
 	)
 	(no_connect
-		(at 107.95 109.22)
-		(uuid "1c710ab1-1f8f-4bc4-b056-ddaadb58a5a7")
-	)
-	(no_connect
-		(at 107.95 195.58)
-		(uuid "1c8f3fd5-3834-4196-a639-1e0d0e06dc8d")
+		(at 35.56 161.29)
+		(uuid "1d481c5e-7c36-46e5-9b00-5c7474784473")
 	)
 	(no_connect
 		(at 107.95 208.28)
@@ -18653,16 +18653,8 @@
 		(uuid "24a2cfa8-e5b2-43dc-b4da-197e8d636126")
 	)
 	(no_connect
-		(at 107.95 200.66)
-		(uuid "25d29542-926e-47c7-8f9e-2821ddb172f8")
-	)
-	(no_connect
 		(at 35.56 146.05)
 		(uuid "26b41f5b-3777-4a9d-8ad0-dd4afd352737")
-	)
-	(no_connect
-		(at 107.95 29.21)
-		(uuid "2800372c-f372-4dad-be22-a2d6347793df")
 	)
 	(no_connect
 		(at 107.95 49.53)
@@ -18671,10 +18663,6 @@
 	(no_connect
 		(at 107.95 54.61)
 		(uuid "2cf32ab8-8039-487a-a0f6-2933b53dfd68")
-	)
-	(no_connect
-		(at 107.95 205.74)
-		(uuid "31848184-de38-4b85-bc53-46cdc3baa2ac")
 	)
 	(no_connect
 		(at 107.95 99.06)
@@ -18729,6 +18717,10 @@
 		(uuid "4af0bbec-0515-45b5-8ae4-258862786e29")
 	)
 	(no_connect
+		(at 35.56 158.75)
+		(uuid "50aa3f75-c6f3-4983-9876-87b91e611325")
+	)
+	(no_connect
 		(at 35.56 96.52)
 		(uuid "55218623-fa09-4795-94e0-d640612c5d92")
 	)
@@ -18773,10 +18765,6 @@
 		(uuid "61870885-3053-4a85-8945-93a11b04ab7b")
 	)
 	(no_connect
-		(at 107.95 198.12)
-		(uuid "6a61fcbd-c26f-4d85-9423-25e3b2aade6f")
-	)
-	(no_connect
 		(at 107.95 247.65)
 		(uuid "6d0772ab-93c9-4f6a-8056-13337c4eac2f")
 	)
@@ -18793,6 +18781,10 @@
 		(uuid "721bf99d-99fd-4fd9-a9ad-57fc55b7e993")
 	)
 	(no_connect
+		(at 35.56 39.37)
+		(uuid "7516037c-f0d4-4fca-bce7-2638ec88ca49")
+	)
+	(no_connect
 		(at 35.56 52.07)
 		(uuid "760718d6-9de7-4992-95c9-d24b838de295")
 	)
@@ -18801,12 +18793,12 @@
 		(uuid "7cc5b6b0-bf24-4e94-9edc-09e600374a66")
 	)
 	(no_connect
-		(at 107.95 26.67)
-		(uuid "83d33585-a8a6-47ea-bc8d-76f0b2fc2431")
-	)
-	(no_connect
 		(at 107.95 133.35)
 		(uuid "89c5c8e2-037d-47ac-9933-248e6b5e0a12")
+	)
+	(no_connect
+		(at 35.56 31.75)
+		(uuid "8b690073-e924-4728-b5fa-9e91ba54f765")
 	)
 	(no_connect
 		(at 35.56 81.28)
@@ -18815,6 +18807,14 @@
 	(no_connect
 		(at 35.56 21.59)
 		(uuid "8f26dd1a-04c4-4049-869d-a874ae24522b")
+	)
+	(no_connect
+		(at 35.56 133.35)
+		(uuid "8f6312e6-bcdd-428d-a4e1-b93d5b7ba6ee")
+	)
+	(no_connect
+		(at 107.95 125.73)
+		(uuid "9162f281-d3e8-4271-b1ae-9a1347208ac8")
 	)
 	(no_connect
 		(at 250.19 182.88)
@@ -18877,6 +18877,10 @@
 		(uuid "ab1d20e0-da6f-4fa5-8477-874b232ac3e4")
 	)
 	(no_connect
+		(at 107.95 198.12)
+		(uuid "ab74a599-a55e-4e8d-8271-1bb54b4de940")
+	)
+	(no_connect
 		(at 250.19 185.42)
 		(uuid "afee6b2d-ae31-47e6-b032-2e3005dde473")
 	)
@@ -18911,14 +18915,6 @@
 	(no_connect
 		(at 35.56 101.6)
 		(uuid "c361d9c6-dba9-46e9-9b95-73a103631ff5")
-	)
-	(no_connect
-		(at 107.95 203.2)
-		(uuid "c3af4758-63c9-468e-b818-c8489a898814")
-	)
-	(no_connect
-		(at 35.56 158.75)
-		(uuid "c5d961bf-fa55-4f6f-ba6f-74da9967c953")
 	)
 	(no_connect
 		(at 35.56 99.06)
@@ -18961,12 +18957,12 @@
 		(uuid "e1372e4b-a18e-4fec-953e-88ec0488814f")
 	)
 	(no_connect
-		(at 107.95 59.69)
-		(uuid "e25049a7-d6f9-443b-b296-475f9b2ecb9b")
+		(at 107.95 123.19)
+		(uuid "e177bbcf-40b8-4c84-bb93-b95f846c8778")
 	)
 	(no_connect
-		(at 107.95 193.04)
-		(uuid "e6250b76-73b2-475a-9939-421e546ccee2")
+		(at 107.95 59.69)
+		(uuid "e25049a7-d6f9-443b-b296-475f9b2ecb9b")
 	)
 	(no_connect
 		(at 250.19 177.8)
@@ -18987,6 +18983,10 @@
 	(no_connect
 		(at 107.95 76.2)
 		(uuid "edc4545d-0052-4579-83a8-b3c7585a2498")
+	)
+	(no_connect
+		(at 107.95 128.27)
+		(uuid "ee5021a0-7fa9-4466-9526-a4f42ed89c16")
 	)
 	(no_connect
 		(at 347.98 26.67)
@@ -19130,7 +19130,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 161.29) (xy 35.56 161.29)
+			(xy 96.52 109.22) (xy 107.95 109.22)
 		)
 		(stroke
 			(width 0)
@@ -21289,7 +21289,7 @@
 		(uuid "3989dfc1-9a3b-4fc9-9415-4c1c16b525d7")
 	)
 	(label "MCU_PMOD_DQ5"
-		(at 107.95 123.19 180)
+		(at 107.95 29.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21349,7 +21349,7 @@
 		(uuid "42fffeb1-0c7d-4344-8762-9f481a88dd49")
 	)
 	(label "MCU_PMOD_DQ7"
-		(at 107.95 128.27 180)
+		(at 107.95 205.74 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21589,7 +21589,7 @@
 		(uuid "62fc9533-7146-4c54-b277-995f2b55cca3")
 	)
 	(label "MCU_PMOD_DQ0"
-		(at 35.56 135.89 180)
+		(at 107.95 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21599,7 +21599,7 @@
 		(uuid "67700fba-f53c-40a2-83bb-145ad8ceeca7")
 	)
 	(label "MCU_PMOD_DQ2"
-		(at 35.56 31.75 180)
+		(at 107.95 193.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21639,7 +21639,7 @@
 		(uuid "6fa68270-0221-4dac-b15b-800944155c2e")
 	)
 	(label "MCU_PMOD_DQ4"
-		(at 35.56 39.37 180)
+		(at 107.95 200.66 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22219,7 +22219,7 @@
 		(uuid "b12a30bf-0f29-449a-910d-14194d24ba66")
 	)
 	(label "MCU_PMOD_DQ6"
-		(at 107.95 125.73 180)
+		(at 107.95 195.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22419,7 +22419,7 @@
 		(uuid "ce211392-0c0d-42fb-86b4-809f241c7c65")
 	)
 	(label "MCU_TRIG"
-		(at 24.13 161.29 0)
+		(at 96.52 109.22 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22499,7 +22499,7 @@
 		(uuid "ddf8acc8-d3de-435e-8df2-99f90844df86")
 	)
 	(label "MCU_PMOD_DQ1"
-		(at 35.56 73.66 180)
+		(at 107.95 26.67 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22519,7 +22519,7 @@
 		(uuid "dfe3242c-1f04-460f-9826-fd60a6142943")
 	)
 	(label "MCU_PMOD_DQ3"
-		(at 35.56 133.35 180)
+		(at 35.56 156.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -41981,7 +41981,7 @@
 	)
 	(symbol
 		(lib_id "conn:CONN_01X01")
-		(at 19.05 161.29 0)
+		(at 91.44 109.22 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -41990,7 +41990,7 @@
 		(dnp no)
 		(uuid "ea0d5f8e-1b14-454c-8e02-15fb604b6c09")
 		(property "Reference" "TP12"
-			(at 21.59 163.83 0)
+			(at 93.98 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41999,7 +41999,7 @@
 			)
 		)
 		(property "Value" "TESTCLIP"
-			(at 21.59 166.2543 0)
+			(at 93.98 114.1843 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42008,7 +42008,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
-			(at 19.05 161.29 0)
+			(at 91.44 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42017,7 +42017,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 19.05 161.29 0)
+			(at 91.44 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42026,7 +42026,7 @@
 			)
 		)
 		(property "Description" "Connector, single row, 01x01, pin header"
-			(at 19.05 161.29 0)
+			(at 91.44 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-11")
+		(date "2026-08-12")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -11266,6 +11266,10 @@
 		(uuid "12e973bc-d9cb-4e32-9427-70244848578b")
 	)
 	(no_connect
+		(at 123.19 144.78)
+		(uuid "12fb8354-338e-4548-9d50-dba4fafc0c51")
+	)
+	(no_connect
 		(at 262.89 119.38)
 		(uuid "138b71dc-a422-4808-91ea-bf5937fc3596")
 	)
@@ -11296,10 +11300,6 @@
 	(no_connect
 		(at 262.89 68.58)
 		(uuid "2547eb5c-1208-492c-853d-bd789d676bef")
-	)
-	(no_connect
-		(at 123.19 124.46)
-		(uuid "255a8011-e0d4-43c0-ad04-97aaba037880")
 	)
 	(no_connect
 		(at 43.18 127)
@@ -11626,10 +11626,6 @@
 		(uuid "8cf2b240-5d13-4bef-86de-dfcd7abd269c")
 	)
 	(no_connect
-		(at 191.77 35.56)
-		(uuid "8d5a0d2b-fdf8-42ce-9719-901994382d2f")
-	)
-	(no_connect
 		(at 262.89 116.84)
 		(uuid "8d7a9a18-c902-43e6-a66c-2ab615aba40e")
 	)
@@ -11740,6 +11736,10 @@
 	(no_connect
 		(at 43.18 119.38)
 		(uuid "bdb94684-17cc-46ad-9ecf-07dfe39c85b4")
+	)
+	(no_connect
+		(at 191.77 27.94)
+		(uuid "bdf26620-5c92-4e4a-94ea-ad093cee8216")
 	)
 	(no_connect
 		(at 123.19 45.72)
@@ -12063,7 +12063,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 27.94) (xy 191.77 27.94)
+			(xy 186.69 35.56) (xy 191.77 35.56)
 		)
 		(stroke
 			(width 0)
@@ -12592,7 +12592,7 @@
 		(uuid "3efbc3ab-eb88-4e5f-88bd-3f74dd14da77")
 	)
 	(label "COAX_1"
-		(at 179.07 22.86 180)
+		(at 179.07 35.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12852,7 +12852,7 @@
 		(uuid "712c6786-5e40-4b29-a864-42b199ab1114")
 	)
 	(label "COAX_2"
-		(at 179.07 25.4 180)
+		(at 179.07 22.86 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12882,7 +12882,7 @@
 		(uuid "7abadfe3-1eec-4c1c-87d4-66a6773c8da1")
 	)
 	(label "COAX_3"
-		(at 179.07 27.94 180)
+		(at 179.07 25.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13382,7 +13382,7 @@
 		(uuid "f07df309-6596-4f38-af66-bfc6e195d697")
 	)
 	(label "LED_CTRL"
-		(at 123.19 144.78 180)
+		(at 123.19 124.46 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16375,7 +16375,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 182.88 22.86 90)
+		(at 182.88 35.56 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16383,7 +16383,7 @@
 		(dnp no)
 		(uuid "5b282015-ddcd-4e3c-80e6-65bb81718db5")
 		(property "Reference" "R54"
-			(at 187.96 21.59 90)
+			(at 187.96 34.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16391,7 +16391,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 182.88 22.86 90)
+			(at 182.88 35.56 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16399,7 +16399,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 182.88 24.638 90)
+			(at 182.88 37.338 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16408,7 +16408,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 22.86 0)
+			(at 182.88 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16417,7 +16417,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 182.88 22.86 0)
+			(at 182.88 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16442,7 +16442,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 182.88 27.94 90)
+		(at 182.88 25.4 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16450,7 +16450,7 @@
 		(dnp no)
 		(uuid "5cdbce97-9fbf-457a-9062-cabfdbed3657")
 		(property "Reference" "R56"
-			(at 187.96 26.67 90)
+			(at 187.96 24.13 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16458,7 +16458,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 182.88 27.94 90)
+			(at 182.88 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16466,7 +16466,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 182.88 29.718 90)
+			(at 182.88 27.178 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16475,7 +16475,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 27.94 0)
+			(at 182.88 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16484,7 +16484,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 182.88 27.94 0)
+			(at 182.88 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18637,7 +18637,7 @@
 	)
 	(symbol
 		(lib_id "device:R")
-		(at 182.88 25.4 90)
+		(at 182.88 22.86 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18645,7 +18645,7 @@
 		(dnp no)
 		(uuid "9fbbc1d0-2f2d-4331-b553-c834b15d13d0")
 		(property "Reference" "R55"
-			(at 187.96 24.13 90)
+			(at 187.96 21.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18653,7 +18653,7 @@
 			)
 		)
 		(property "Value" "33"
-			(at 182.88 25.4 90)
+			(at 182.88 22.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18661,7 +18661,7 @@
 			)
 		)
 		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
-			(at 182.88 27.178 90)
+			(at 182.88 24.638 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18670,7 +18670,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 25.4 0)
+			(at 182.88 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18679,7 +18679,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 182.88 25.4 0)
+			(at 182.88 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
