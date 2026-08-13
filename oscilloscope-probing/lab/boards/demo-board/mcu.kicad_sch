@@ -18821,10 +18821,6 @@
 		(uuid "93d1b5cd-6c24-448a-ba0e-63312dee1358")
 	)
 	(no_connect
-		(at 347.98 52.07)
-		(uuid "95bdf427-8821-4ff2-9f8c-a265d63e128f")
-	)
-	(no_connect
 		(at 107.95 224.79)
 		(uuid "9771ce05-07be-41db-b4e0-0b80b4e30d1b")
 	)
@@ -19003,10 +18999,6 @@
 	(no_connect
 		(at 35.56 118.11)
 		(uuid "f9e06d87-d5f2-45bb-b27c-64e14e7679d8")
-	)
-	(no_connect
-		(at 347.98 49.53)
-		(uuid "fa870d3f-f1a4-4083-85f6-9ff6ca9b96fb")
 	)
 	(no_connect
 		(at 250.19 180.34)
@@ -20120,6 +20112,16 @@
 	)
 	(wire
 		(pts
+			(xy 367.03 182.88) (xy 378.46 182.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1216355-deb9-4675-b95f-7b8d7933f51e")
+	)
+	(wire
+		(pts
 			(xy 250.19 142.24) (xy 250.19 144.78)
 		)
 		(stroke
@@ -20760,6 +20762,16 @@
 	)
 	(wire
 		(pts
+			(xy 367.03 171.45) (xy 378.46 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9ccba23-6a65-4cc6-aa80-453c78bdb998")
+	)
+	(wire
+		(pts
 			(xy 334.01 31.75) (xy 337.82 31.75)
 		)
 		(stroke
@@ -20827,6 +20839,16 @@
 			(justify right bottom)
 		)
 		(uuid "02e6fde5-501e-4e80-905c-e7fdf96316a8")
+	)
+	(label "PAM3_TX_P"
+		(at 347.98 49.53 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "02e97156-849f-49e7-abba-db28b1bb0b80")
 	)
 	(label "3V3"
 		(at 146.05 203.2 180)
@@ -21278,6 +21300,16 @@
 		)
 		(uuid "37a1808d-f2dd-47be-b9d5-828302ec1452")
 	)
+	(label "PAM3_TX_N"
+		(at 367.03 177.8 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3984c3a6-227f-4f81-876b-4e1626ad61af")
+	)
 	(label "FMC_A21"
 		(at 347.98 140.97 180)
 		(effects
@@ -21397,6 +21429,16 @@
 			(justify right bottom)
 		)
 		(uuid "4b45d452-d736-4fd7-96fd-ed4b197665cd")
+	)
+	(label "PAM3_TX_P"
+		(at 367.03 166.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b7068ff-f27c-431d-94b2-99e0aae0919f")
 	)
 	(label "FMC_NE4"
 		(at 347.98 123.19 180)
@@ -21717,6 +21759,16 @@
 			(justify right bottom)
 		)
 		(uuid "773fe359-e03d-4e0a-8328-4c227813997e")
+	)
+	(label "GND"
+		(at 367.03 171.45 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "79e341c3-95ef-47ed-b5cd-b862dfb12adf")
 	)
 	(label "3V3"
 		(at 196.85 243.84 0)
@@ -22077,6 +22129,16 @@
 			(justify right bottom)
 		)
 		(uuid "a329eb13-cf1d-4f82-8c21-66de31b860b7")
+	)
+	(label "GND"
+		(at 367.03 182.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a33ee1f7-de36-45a3-82e4-595e6ae6fc80")
 	)
 	(label "3V3"
 		(at 278.13 49.53 0)
@@ -22807,6 +22869,16 @@
 			(justify left bottom)
 		)
 		(uuid "fd6e5eb0-943d-4714-b192-e737d86719b3")
+	)
+	(label "PAM3_TX_N"
+		(at 347.98 52.07 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ffa1c0cd-b686-41b1-b6ec-8d72aadbe52b")
 	)
 	(hierarchical_label "UART_RX"
 		(shape input)
@@ -26042,6 +26114,76 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
 					(reference "R48")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 378.46 166.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "152ecd31-5ce6-4eb8-8e41-63976ae9e1a6")
+		(property "Reference" "J28"
+			(at 381 165.451 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 381 167.8753 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
+			(at 378.46 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 378.46 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 378.46 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d2f67b73-52f7-40f7-aca5-d3b64f15c922")
+		)
+		(pin "1"
+			(uuid "4da1ce40-8a20-4ff8-9471-341358d78b94")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
+					(reference "J28")
 					(unit 1)
 				)
 			)
@@ -32329,6 +32471,73 @@
 		)
 	)
 	(symbol
+		(lib_id "device:R")
+		(at 370.84 166.37 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "74f46db1-4aed-49ae-8ee3-aab98c49dd2e")
+		(property "Reference" "R67"
+			(at 370.84 163.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "127"
+			(at 370.84 166.37 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 370.84 168.148 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 370.84 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 370.84 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1f320945-0ad5-4433-b780-fc3f55fa7adb")
+		)
+		(pin "1"
+			(uuid "fe849056-b1eb-44a3-9f3f-dee230cfdbec")
+		)
+		(instances
+			(project ""
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
+					(reference "R67")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "xilinx-azonenberg:XC7AxxxT-xFBG484")
 		(at 353.06 151.13 0)
 		(unit 4)
@@ -37019,6 +37228,76 @@
 		)
 	)
 	(symbol
+		(lib_id "conn:CONN_COAXIAL")
+		(at 378.46 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "899691ba-4ca4-4cf3-81de-b3ef53817a53")
+		(property "Reference" "J29"
+			(at 381 176.881 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMA-J-P-H-ST-EM1"
+			(at 381 179.3053 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:CONN_SMA_EDGE_SAMTEC_SMA_J_P_H_ST_EM1_NOPASTE"
+			(at 378.46 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 378.46 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"
+			(at 378.46 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d2c0f835-027e-4c74-affc-1cafb1396953")
+		)
+		(pin "1"
+			(uuid "ab4414d1-fff9-4ae2-a4f1-88f56f2adf6f")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
+					(reference "J29")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "device:C")
 		(at 334.01 215.9 0)
 		(unit 1)
@@ -37773,6 +38052,73 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
 					(reference "R50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "device:R")
+		(at 370.84 177.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a55ce0d1-7e7f-4342-9fb6-ceced12d6f4b")
+		(property "Reference" "R68"
+			(at 370.84 175.26 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "127"
+			(at 370.84 177.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:EIA_0402_RES_NOSILK"
+			(at 370.84 179.578 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 370.84 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 370.84 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1a591098-86c1-4bc4-93fc-458a55bc51a7")
+		)
+		(pin "1"
+			(uuid "741f369e-be7f-441b-b339-4362c43263a3")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
+					(reference "R68")
 					(unit 1)
 				)
 			)
