@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-12")
+		(date "2026-08-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -4943,6 +4943,16 @@
 			(justify left bottom)
 		)
 		(uuid "01392363-9a57-4a70-8b49-76a9d82933c6")
+	)
+	(label "3V3_SW"
+		(at 66.04 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "028297f7-1d7e-4b02-ab06-5278129b9791")
 	)
 	(label "VBUS"
 		(at 187.96 48.26 180)

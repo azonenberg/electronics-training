@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-12")
+		(date "2026-08-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -20889,7 +20889,7 @@
 		(uuid "076709b2-fd56-450d-9c7a-60bb86f5f1e3")
 	)
 	(label "DPY_BUSY_N"
-		(at 107.95 156.21 180)
+		(at 107.95 170.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20959,7 +20959,7 @@
 		(uuid "0fe1ed1b-1d9c-4df4-be6b-936d1a160c7d")
 	)
 	(label "FMC_A22"
-		(at 347.98 80.01 180)
+		(at 347.98 135.89 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21199,7 +21199,7 @@
 		(uuid "2f78a159-c325-44dd-b47a-4999e02d5858")
 	)
 	(label "DPY_RST_N"
-		(at 107.95 172.72 180)
+		(at 107.95 175.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21439,7 +21439,7 @@
 		(uuid "503efd94-0080-4807-8782-da81d7ec481d")
 	)
 	(label "DPY_BS"
-		(at 107.95 170.18 180)
+		(at 107.95 156.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21619,7 +21619,7 @@
 		(uuid "6bae99d6-7b3c-429a-82d9-0877e1b11e53")
 	)
 	(label "FMC_AD2"
-		(at 347.98 128.27 180)
+		(at 347.98 80.01 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22089,7 +22089,7 @@
 		(uuid "a5055995-2dfc-466f-ba38-b7dd001880b0")
 	)
 	(label "FMC_NE3"
-		(at 347.98 125.73 180)
+		(at 347.98 128.27 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22389,7 +22389,7 @@
 		(uuid "c83269fb-735f-4f4b-a601-e4cbd6c56e9c")
 	)
 	(label "DPY_DC"
-		(at 107.95 175.26 180)
+		(at 107.95 172.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22739,7 +22739,7 @@
 		(uuid "f8af0684-c5a9-49b5-b950-e7d86a3d326b")
 	)
 	(label "FMC_AD8"
-		(at 347.98 135.89 180)
+		(at 347.98 125.73 180)
 		(effects
 			(font
 				(size 1.27 1.27)

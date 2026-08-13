@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-12")
+		(date "2026-08-13")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -11206,10 +11206,6 @@
 		(uuid "01e92b31-8871-4825-bda9-4a219d57b43a")
 	)
 	(no_connect
-		(at 43.18 76.2)
-		(uuid "0287c8c3-5452-4373-8b7f-95ed7b1e2018")
-	)
-	(no_connect
 		(at 262.89 76.2)
 		(uuid "0462255d-8674-4fb3-81c5-5e70c61afc85")
 	)
@@ -11398,6 +11394,10 @@
 		(uuid "42747b39-4d58-421a-8011-b6089f476a2f")
 	)
 	(no_connect
+		(at 43.18 38.1)
+		(uuid "429f63ec-c1c0-44c1-afad-752f414003b8")
+	)
+	(no_connect
 		(at 335.28 27.94)
 		(uuid "45100419-d3b2-4511-9bf0-5fd3c7bf6184")
 	)
@@ -11518,6 +11518,10 @@
 		(uuid "66650b21-5a2b-4e33-89e3-ac82a3bdabb8")
 	)
 	(no_connect
+		(at 43.18 35.56)
+		(uuid "69fbd24b-bb24-42b0-98cc-651f67fee228")
+	)
+	(no_connect
 		(at 191.77 96.52)
 		(uuid "6a47e4fb-4659-4420-a4c1-88269255dc23")
 	)
@@ -11630,10 +11634,6 @@
 		(uuid "8d7a9a18-c902-43e6-a66c-2ab615aba40e")
 	)
 	(no_connect
-		(at 43.18 60.96)
-		(uuid "8db028a7-a11e-4e55-86a4-7f9e897bf849")
-	)
-	(no_connect
 		(at 191.77 104.14)
 		(uuid "9553cf6b-2294-4092-a9e4-b0d529c9df2d")
 	)
@@ -11702,6 +11702,10 @@
 		(uuid "b4fe7cc8-8e15-49ee-bf40-4e4515d0d713")
 	)
 	(no_connect
+		(at 43.18 43.18)
+		(uuid "b705f7d6-8560-41d4-9cd3-30d53d33f7b8")
+	)
+	(no_connect
 		(at 262.89 127)
 		(uuid "b7173e29-d8e2-4f3b-9479-617c6676cf5c")
 	)
@@ -11752,10 +11756,6 @@
 	(no_connect
 		(at 262.89 73.66)
 		(uuid "c231f442-be30-478c-9bdf-9fde62d278a9")
-	)
-	(no_connect
-		(at 43.18 53.34)
-		(uuid "c5339bc9-c319-4c2a-8571-95ff88673003")
 	)
 	(no_connect
 		(at 43.18 99.06)
@@ -11822,10 +11822,6 @@
 		(uuid "db134192-54fd-4704-a29f-28b18b13e958")
 	)
 	(no_connect
-		(at 43.18 55.88)
-		(uuid "db5aac1a-3102-4b78-9f6d-ffc693dbf2fe")
-	)
-	(no_connect
 		(at 43.18 139.7)
 		(uuid "db7168ce-830c-405f-a3f0-61850bdbc5ce")
 	)
@@ -11840,6 +11836,10 @@
 	(no_connect
 		(at 191.77 76.2)
 		(uuid "dff8eacb-4919-42ae-8597-d04db9fe8abb")
+	)
+	(no_connect
+		(at 43.18 40.64)
+		(uuid "e135ca8e-0585-4228-9657-b291c2f7d77f")
 	)
 	(no_connect
 		(at 262.89 38.1)
@@ -12662,7 +12662,7 @@
 		(uuid "49cf45c5-7da9-4d19-a10f-30a3b25e5153")
 	)
 	(label "CLIP_3"
-		(at 43.18 40.64 180)
+		(at 43.18 76.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12881,6 +12881,16 @@
 		)
 		(uuid "7abadfe3-1eec-4c1c-87d4-66a6773c8da1")
 	)
+	(label "GND"
+		(at 106.68 189.23 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7bd9c97e-4195-4307-b2ff-e090b3631194")
+	)
 	(label "COAX_3"
 		(at 179.07 25.4 180)
 		(effects
@@ -12920,6 +12930,16 @@
 			(justify right bottom)
 		)
 		(uuid "8669f473-ff23-4abf-884c-d5eb4ea9cbc8")
+	)
+	(label "GND"
+		(at 106.68 195.58 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8bf482b7-5249-4825-b534-99232bc2734b")
 	)
 	(label "FPGA_LED1"
 		(at 265.43 256.54 180)
@@ -12962,7 +12982,7 @@
 		(uuid "93a8c188-d5df-4c8c-9a6f-f476daeff4d2")
 	)
 	(label "CLIP_2"
-		(at 43.18 38.1 180)
+		(at 43.18 55.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13172,7 +13192,7 @@
 		(uuid "c9ea2ba9-514f-4b6c-835f-d80f30358907")
 	)
 	(label "CLIP_1"
-		(at 43.18 35.56 180)
+		(at 43.18 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13432,7 +13452,7 @@
 		(uuid "fb5b17e0-b23d-4839-9233-6b5ef9244b6f")
 	)
 	(label "CLIP_4"
-		(at 43.18 43.18 180)
+		(at 43.18 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13876,6 +13896,73 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "C199")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 111.76 195.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0e388f4c-bb6e-440f-b2d7-1f62e20f7bba")
+		(property "Reference" "J27"
+			(at 113.665 194.3678 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 113.665 196.7921 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 111.76 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 111.76 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e86f2afa-7e85-4746-805b-e48d161df7d9")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J27")
 					(unit 1)
 				)
 			)
@@ -16913,6 +17000,73 @@
 			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "TP15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 111.76 189.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7eb83148-86e0-4ea5-b34d-0d582f38f02b")
+		(property "Reference" "J26"
+			(at 113.665 188.0178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 113.665 190.4421 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 111.76 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 111.76 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6dd3420c-5e68-47b9-9a8f-bc061a924ad5")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J26")
 					(unit 1)
 				)
 			)
