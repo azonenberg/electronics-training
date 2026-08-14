@@ -12721,6 +12721,16 @@
 		)
 		(uuid "582b887d-ec87-4324-b7a3-507a71457982")
 	)
+	(label "GND"
+		(at 106.68 201.93 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a2a3f85-a448-408a-be34-ee7e9dd2e28d")
+	)
 	(label "GTP_REF_P"
 		(at 335.28 81.28 180)
 		(effects
@@ -24556,6 +24566,73 @@
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
 					(reference "U4")
 					(unit 7)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "conn:CONN_01X01")
+		(at 111.76 201.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e840792e-7873-410e-b66e-68fea51fa0fb")
+		(property "Reference" "J30"
+			(at 113.665 200.7178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TESTCLIP"
+			(at 113.665 203.1421 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "azonenberg_pcb:TESTPOINT_SMT_KEYSTONE_5016"
+			(at 111.76 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 111.76 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector, single row, 01x01, pin header"
+			(at 111.76 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9f31d367-0180-4071-8606-8cc33b86299e")
+		)
+		(instances
+			(project "demo-board"
+				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a5c6d6a0-0eb9-4128-8a96-febfa5d4e510"
+					(reference "J30")
+					(unit 1)
 				)
 			)
 		)
