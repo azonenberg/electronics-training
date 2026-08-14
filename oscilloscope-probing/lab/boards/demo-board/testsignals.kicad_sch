@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-13")
+		(date "2026-08-14")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -12741,16 +12741,6 @@
 		)
 		(uuid "5d472f35-f381-40e9-a33a-ebb230206bd0")
 	)
-	(label "FPGA_UART_CTS_N"
-		(at 264.16 167.64 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5febf5c1-1d73-42d1-8150-5fe02953f594")
-	)
 	(label "GTP_TX1_N"
 		(at 335.28 53.34 180)
 		(effects
@@ -12760,16 +12750,6 @@
 			(justify right bottom)
 		)
 		(uuid "6237b6d1-1c18-470d-9d3b-5a21d9510b72")
-	)
-	(label "FPGA_UART_RX"
-		(at 264.16 175.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "62b4ca56-9cb5-4797-a523-36aae08a30e6")
 	)
 	(label "FPGA_UART_RTS_N"
 		(at 123.19 127 180)
@@ -12951,16 +12931,6 @@
 		)
 		(uuid "8cc4a4cd-6f76-4335-bb1a-808824376fe7")
 	)
-	(label "FPGA_UART_TX"
-		(at 264.16 172.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "91c3c4e3-61be-4d08-8efc-0bbcfa514885")
-	)
 	(label "FPGA_PMOD_DQ7"
 		(at 123.19 66.04 180)
 		(effects
@@ -13060,16 +13030,6 @@
 			(justify right bottom)
 		)
 		(uuid "af1fbc0c-8dff-4b6e-80d8-67adac778a65")
-	)
-	(label "FPGA_UART_RTS_N"
-		(at 264.16 177.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b0962fe0-e04d-4ee5-ab5e-5bf672f75f92")
 	)
 	(label "VBUS"
 		(at 80.01 256.54 180)

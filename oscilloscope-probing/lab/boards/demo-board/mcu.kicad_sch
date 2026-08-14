@@ -6,7 +6,7 @@
 	(paper "A3")
 	(title_block
 		(title "Oscilloscope Demo Board")
-		(date "2026-08-13")
+		(date "2026-08-14")
 		(rev "0.1")
 		(company "Antikernel Labs")
 		(comment 1 "Andrew D. Zonenberg")
@@ -32529,7 +32529,7 @@
 			(uuid "fe849056-b1eb-44a3-9f3f-dee230cfdbec")
 		)
 		(instances
-			(project ""
+			(project "demo-board"
 				(path "/aa2d82c6-7ba7-4266-9b47-ed3339e6c556/a3b16bfb-b7c6-40a4-acca-70d1a835c16b"
 					(reference "R67")
 					(unit 1)
