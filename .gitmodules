@@ -4,3 +4,6 @@
 [submodule "oscilloscope-probing/lab/firmware/embedded-cli"]
 	path = oscilloscope-probing/lab/firmware/embedded-cli
 	url = ../embedded-cli
+[submodule "oscilloscope-probing/lab/firmware/antikernel-ipcores"]
+	path = oscilloscope-probing/lab/firmware/antikernel-ipcores
+	url = ../antikernel-ipcores.git
