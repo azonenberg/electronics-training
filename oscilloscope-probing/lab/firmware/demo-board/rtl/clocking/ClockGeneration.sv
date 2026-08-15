@@ -43,6 +43,7 @@ module ClockGeneration(
 
 	//Clocks out to system
 	output wire		gtp_refclk,
+	output wire		clk_50mhz,
 	output wire		clk_100mhz
 	);
 
@@ -53,13 +54,14 @@ module ClockGeneration(
 
 	wire	pll_lock;
 
+	wire	clk_50mhz_raw;
 	wire	clk_100mhz_raw;
 
 	MMCME2_BASE #(
 		.BANDWIDTH("OPTIMIZED"),
 
 		.CLKOUT0_DIVIDE_F(10),		//1 GHz VCO / 10 = 100 MHz PLL out
-		.CLKOUT1_DIVIDE(128),
+		.CLKOUT1_DIVIDE(20),		//1 GHz VCO / 20 = 50 MHz PLL out
 		.CLKOUT2_DIVIDE(128),
 		.CLKOUT3_DIVIDE(128),
 		.CLKOUT4_DIVIDE(128),
@@ -98,7 +100,7 @@ module ClockGeneration(
 
 		.CLKOUT0(clk_100mhz_raw),
 		.CLKOUT0B(),
-		.CLKOUT1(),
+		.CLKOUT1(clk_50mhz_raw),
 		.CLKOUT1B(),
 		.CLKOUT2(),
 		.CLKOUT2B(),
@@ -117,10 +119,8 @@ module ClockGeneration(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Clock buffers
 
-	BUFGCE bufg_clk_100mhz(
-		.I(clk_100mhz_raw),
-		.O(clk_100mhz),
-		.CE(pll_lock));
+	BUFGCE bufg_clk_50mhz( .I(clk_50mhz_raw), .O(clk_50mhz), .CE(pll_lock));
+	BUFGCE bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Transceiver input refclk buffer

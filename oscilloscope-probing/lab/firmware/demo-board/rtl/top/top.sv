@@ -96,6 +96,7 @@ module top(
 	// Top level clocking
 
 	wire	gtp_refclk;
+	wire	clk_50mhz;
 	wire	clk_100mhz;
 
 	ClockGeneration clkgen(
@@ -105,7 +106,82 @@ module top(
 		.gtp_ref_n(gtp_ref_n),
 
 		.gtp_refclk(gtp_refclk),
+
+		.clk_50mhz(clk_50mhz),
 		.clk_100mhz(clk_100mhz)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interconnect
+
+	//Two independent buses with no connection; main bus is only bridged to MCU and debug bus only to UART
+	//FMC APB is externally mapped at 0xc000_0000 and internally 0000_0000
+	//Debug APB is not externally memory mapped, and internally 4000_0000
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(24), .USER_WIDTH(0)) apb_fmc();
+	APB #(.ADDR_WIDTH(32), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug();
+
+	ExternalBridging extbridge(
+		.clk_100mhz(clk_100mhz),
+
+		.fmc_clk(fmc_clk),
+		.fmc_nwait(fmc_nwait),
+		.fmc_noe(fmc_noe),
+		.fmc_ad(fmc_ad),
+		.fmc_nwe(fmc_nwe),
+		.fmc_nbl(fmc_nbl),
+		.fmc_nl_nadv(fmc_nl_nadv),
+		.fmc_a_hi(fmc_a_hi),
+		.fmc_ne4(fmc_ne4),
+		.fmc_ne3(fmc_ne3),
+		.fmc_ne2(fmc_ne2),
+		.fmc_ne1(fmc_ne1),
+
+		.uart_cts_n(uart_cts_n),
+		.uart_rx(uart_rx),
+		.uart_rts_n(uart_rts_n),
+		.uart_tx(uart_tx),
+
+		.apb_fmc(apb_fmc),
+		.apb_debug(apb_debug)
+	);
+
+	//APB1 (0xc000_0000, 1 kB per peripheral)
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb1();
+
+	//APB2 (0xc001_0000, 4 kB per peripheral)
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb2();
+
+	APBInterconnect busmatrix(
+		.apb_fmc(apb_fmc),
+		.apb_debug(apb_debug),
+
+		.apb1(apb1),
+		.apb2(apb2)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB peripherals
+
+	PeripheralTop peripherals(
+		.clk_50mhz(clk_50mhz),
+
+		.apb1(apb1),
+		.apb2(apb2),
+
+		.flash_dq(flash_dq),
+		.flash_cs_n(flash_cs_n),
+
+		.pam3_tx_p(pam3_tx_p),
+		.pam3_tx_n(pam3_tx_n),
+
+		.coax_out(coax_out),
+		.clip_out(clip_out),
+
+		.pmod_io(pmod_io),
+
+		.led(led),
+
+		.led_ctrl(led_ctrl)
 	);
 
 endmodule

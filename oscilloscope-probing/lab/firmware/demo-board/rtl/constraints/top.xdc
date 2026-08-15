@@ -182,3 +182,5 @@ set_property DRIVE 4 [get_ports uart_rts_n]
 set_property SLEW SLOW [get_ports uart_rts_n]
 
 set_property PACKAGE_PIN F6 [get_ports gtp_ref_p]
+
+create_clock -period 40.000 -name clk_25mhz -waveform {0.000 20.000} [get_ports clk_25mhz]

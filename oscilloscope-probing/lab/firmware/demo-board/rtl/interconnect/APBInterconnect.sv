@@ -30,83 +30,84 @@
 ***********************************************************************************************************************/
 
 /**
-	@brief External bus interface bridge logic
+	@brief Top level bus interconnect
  */
-module ExternalBridging(
+module APBInterconnect(
 
-	input wire			clk_100mhz,
+	//Main system APB in
+	APB.completer 		apb_fmc,
 
-	//FMC pins to MCU for APB interface
-	input wire			fmc_clk,
-	output wire			fmc_nwait,
-	input wire			fmc_noe,
-	inout wire[15:0]	fmc_ad,
-	input wire			fmc_nwe,
-	input wire[1:0]		fmc_nbl,
-	input wire			fmc_nl_nadv,
-	input wire[6:0]		fmc_a_hi,
-	input wire			fmc_ne4,
-	input wire			fmc_ne3,
-	input wire			fmc_ne2,
-	input wire			fmc_ne1,
+	//APB1 (0xc000_0000, 1 kB per peripheral)
+	APB.requester		apb1,
 
-	//Debug APB UART
-	input wire			uart_cts_n,
-	input wire			uart_rx,
-	output wire			uart_rts_n,
-	output wire			uart_tx,
+	//APB2 (0xc001_0000, 4 kB per peripheral)
+	APB.requester		apb2,
 
-	//Main system APB
-	APB.requester 		apb_fmc,
+	//Debug APB in
+	APB.completer 		apb_debug
 
-	//Debug APB
-	APB.requester 		apb_debug
+	//Small debug APB TODO
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// FMC APB
+	// Main system top level bus bridge (0xc000_0000)
 
-	APB #(.DATA_WIDTH(64), .ADDR_WIDTH(24), .USER_WIDTH(0)) apb_x64_unused();
+	//Optional register slice for timing
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(24), .USER_WIDTH(0)) apb_fmc_pipe();
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb_fmc(
+		.upstream(apb_fmc),
+		.downstream(apb_fmc_pipe));
 
-	FMC_APBBridge #(
-		.CLOCK_PERIOD(6.66),	//150 MHz
-		.VCO_MULT(8),			//1.25 GHz VCO
-		.CAPTURE_CLOCK_PHASE(-30),
-		.LAUNCH_CLOCK_PHASE(-60),
-		.BASE_X64(32'h00000000)
-	) fmcbridge(
+	//Root bridge: 64K per block
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb_fmc_root[1:0]();
+	APBBridge #(
+		.BASE_ADDR(32'h0000_0000),
+		.BLOCK_SIZE(32'h1_0000),
+		.NUM_PORTS(2)
+	) root_bridge (
+		.upstream(apb_fmc_pipe),
+		.downstream(apb_fmc_root)
+	);
 
-		.apb_x32(apb_fmc),
-		.apb_x64(apb_x64_unused),
+	//Optional register slices for downstream logic
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb1(
+		.upstream(apb_fmc_root[0]),
+		.downstream(apb1));
 
-		.clk_mgmt(clk_100mhz),
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb2(
+		.upstream(apb_fmc_root[1]),
+		.downstream(apb2));
 
-		.fmc_clk(fmc_clk),
-		.fmc_nwait(fmc_nwait),
-		.fmc_noe(fmc_noe),
-		.fmc_ad(fmc_ad),
-		.fmc_nwe(fmc_nwe),
-		.fmc_nbl(fmc_nbl),
-		.fmc_nl_nadv(fmc_nl_nadv),
-		.fmc_a_hi({3'b0, fmc_a_hi[6:0]}),
-		.fmc_cs_n(fmc_ne1)
-		//TODO: support multiple ranges with multiple CSes
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Debug top level bus bridge (0x4000_0000, 1 MB blocks)
+
+	localparam NUM_APB_L1 = 2;
+	APB #(.ADDR_WIDTH(20), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug_root[NUM_APB_L1-1:0]();
+
+	//Root bridge
+	APBBridge #(
+		.BASE_ADDR(32'h4000_0000),
+		.BLOCK_SIZE(32'h10_0000),
+		.NUM_PORTS(NUM_APB_L1)
+	) debug_root_bridge (
+		.upstream(apb_debug),
+		.downstream(apb_debug_root)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Debug APB
+	// Debug ROM table (0x4000_0000)
 
-	UART_APBBridge #(
-		.DEBUG_ROM_ADDR(32'h4000_0000)
-	) uartbridge (
-		.clk(clk_100mhz),
-		.rst_n(1'b1),
-		.baud_div(16'd100),		//1 Mbaud (3 seems to drop bytes without flow control)
-								//TODO: support flow control?
+	APB #(.ADDR_WIDTH(20), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug_rom();
 
-		.uart_rx(uart_rx),
-		.uart_tx(uart_tx),
+	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb_debug_rom(
+		.upstream(apb_debug_root[0]),
+		.downstream(apb_debug_rom));
 
-		.apb(apb_debug));
+	DebugROM #(
+		//.DEVICE_0_TYPE("ILA_"),
+		//.DEVICE_0_ADDR(32'h4000_0800),
+	) debugrom (
+		.apb(apb_debug_rom)
+	);
 
 endmodule
