@@ -27,90 +27,126 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-/**
-	@file
-	@author	Andrew D. Zonenberg
-	@brief	Boot-time hardware initialization
- */
-#include <core/platform.h>
-#include <supervisor/supervisor-common.h>
-#include "hwinit.h"
-#include <peripheral/Power.h>
+#include "supervisor.h"
+#include "LEDTask.h"
+#include "ButtonTask.h"
+#include "SensorTask.h"
+#include <math.h>
+#include <peripheral/DWT.h>
+#include "ITMTask.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// System status indicator LEDs
+// Power rail descriptors
 
-GPIOPin g_pgoodLED(&GPIOB, 13, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_faultLED(&GPIOB, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_sysokLED(&GPIOB, 14, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+GPIOPin g_1v0_en(&GPIOC, 13, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndADC g_1v0("1V0", g_1v0_en, 6, 0.95, 1.05, 2.0, g_logTimer, 50);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Common global hardware config used by both bootloader and application
+GPIOPin g_1v2_en(&GPIOC, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndADC g_1v2("1V2", g_1v2_en, 8, 1.15, 1.25, 2.0, g_logTimer, 50);
 
-//UART console
-//USART1 is on APB1 (80 MHz), so we need a divisor of 694.44, round to 694
-UART<16, 256> g_uart(&USART1, 694);
+GPIOPin g_1v8_en(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndADC g_1v8("1V8", g_1v8_en, 7, 1.7, 1.85, 2.0, g_logTimer, 50);
 
-//I2C1 defaults to running of APB clock (80 MHz)
-//Prescale by 4 to get 20 MHz
-//Divide by 50 after that to get 400 kHz
-I2C g_i2c(&I2C1, 4, 50);
+GPIOPin g_3v3_en(&GPIOC, 14, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+RailDescriptorWithEnableAndADC g_3v3("3V3", g_3v3_en, 9, 3.15, 3.35, 2.0, g_logTimer, 50);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Low level init
+// Power rail sequence
 
-void BSP_InitUART()
+etl::vector g_powerSequence
 {
-	//Initialize the UART for local console: 115.2 Kbps
-	//TODO: nice interface for enabling UART interrupts
-	GPIOPin uart_tx(&GPIOA, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 7);
-	GPIOPin uart_rx(&GPIOA, 10, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 7);
+	//VCCINT - VCCAUX - VCCO for the FPGA
+	(RailDescriptor*)&g_1v0,
+	&g_1v8,
+	&g_3v3,
 
-	g_logTimer.Sleep(10);	//wait for UART pins to be high long enough to remove any glitches during powerup
-
-	//Enable the UART interrupt
-	NVIC_EnableIRQ(37);
-}
+	//1V2 Vtt rail for the GTP comes last
+	&g_1v2
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Common features shared by both application and bootloader
+// Reset descriptors
 
-void BSP_Init()
+//Active low edge triggered reset
+GPIOPin g_fpgaResetN(&GPIOB, 5, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0);
+ActiveLowResetDescriptor g_fpgaResetDescriptor(g_fpgaResetN, "FPGA PROG");
+
+//Active low level triggered delay-boot flag
+//Use this as the "FPGA is done booting" indicator
+//Note: DONE pin here is active *low* due to inverting level shifter on the board
+GPIOPin g_fpgaInitN(&GPIOA, 11, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0, true);
+GPIOPin g_fpgaDone(&GPIOB, 9, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+ActiveLowResetDescriptorWithActiveHighDone g_fpgaInitDescriptor(g_fpgaInitN, g_fpgaDone, "FPGA INIT");
+
+//MCU reset comes at the end
+GPIOPin g_mcuResetN(&GPIOA, 8, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+ActiveLowResetDescriptor g_mcuResetDescriptor(g_mcuResetN, "MCU");
+
+//TODO mcu has software done line on PB8
+
+etl::vector g_resetSequence
 {
-	InitGPIOs();
-	Super_Init();
+	//First boot the FPGA
+	(ResetDescriptorBase*)&g_fpgaResetDescriptor,	//need to cast at least one entry to base class
+												//for proper template deduction
+	&g_fpgaInitDescriptor,
 
-	App_Init();
-}
-
-void BSP_InitMemory()
-{
-}
-
-void BSP_MainLoopIteration()
-{
-}
+	//then release the MCU
+	&g_mcuResetDescriptor,
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GPIOs for all of the rail enables
+// Task tables
 
-void InitGPIOs()
+etl::vector<Task*, MAX_TASKS>  g_tasks;
+etl::vector<TimerTask*, MAX_TIMER_TASKS>  g_timerTasks;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The top level supervisor controller
+
+DemoPowerResetSupervisor g_super(g_powerSequence, g_resetSequence);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Peripheral initialization
+
+void App_Init()
 {
-	g_log("Initializing GPIOs\n");
+	RCCHelper::Enable(&_RTC);
 
-	//turn off all LEDs
-	g_pgoodLED = 0;
-	g_faultLED = 0;
-	g_sysokLED = 0;
+	//Format version string
+	StringBuffer buf(g_version, sizeof(g_version));
+	static const char* buildtime = __TIME__;
+	buf.Printf("%s %c%c%c%c%c%c",
+		__DATE__, buildtime[0], buildtime[1], buildtime[3], buildtime[4], buildtime[6], buildtime[7]);
+	g_log("Firmware version %s\n", g_version);
 
-	//Set up GPIOs for I2C bus
-	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-}
+	//Start tracing
+	#ifdef _DEBUG
+		ITM::Enable();
+		DWT::EnablePCSampling(DWT::PC_SAMPLE_SLOW);
+		ITM::EnableDwtForwarding();
+	#endif
 
-float GetLTCTemp()
-{
-	//220 mV at 25C plus 7 mV/c
-	float vtemp = g_adc->ReadChannelScaledAveraged(5, 4, 3.3);
-	return ((vtemp - 0.22) / 0.007) + 25;
+	static LEDTask ledTask;
+	static ButtonTask buttonTask;
+	static SensorTask sensorTask;
+	#ifdef _DEBUG
+		static ITMTask itmTask;
+	#endif
+
+	g_tasks.push_back(&ledTask);
+	g_tasks.push_back(&buttonTask);
+	g_tasks.push_back(&g_super);
+	g_tasks.push_back(&sensorTask);
+	#ifdef _DEBUG
+		g_tasks.push_back(&itmTask);
+	#endif
+
+	g_timerTasks.push_back(&ledTask);
+	#ifdef _DEBUG
+		g_timerTasks.push_back(&itmTask);
+	#endif
+
+	//Turn on immediately, don't wait for a button press
+	g_super.PowerOn();
 }

@@ -27,90 +27,44 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-/**
-	@file
-	@author	Andrew D. Zonenberg
-	@brief	Boot-time hardware initialization
- */
-#include <core/platform.h>
+#ifndef supervisor_h
+#define supervisor_h
+
 #include <supervisor/supervisor-common.h>
-#include "hwinit.h"
-#include <peripheral/Power.h>
+#include <supervisor/PowerResetSupervisor.h>
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// System status indicator LEDs
+//#include <bootloader/BootloaderAPI.h>
+#include "../bsp/hwinit.h"
 
-GPIOPin g_pgoodLED(&GPIOB, 13, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_faultLED(&GPIOB, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-GPIOPin g_sysokLED(&GPIOB, 14, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Common global hardware config used by both bootloader and application
-
-//UART console
-//USART1 is on APB1 (80 MHz), so we need a divisor of 694.44, round to 694
-UART<16, 256> g_uart(&USART1, 694);
-
-//I2C1 defaults to running of APB clock (80 MHz)
-//Prescale by 4 to get 20 MHz
-//Divide by 50 after that to get 400 kHz
-I2C g_i2c(&I2C1, 4, 50);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Low level init
-
-void BSP_InitUART()
+///@brief Project-specific supervisor class with hooks for controlling LEDs on panic
+class DemoPowerResetSupervisor : public PowerResetSupervisor
 {
-	//Initialize the UART for local console: 115.2 Kbps
-	//TODO: nice interface for enabling UART interrupts
-	GPIOPin uart_tx(&GPIOA, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 7);
-	GPIOPin uart_rx(&GPIOA, 10, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 7);
+public:
+	DemoPowerResetSupervisor(etl::ivector<RailDescriptor*>& rails, etl::ivector<ResetDescriptorBase*>& resets)
+	: PowerResetSupervisor(rails, resets)
+	{}
 
-	g_logTimer.Sleep(10);	//wait for UART pins to be high long enough to remove any glitches during powerup
+protected:
 
-	//Enable the UART interrupt
-	NVIC_EnableIRQ(37);
-}
+	virtual void OnPowerOn() override
+	{ g_pgoodLED = 1; }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Common features shared by both application and bootloader
+	virtual void OnPowerOff() override
+	{ g_pgoodLED = 0; }
 
-void BSP_Init()
-{
-	InitGPIOs();
-	Super_Init();
+	virtual void OnFault() override
+	{
+		//Set LEDs to fault state
+		g_faultLED = 1;
+		g_sysokLED = 0;
+		g_pgoodLED = 0;
 
-	App_Init();
-}
+		//Hang until reset, don't attempt to auto restart
+		while(1)
+		{}
+	}
+};
 
-void BSP_InitMemory()
-{
-}
+extern DemoPowerResetSupervisor g_super;
 
-void BSP_MainLoopIteration()
-{
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GPIOs for all of the rail enables
-
-void InitGPIOs()
-{
-	g_log("Initializing GPIOs\n");
-
-	//turn off all LEDs
-	g_pgoodLED = 0;
-	g_faultLED = 0;
-	g_sysokLED = 0;
-
-	//Set up GPIOs for I2C bus
-	static GPIOPin i2c_scl(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-	static GPIOPin i2c_sda(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-}
-
-float GetLTCTemp()
-{
-	//220 mV at 25C plus 7 mV/c
-	float vtemp = g_adc->ReadChannelScaledAveraged(5, 4, 3.3);
-	return ((vtemp - 0.22) / 0.007) + 25;
-}
+#endif
