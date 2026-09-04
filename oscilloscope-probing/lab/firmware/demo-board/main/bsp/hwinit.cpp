@@ -36,28 +36,22 @@
 #include "hwinit.h"
 #include "FPGATask.h"
 #include <peripheral/QuadSPI.h>
-/*
+
 #include <peripheral/DWT.h>
 #include <peripheral/ITM.h>
 #include <ctype.h>
 #include <embedded-utils/CoreSightRom.h>
-#include <fpga/FPGAFirmwareUpdater.h>
-*/
+//#include <fpga/FPGAFirmwareUpdater.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Memory mapped SFRs on the FPGA
-/*
+
+volatile APB_DeviceInfo_7series FDEVINFO __attribute__((section(".fdevinfo")));
+volatile APB_XADC FXADC __attribute__((section(".fxadc")));
+volatile APB_SerialLED FRGBLED __attribute__((section(".frgbled")));
 volatile APB_GPIO FPGA_GPIOA __attribute__((section(".fgpioa")));
-volatile APB_DeviceInfo_Generic FDEVINFO __attribute__((section(".fdevinfo")));
-volatile APB_SPIHostInterface FSPI1 __attribute__((section(".fspi1")));
+volatile APB_SPIHostInterface FQSPI __attribute__((section(".fqspi")));
 
-volatile APB_MDIO FMDIO __attribute__((section(".fmdio")));
-
-//volatile APB_Curve25519 FCURVE25519 __attribute__((section(".fcurve25519")));
-
-volatile APB_EthernetTxBuffer_10G FETHTX __attribute__((section(".fethtx")));
-volatile APB_EthernetRxBuffer FETHRX __attribute__((section(".fethrx")));
-*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common peripherals used by application and bootloader
 
@@ -72,42 +66,27 @@ UART<32, 256> g_cliUART(&USART1, 1031);
 /**
 	@brief MCU GPIO LEDs
  */
- /*
 GPIOPin g_leds[4] =
 {
+	GPIOPin(&GPIOB, 5, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW),
 	GPIOPin(&GPIOI, 4, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW),
-	GPIOPin(&GPIOI, 6, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW),
-	GPIOPin(&GPIOI, 7, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW),
-	GPIOPin(&GPIOI, 5, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW)
+	GPIOPin(&GPIOI, 5, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW),
+	GPIOPin(&GPIOI, 6, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW)
 };
-*/
 
 /**
 	@brief FPGA GPIO LEDs
  */
-/*
-APB_GPIOPin g_fpgaLEDs[8] =
+APB_GPIOPin g_fpgaLEDs[4] =
 {
-	APB_GPIOPin(&FPGA_GPIOA, 8, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 9, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 10, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 11, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 12, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 13, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 14, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
-	APB_GPIOPin(&FPGA_GPIOA, 15, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED)
+	APB_GPIOPin(&FPGA_GPIOA, 3, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
+	APB_GPIOPin(&FPGA_GPIOA, 2, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
+	APB_GPIOPin(&FPGA_GPIOA, 1, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
+	APB_GPIOPin(&FPGA_GPIOA, 0, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED),
 };
 
 ///@brief FPGA IRQ pin
-APB_GPIOPin g_fpgaIRQ(&FPGA_GPIOA, 0, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED);
-*/
-/**
-	@brief MAC address I2C EEPROM
-	Default kernel clock for I2C1 is pclk1 (118.75 MHz for our current config)
-	Prescale by 16 to get 29.68 MHz
-	Divide by 128 after that to get 231 kHz
-*/
-//I2C g_macI2C(&I2C1, 16, 128);
+//APB_GPIOPin g_fpgaIRQ(&FPGA_GPIOA, 0, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INIT_DEFERRED);
 
 /**
 	@brief Microkvs and firmware storage for the MCU
@@ -118,8 +97,8 @@ APB_GPIOPin g_fpgaIRQ(&FPGA_GPIOA, 0, APB_GPIOPin::MODE_OUTPUT, APB_GPIOPin::INI
  */
 //QuadSPI_SpiFlashInterface g_flashQspi(&_QUADSPI, 128 * 1024 * 1024, 4);
 
-///@brief Boot flash on the FPGA
-//APB_SpiFlashInterface* g_fpgaFlash = nullptr;
+///@brief Boot flash on the FPGA (also used for microkvs once we implement memory mapping, TODO)
+APB_SpiFlashInterface* g_fpgaFlash = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Task tables
@@ -137,10 +116,10 @@ void BSP_InitTasks();
 
 void BSP_Init()
 {
-	/*
 	//Set up PLL2 to run the external memory bus
 	//We have some freedom with how fast we clock this!
 	//Doesn't have to be a multiple of CPU clock since separate VCO from the main system
+	//TODO: we probably want to do faster than 62.5 MHz lol, but this is what's saved right now
 	RCCHelper::InitializePLL(
 		2,		//PLL2
 		25,		//input is 25 MHz from the HSE
@@ -152,11 +131,13 @@ void BSP_Init()
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
 
-	g_leds[0] = 1;
+	//Initialize LEDs
+	for(auto& led : g_leds)
+		led = 1;
 
 	InitRTCFromHSE();
-	InitQSPI();
-	DoInitKVS();
+	//InitQSPI();
+	//DoInitKVS();
 	InitFMC();
 	InitFPGA();
 	InitFPGAFlash();
@@ -167,44 +148,28 @@ void BSP_Init()
 		led.DeferredInit();
 		led = 1;
 	}
-	g_fpgaIRQ.DeferredInit();
+	//g_fpgaIRQ.DeferredInit();
 
-	InitI2C();
-	InitMacEEPROM();
-	InitManagementPHY();
-
-	//TODO: tune this to see what gives the best results and how wide our data window is
-	g_log("Poking clock skew register\n");
-	g_phyMdio->WriteExtendedRegister(2, REG_KSZ9031_MMD2_CLKSKEW, 0x3ff0);
-
-	InitIP();
-	//InitITM();
+	InitITM();
 
 	//Standard tasks used by both bootloader and application
 	BSP_InitTasks();
 
 	App_Init();
-	*/
 }
-/*
+
 void BSP_InitTasks()
 {
 	//Create tasks
 	static FPGATask fpgaTask;
-	static IPAgingTask1Hz agingTask1;
-	static IPAgingTask10Hz agingTask10;
-	static PhyPollTask phyTask;
 
 	g_tasks.push_back(&fpgaTask);
-	g_tasks.push_back(&agingTask1);
-	g_tasks.push_back(&agingTask10);
-	g_tasks.push_back(&phyTask);
 
-	g_timerTasks.push_back(&agingTask1);
-	g_timerTasks.push_back(&agingTask10);
-	g_timerTasks.push_back(&phyTask);
+	//g_tasks.push_back(&phyTask);
+
+	//g_timerTasks.push_back(&phyTask);
 }
-*/
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable trace
 
@@ -227,7 +192,7 @@ void InitITM()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // BSP overrides for low level init
-/*
+
 void BSP_InitUART()
 {
 	//Initialize the UART for local console: 115.2 Kbps using PA9 for UART1 transmit and PA10 for UART1 receive
@@ -239,55 +204,16 @@ void BSP_InitUART()
 	NVIC_EnableIRQ(37);
 
 	g_logTimer.Sleep(10);	//wait for UART pins to be high long enough to remove any glitches during powerup
+
+	//TODO: also init uart4 for SCPI
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Higher level initialization we used for a lot of stuff
 
-void InitQSPI()
-{
-	g_log("Initializing QSPI...\n");
-
-	//Set up QSPI pins
-	g_leds[1] = 1;
-	static GPIOPin quadspi_sck(&GPIOB, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 9);
-	static GPIOPin quadspi_cs_n(&GPIOB, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 10);
-	static GPIOPin quadspi_dq0(&GPIOF, 8, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 10);
-	static GPIOPin quadspi_dq1(&GPIOF, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 10);
-	static GPIOPin quadspi_dq2(&GPIOF, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 9);
-	static GPIOPin quadspi_dq3(&GPIOF, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_FAST, 9);
-
-	//Bring the QSPI up in memory mapped mode
-	g_leds[2] = 1;
-	g_flashQspi.SetDoubleRateMode(false);
-	g_flashQspi.SetInstructionMode(QuadSPI::MODE_SINGLE);
-	g_flashQspi.SetAddressMode(QuadSPI::MODE_SINGLE, 3);
-	g_flashQspi.SetAltBytesMode(QuadSPI::MODE_NONE, 0);
-	g_flashQspi.SetDataMode(QuadSPI::MODE_SINGLE);
-	g_flashQspi.SetDummyCycleCount(8);
-	g_flashQspi.SetDeselectTime(1);
-	g_flashQspi.SetFifoThreshold(1);
-	g_flashQspi.Enable();
-	g_leds[3] = 1;
-
-	//break point in case of issues
-	g_logTimer.Sleep(5000);
-
-	g_flashQspi.Discover();
-
-	//fail to detect flash if size is implausibly small
-	if(g_flashQspi.GetFlashSize() < 4096 )
-	{
-		g_log(Logger::ERROR, "Failed to detect SPI flash\n");
-		while(1)
-		{}
-	}
-
-	g_flashQspi.MemoryMap();
-}
-
 void InitFMC()
 {
+	/*
 	g_log("Initializing FMC...\n");
 	LogIndenter li(g_log);
 
@@ -338,13 +264,7 @@ void InitFMC()
 
 	//Wait a little while for FPGA PLL to lock etc before we start talking to it
 	g_logTimer.Sleep(500);
-}
-
-void InitI2C()
-{
-	g_log("Initializing I2C interfaces\n");
-	static GPIOPin mac_i2c_scl(&GPIOB, 8, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
-	static GPIOPin mac_i2c_sda(&GPIOB, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 4, true);
+	*/
 }
 
 void InitFPGAFlash()
@@ -352,8 +272,7 @@ void InitFPGAFlash()
 	g_log("Initializing FPGA flash\n");
 	LogIndenter li(g_log);
 
-	static APB_SpiFlashInterface flash(&FSPI1, 2);	//62.5 MHz PCLK / 2 = 31.25 MHz SCK
+	static APB_SpiFlashInterface flash(&FQSPI, 2);	//62.5 MHz PCLK / 2 = 31.25 MHz SCK
 													//(even dividers required)
 	g_fpgaFlash = &flash;
 }
-*/

@@ -39,9 +39,11 @@
 #include <peripheral/SPI.h>
 #include <peripheral/UART.h>
 
-#include <APB_DeviceInfo_Generic.h>
+#include <APB_DeviceInfo_7series.h>
 #include <APB_GPIO.h>
+#include <APB_SerialLED.h>
 #include <APB_SPIHostInterface.h>
+#include <APB_XADC.h>
 
 #include <embedded-utils/LogSink.h>
 #include <embedded-utils/APB_SpiFlashInterface.h>
@@ -55,21 +57,20 @@ void App_Init();
 void InitFMC();
 void InitFPGAFlash();
 void InitI2C();
+void InitITM();
 
 //Common hardware interface stuff (mostly Ethernet related)
 extern GPIOPin g_leds[4];
-extern APB_GPIOPin g_fpgaLEDs[8];
+extern APB_GPIOPin g_fpgaLEDs[4];
 extern APB_SpiFlashInterface* g_fpgaFlash;
 extern APB_GPIOPin g_fpgaIRQ;
 
 void USART1_Handler();
 
-/*
+extern volatile APB_DeviceInfo_7series FDEVINFO;
 extern volatile APB_XADC FXADC;
-extern volatile APB_Curve25519 FCURVE25519;
 extern volatile APB_SerialLED FRGBLED;
 extern volatile APB_GPIO FPGA_GPIOA;
-extern volatile APB_SPIHostInterface FSPI1;
-*/
+extern volatile APB_SPIHostInterface FQSPI;
 
 #endif
