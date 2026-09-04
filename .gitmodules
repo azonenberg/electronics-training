@@ -7,3 +7,15 @@
 [submodule "oscilloscope-probing/lab/firmware/antikernel-ipcores"]
 	path = oscilloscope-probing/lab/firmware/antikernel-ipcores
 	url = ../antikernel-ipcores.git
+[submodule "oscilloscope-probing/lab/firmware/common-embedded-platform"]
+	path = oscilloscope-probing/lab/firmware/common-embedded-platform
+	url = ../common-embedded-platform.git
+[submodule "oscilloscope-probing/lab/firmware/microkvs"]
+	path = oscilloscope-probing/lab/firmware/microkvs
+	url = ../microkvs.git
+[submodule "oscilloscope-probing/lab/firmware/embedded-utils"]
+	path = oscilloscope-probing/lab/firmware/embedded-utils
+	url = ../embedded-utils.git
+[submodule "oscilloscope-probing/lab/firmware/etl"]
+	path = oscilloscope-probing/lab/firmware/etl
+	url = https://github.com/ETLCPP/etl
