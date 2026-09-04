@@ -213,9 +213,11 @@ void BSP_InitUART()
 
 void InitFMC()
 {
-	/*
 	g_log("Initializing FMC...\n");
 	LogIndenter li(g_log);
+
+	//Wait a bit before initializing FMC in case something goes bad
+	g_logTimer.Sleep(500);
 
 	static GPIOPin fmc_ad0(&GPIOD, 14, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ad1(&GPIOD, 15, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
@@ -242,14 +244,13 @@ void InitFMC()
 	static GPIOPin fmc_a21(&GPIOE, 5, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_a22(&GPIOE, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	//no A23...25 pinned out on this board
-	//static GPIOPin fmc_a23(&GPIOE, 2, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, FIXME);
-	//static GPIOPin fmc_a24(&GPIOG, 13, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, FIXME);
-	//static GPIOPin fmc_a25(&GPIOG, 14, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, FIXME);
 
 	static GPIOPin fmc_nl_nadv(&GPIOB, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_nwait(&GPIOD, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ne1(&GPIOD, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
-	//static GPIOPin fmc_ne3(&GPIOG, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, FIXME);
+	static GPIOPin fmc_ne2(&GPIOC, 8, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 9);
+	static GPIOPin fmc_ne3(&GPIOG, 6, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
+	static GPIOPin fmc_ne4(&GPIOG, 12, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 
 	static GPIOPin fmc_clk(&GPIOD, 3, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_noe(&GPIOD, 4, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
@@ -264,7 +265,6 @@ void InitFMC()
 
 	//Wait a little while for FPGA PLL to lock etc before we start talking to it
 	g_logTimer.Sleep(500);
-	*/
 }
 
 void InitFPGAFlash()
