@@ -27,13 +27,55 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef bootloader_h
-#define bootloader_h
+/**
+	@file
+	@brief Declaration of DemoCLISessionContext
+ */
+#ifndef DemoCLISessionContext_h
+#define DemoCLISessionContext_h
 
-#include <core/platform.h>
-#include <bootloader/bootloader-common.h>
-#include <hwinit.h>
+#include <embedded-cli/CLIOutputStream.h>
+#include <embedded-cli/CLISessionContext.h>
 
-#include <microkvs/driver/STM32StorageBank.h>
+class DemoCLISessionContext : public CLISessionContext
+{
+public:
+	DemoCLISessionContext();
+
+	void Initialize(CLIOutputStream* stream, const char* username)
+	{
+		m_stream = stream;
+		LoadHostname();
+		CLISessionContext::Initialize(m_stream, username);
+	}
+
+	virtual void PrintPrompt();
+
+protected:
+	void LoadHostname();
+
+	virtual void OnExecute();
+
+	void OnExecuteRoot();
+	void OnCommit();
+	//void OnDFU();
+
+	void OnNoCommand();
+
+	void OnReload();
+	void OnRollback();
+	void OnShowCommand();
+	/*
+	void OnShowFlash();
+	void OnShowFlashDetail();
+	void OnShowHardware();
+	*/
+	void OnShowVersion();
+
+	CLIOutputStream* m_stream;
+
+	///@brief Hostname (only used for display)
+	char m_hostname[33];
+};
 
 #endif

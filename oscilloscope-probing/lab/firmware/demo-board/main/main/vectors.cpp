@@ -27,7 +27,7 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "bootloader.h"
+#include "demo.h"
 
 typedef void(*fnptr)();
 
@@ -222,12 +222,12 @@ fnptr __attribute__((section(".vector"))) vectorTable[] =
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Firmware version string used for the bootloader
+// Firmware version string used for the main image
 
 extern "C" const char
 	__attribute__((section(".fwid")))
 	__attribute__((used))
-	g_firmwareID[] = "demo-board-bl-main";
+	g_firmwareID[] = "demo-board-main";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Stub for unused interrupts

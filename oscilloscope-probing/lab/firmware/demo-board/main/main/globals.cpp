@@ -27,13 +27,8 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef bootloader_h
-#define bootloader_h
+#include "demo.h"
+#include <peripheral/ITMStream.h>
 
-#include <core/platform.h>
-#include <bootloader/bootloader-common.h>
-#include <hwinit.h>
-
-#include <microkvs/driver/STM32StorageBank.h>
-
-#endif
+///@brief ITM serial trace data stream
+ITMStream g_itmStream(0);

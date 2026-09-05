@@ -27,13 +27,36 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef bootloader_h
-#define bootloader_h
+#ifndef LocalConsoleTask_h
+#define LocalConsoleTask_h
 
-#include <core/platform.h>
-#include <bootloader/bootloader-common.h>
-#include <hwinit.h>
+#include <core/Task.h>
+#include "DemoCLISessionContext.h"
 
-#include <microkvs/driver/STM32StorageBank.h>
+class LocalConsoleTask : public Task
+{
+public:
+	LocalConsoleTask()
+	{
+		m_outputStream.Initialize(&g_cliUART);
+		m_context.Initialize(&m_outputStream, "localadmin");
+		m_context.PrintPrompt();
+	}
+
+	virtual void Iteration()
+	{
+		if(g_cliUART.HasInput())
+			m_context.OnKeystroke(g_cliUART.BlockingRead());
+	}
+
+protected:
+
+	///@brief Output stream for local serial console
+	UARTOutputStream m_outputStream;
+
+	///@brief Session context for local serial console
+	DemoCLISessionContext m_context;
+};
 
 #endif
+

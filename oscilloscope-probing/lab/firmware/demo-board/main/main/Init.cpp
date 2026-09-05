@@ -27,13 +27,77 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef bootloader_h
-#define bootloader_h
+#include "demo.h"
+#include <ctype.h>
+#include "../bsp/FPGATask.h"
+#include "LocalConsoleTask.h"
 
-#include <core/platform.h>
-#include <bootloader/bootloader-common.h>
-#include <hwinit.h>
+/**
+	@brief Initialize global GPIO LEDs
+ */
+void InitLEDs()
+{
+	/*
+	//Turn on the MCU GPIO LEDs
+	g_leds[0] = 1;
+	g_leds[1] = 1;
+	g_leds[2] = 1;
+	g_leds[3] = 1;
 
-#include <microkvs/driver/STM32StorageBank.h>
+	//Turn on the FPGA GPIO LEDs
+	g_fpgaLEDs[0] = 1;
+	g_fpgaLEDs[1] = 1;
+	g_fpgaLEDs[2] = 1;
+	g_fpgaLEDs[3] = 1;
 
-#endif
+	//Turn off all of the RGB LEDs
+	for(int i=0; i<6; i++)
+		FRGBLED.framebuffer[i] = 0x000000;
+	*/
+}
+
+/**
+	@brief Initialize sensors and log starting values for each
+ */
+void InitSensors()
+{
+	/*
+	g_log("Initializing sensors\n");
+	LogIndenter li(g_log);
+
+	//No fans on this board
+
+	//Read FPGA temperature
+	auto temp = FXADC.die_temp;
+	g_log("FPGA die temperature:              %uhk C\n", temp);
+
+	//Read FPGA voltage sensors
+	int volt = FXADC.volt_core;
+	g_log("FPGA VCCINT:                        %uhk V\n", volt);
+	volt = FXADC.volt_ram;
+	g_log("FPGA VCCBRAM:                       %uhk V\n", volt);
+	volt = FXADC.volt_aux;
+	g_log("FPGA VCCAUX:                        %uhk V\n", volt);
+	*/
+}
+
+void App_Init()
+{
+	//Enable interrupts early on since we use them for e.g. debug logging during boot
+	EnableInterrupts();
+
+	/*
+	//Basic hardware setup
+	InitLEDs();
+	InitDTS();
+	InitSensors();
+
+	static FPGATask fpgaTask;
+	static LocalConsoleTask localConsoleTask;
+
+	g_tasks.push_back(&fpgaTask);
+	g_tasks.push_back(&localConsoleTask);
+
+	//g_timerTasks.push_back(&phyTask);
+	*/
+}

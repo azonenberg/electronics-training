@@ -55,5 +55,5 @@ add_subdirectory("${PROJECT_ROOT}/stm32-cpp" "${CMAKE_BINARY_DIR}/stm32-cpp")
 # The actual project build
 
 add_subdirectory("bsp")
-#add_subdirectory("bl")
-#add_subdirectory("main")
+add_subdirectory("bl")
+add_subdirectory("main")

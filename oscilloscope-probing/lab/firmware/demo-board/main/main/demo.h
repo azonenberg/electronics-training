@@ -27,13 +27,23 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef bootloader_h
-#define bootloader_h
+#ifndef demo_h
+#define demo_h
 
 #include <core/platform.h>
-#include <bootloader/bootloader-common.h>
 #include <hwinit.h>
 
-#include <microkvs/driver/STM32StorageBank.h>
+#include <peripheral/SPI.h>
+#include <embedded-utils/StringBuffer.h>
+
+void InitLEDs();
+void InitSensors();
+
+//RGB LED color constants
+#define RGB_OFF		0x000000
+#define RGB_RED		0x200000
+#define RGB_YELLOW	0x202000
+#define RGB_GREEN	0x002000
+#define RGB_BLUE	0x000020
 
 #endif

@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
 *                                                                                                                      *
-* efinix-tests                                                                                                         *
+* electronics-training                                                                                                 *
 *                                                                                                                      *
-* Copyright (c) 2023-2025 Andrew D. Zonenberg and contributors                                                         *
+* Copyright (c) 2023-2026 Andrew D. Zonenberg and contributors                                                         *
 * All rights reserved.                                                                                                 *
 *                                                                                                                      *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the     *
@@ -28,13 +28,12 @@
 ***********************************************************************************************************************/
 
 #include "bootloader.h"
-/*#include "BootloaderUDPProtocol.h"
-#include "BootloaderTCPProtocol.h"
-#include "BootloaderCLISessionContext.h"*/
+
+//TODO: application code will live in SRAM copied there as an image from FPGA flash?
 
 //Application region of flash starts at the beginning of external SPI flash
 //Firmware version string is put right after vector table by linker script at a constant address
-uint32_t* const g_appVector  = reinterpret_cast<uint32_t*>(0x9000'0000);
+uint32_t* const g_appVector  = reinterpret_cast<uint32_t*>(0x0000'0000);
 
 //Offset of the version string (size of the vector table plus 32 byte alignment)
 const uint32_t g_appVersionOffset = 0x2e0;
@@ -44,9 +43,6 @@ UARTOutputStream g_localConsoleOutputStream;
 /*
 ///@brief Context data structure for local serial console
 BootloaderCLISessionContext g_localConsoleSessionContext;
-
-///@brief The SSH server
-BootloaderSSHTransportServer* g_sshd = nullptr;
 */
 
 extern bool g_bootAppPending;
@@ -87,19 +83,6 @@ void Bootloader_FinalCleanup()
 void __attribute__((noreturn)) BSP_MainLoop()
 {
 	Bootloader_MainLoop();
-}
-
-void RegisterProtocolHandlers(IPv4Protocol& ipv4)
-{
-	g_log("register handlers\n");
-
-	/*
-	static BootloaderTCPProtocol tcp(&ipv4);
-	static BootloaderUDPProtocol udp(&ipv4);
-	ipv4.UseTCP(&tcp);
-	ipv4.UseUDP(&udp);
-	g_dhcpClient = &udp.GetDHCP();
-	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
