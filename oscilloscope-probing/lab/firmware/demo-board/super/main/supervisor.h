@@ -59,10 +59,14 @@ protected:
 		g_sysokLED = 0;
 		g_pgoodLED = 0;
 
+		PrintRailVoltages();
+
 		//Hang until reset, don't attempt to auto restart
 		while(1)
 		{}
 	}
+
+	void PrintRailVoltages();
 };
 
 extern DemoPowerResetSupervisor g_super;

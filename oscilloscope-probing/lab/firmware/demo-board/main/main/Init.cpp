@@ -31,13 +31,14 @@
 #include <ctype.h>
 #include "../bsp/FPGATask.h"
 #include "LocalConsoleTask.h"
+#include "DisplayTask.h"
+#include "ButtonTask.h"
 
 /**
 	@brief Initialize global GPIO LEDs
  */
 void InitLEDs()
 {
-	/*
 	//Turn on the MCU GPIO LEDs
 	g_leds[0] = 1;
 	g_leds[1] = 1;
@@ -51,9 +52,14 @@ void InitLEDs()
 	g_fpgaLEDs[3] = 1;
 
 	//Turn off all of the RGB LEDs
-	for(int i=0; i<6; i++)
-		FRGBLED.framebuffer[i] = 0x000000;
-	*/
+	/*for(int i=0; i<4; i++)
+		FRGBLED.framebuffer[i] = 0x000000;*/
+
+	//Configure the RGB LEDs
+	FRGBLED.framebuffer[0] = 0x200000;	//red
+	FRGBLED.framebuffer[1] = 0x002000;	//green
+	FRGBLED.framebuffer[2] = 0x000020;	//blue
+	FRGBLED.framebuffer[3] = 0x202020;	//white
 }
 
 /**
@@ -61,7 +67,6 @@ void InitLEDs()
  */
 void InitSensors()
 {
-	/*
 	g_log("Initializing sensors\n");
 	LogIndenter li(g_log);
 
@@ -78,7 +83,65 @@ void InitSensors()
 	g_log("FPGA VCCBRAM:                       %uhk V\n", volt);
 	volt = FXADC.volt_aux;
 	g_log("FPGA VCCAUX:                        %uhk V\n", volt);
-	*/
+
+	//TODO: read STM32 temperature
+
+	//TODO: I2C query the supervisor
+}
+
+/**
+	@brief Initialize the display
+ */
+void InitDisplay()
+{
+	g_log("Initializing display\n");
+	LogIndenter li(g_log);
+
+	//Set up GPIOs for display bus
+	static GPIOPin display_sck(&GPIOF, 7, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 5);
+	static GPIOPin display_mosi(&GPIOF, 9, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_SLOW, 5);
+	display_sck.SetPullMode(GPIOPin::PULL_DOWN);
+
+	//Set up GPIOs
+	static GPIOPin display_busy_n(&GPIOI, 0, GPIOPin::MODE_INPUT, GPIOPin::SLEW_SLOW);
+	static GPIOPin display_bs(&GPIOH, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+	static GPIOPin display_cs_n(&GPIOF, 6, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+	static GPIOPin display_dc(&GPIOI, 1, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_MEDIUM);
+	static GPIOPin display_rst_n(&GPIOI, 2, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
+
+	//BS pin seems to be a strap that just needs to be held low
+	display_bs = 0;
+
+	//Set up the display itself
+	static DisplayTask display(&g_displaySPI, &display_busy_n, &display_cs_n, &display_dc, &display_rst_n);
+	g_display = &display;
+
+	//Change the SPI baud rate once the display has read the ROM
+	//div 8 = 14.842 MHz
+	g_displaySPI.SetBaudDiv(8);
+
+	//Clear the display
+	g_display->Clear();
+
+	//Fill with a checkerboard
+	uint32_t size = 8;
+	uint h = g_display->GetHeight();
+	uint w = g_display->GetWidth();
+	for(uint32_t y=0; y < h; y += size)
+	{
+		for(uint32_t x=0; x < w; x += size)
+		{
+			uint32_t bx = (x / size) & 1;
+			uint32_t by = (y / size) & 1;
+			g_display->FilledRect(x, y, x + size, y + size, (bx == by));
+		}
+	}
+
+	//Actually refresh it
+	g_display->StartRefresh(true);
+
+	//Add the task
+	g_tasks.push_back(g_display);
 }
 
 void App_Init()
@@ -86,18 +149,16 @@ void App_Init()
 	//Enable interrupts early on since we use them for e.g. debug logging during boot
 	EnableInterrupts();
 
-	/*
 	//Basic hardware setup
 	InitLEDs();
-	InitDTS();
 	InitSensors();
+	InitDisplay();
 
-	static FPGATask fpgaTask;
 	static LocalConsoleTask localConsoleTask;
+	static ButtonTask buttonTask;
 
-	g_tasks.push_back(&fpgaTask);
 	g_tasks.push_back(&localConsoleTask);
+	g_tasks.push_back(&buttonTask);
 
 	//g_timerTasks.push_back(&phyTask);
-	*/
 }

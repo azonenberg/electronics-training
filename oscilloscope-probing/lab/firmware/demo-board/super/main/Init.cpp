@@ -39,16 +39,16 @@
 // Power rail descriptors
 
 GPIOPin g_1v0_en(&GPIOC, 13, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-RailDescriptorWithEnableAndADC g_1v0("1V0", g_1v0_en, 6, 0.95, 1.05, 2.0, g_logTimer, 50);
+RailDescriptorWithEnableAndADC g_1v0("1V0", g_1v0_en, 6, 0.925, 1.05, 1.0, g_logTimer, 50);
 
 GPIOPin g_1v2_en(&GPIOC, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-RailDescriptorWithEnableAndADC g_1v2("1V2", g_1v2_en, 8, 1.15, 1.25, 2.0, g_logTimer, 50);
+RailDescriptorWithEnableAndADC g_1v2("1V2", g_1v2_en, 8, 1.15, 1.25, 1.0, g_logTimer, 50);
 
 GPIOPin g_1v8_en(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-RailDescriptorWithEnableAndADC g_1v8("1V8", g_1v8_en, 7, 1.7, 1.85, 2.0, g_logTimer, 50);
+RailDescriptorWithEnableAndADC g_1v8("1V8", g_1v8_en, 7, 1.7, 1.85, 1.0, g_logTimer, 50);
 
 GPIOPin g_3v3_en(&GPIOC, 14, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-RailDescriptorWithEnableAndADC g_3v3("3V3", g_3v3_en, 9, 3.15, 3.35, 2.0, g_logTimer, 50);
+RailDescriptorWithEnableAndADC g_3v3("3V3", g_3v3_en, 9, 3.15, 3.35, 1.0, g_logTimer, 50);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Power rail sequence
@@ -96,6 +96,11 @@ etl::vector g_resetSequence
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Other GPIOS
+
+GPIOPin g_mainBoot0(&GPIOA, 12, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW, 0);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Task tables
 
 etl::vector<Task*, MAX_TASKS>  g_tasks;
@@ -105,6 +110,18 @@ etl::vector<TimerTask*, MAX_TIMER_TASKS>  g_timerTasks;
 // The top level supervisor controller
 
 DemoPowerResetSupervisor g_super(g_powerSequence, g_resetSequence);
+
+void DemoPowerResetSupervisor::PrintRailVoltages()
+{
+	g_log("Last measured rail voltages:\n");
+
+	LogIndenter li(g_log);
+
+	g_log("3V3: %d mV\n", static_cast<int>(g_3v3.PeekVoltage() * 1000));
+	g_log("1V8: %d mV\n", static_cast<int>(g_1v8.PeekVoltage() * 1000));
+	g_log("1V2: %d mV\n", static_cast<int>(g_1v2.PeekVoltage() * 1000));
+	g_log("1V0: %d mV\n", static_cast<int>(g_1v0.PeekVoltage() * 1000));
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Peripheral initialization
@@ -146,6 +163,39 @@ void App_Init()
 	#ifdef _DEBUG
 		g_timerTasks.push_back(&itmTask);
 	#endif
+
+	//Pull BOOT0 on main MCU low
+	g_mainBoot0 = 0;
+
+	//Log parameters
+	{
+		g_log("Initial system health check\n");
+		LogIndenter li(g_log);
+
+		g_log("Supervisor temperature: %uhk C\n", g_adc->GetTemperature());
+
+		auto vdd = g_adc->GetSupplyVoltage();
+		g_log("3V3_SB: %d mV\n", vdd);
+
+		//3V3_SB hasn't come up fully yet, give it time
+		//The FT234 doesn't have a very high output current so decoupling caps take a while to charge,
+		//and if we don't let the rails stabilize then ADC readings used by the boot process will be wrong
+		const int min_vdd = 3280;
+		if(vdd < min_vdd)
+		{
+			g_log("Waiting for 3V3_SB rail to stabilize\n");
+
+			while(vdd < min_vdd)
+			{
+				LogIndenter li2(g_log);
+				vdd = g_adc->GetSupplyVoltage();
+				g_log("3V3_SB: %d mV\n", vdd);
+				g_logTimer.Sleep(250);
+			}
+		}
+
+		g_log("Power is stable\n");
+	}
 
 	//Turn on immediately, don't wait for a button press
 	g_super.PowerOn();

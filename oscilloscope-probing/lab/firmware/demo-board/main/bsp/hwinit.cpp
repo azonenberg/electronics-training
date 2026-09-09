@@ -119,36 +119,28 @@ void BSP_Init()
 	//Set up PLL2 to run the external memory bus
 	//We have some freedom with how fast we clock this!
 	//Doesn't have to be a multiple of CPU clock since separate VCO from the main system
-	//TODO: we probably want to do faster than 62.5 MHz lol, but this is what's saved right now
 	RCCHelper::InitializePLL(
 		2,		//PLL2
 		25,		//input is 25 MHz from the HSE
 		2,		//25/2 = 12.5 MHz at the PFD
-		20,		//12.5 * 20 = 250 MHz at the VCO
+		20,		//12.5 * 20 = 200 MHz at the VCO
 		32,		//div P (not used for now)
 		32,		//div Q (not used for now)
-		2,		//div R (125 MHz FMC kernel clock = 62.5 MHz FMC clock)
+		1,		//div R (250 MHz FMC kernel clock = 125 MHz FMC clock)
 		RCCHelper::CLOCK_SOURCE_HSE
 	);
-
-	//Initialize LEDs
-	for(auto& led : g_leds)
-		led = 1;
 
 	InitRTCFromHSE();
 	//InitQSPI();
 	//DoInitKVS();
 	InitFMC();
 	InitFPGA();
+
 	InitFPGAFlash();
 
-	//Initialize the LEDs and FPGA IRQ (for now turn them all on)
+	//Configure the FPGA-side LEDs
 	for(auto& led : g_fpgaLEDs)
-	{
 		led.DeferredInit();
-		led = 1;
-	}
-	//g_fpgaIRQ.DeferredInit();
 
 	InitITM();
 
@@ -225,7 +217,7 @@ void InitFMC()
 	LogIndenter li(g_log);
 
 	//Wait a bit before initializing FMC in case something goes bad
-	g_logTimer.Sleep(500);
+	g_logTimer.Sleep(1000);
 
 	static GPIOPin fmc_ad0(&GPIOD, 14, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
 	static GPIOPin fmc_ad1(&GPIOD, 15, GPIOPin::MODE_PERIPHERAL, GPIOPin::SLEW_VERYFAST, 12);
@@ -273,6 +265,7 @@ void InitFMC()
 
 	//Wait a little while for FPGA PLL to lock etc before we start talking to it
 	g_logTimer.Sleep(500);
+	//g_log("FMC initialized\n");
 }
 
 void InitFPGAFlash()

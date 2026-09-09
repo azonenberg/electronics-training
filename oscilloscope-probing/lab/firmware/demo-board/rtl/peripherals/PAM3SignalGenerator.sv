@@ -1,8 +1,10 @@
+`timescale 1ns/1ps
+`default_nettype none
 /***********************************************************************************************************************
 *                                                                                                                      *
 * electronics-training                                                                                                 *
 *                                                                                                                      *
-* Copyright (c) 2023-2026 Andrew D. Zonenberg and contributors                                                         *
+* Copyright (c) 2026 Andrew D. Zonenberg and contributors                                                              *
 * All rights reserved.                                                                                                 *
 *                                                                                                                      *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the     *
@@ -27,24 +29,102 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "demo.h"
-#include <peripheral/ITMStream.h>
+module PAM3SignalGenerator(
+	input wire	clk_66mhz,
+	input wire	clk_125mhz,
 
-///@brief ITM serial trace data stream
-ITMStream g_itmStream(0);
+	output wire	pam3_tx_p,
+	output wire	pam3_tx_n
+);
 
-/**
-	@brief SPI interface for the display
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Output buffers
 
-	SPI5 is on APB2, but uses kernel clock selected by RCC_D2CCIP1R.SPI45SEL.
-	Powerup default is all 3'b000 which selects APB clock (118.75) as kernel clock
+	logic	pam3_tx_p_out;
+	logic	pam3_tx_n_out;
 
-	Display Fmax is 10 MHz for writes, 2 MHz for reads
- */
-DisplaySPIType g_displaySPI(&SPI5, false, 64);	//1.855 MHz
+	logic	pam3_tx_p_tris;
+	logic	pam3_tx_n_tris;
 
-///@brief E-ink controller
-DisplayTask* g_display = nullptr;
+	OBUFT obuf_pam3_tx_p(
+		.I(pam3_tx_p_out),
+		.T(pam3_tx_p_tris),
+		.O(pam3_tx_p));
 
-///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
-Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+	OBUFT obuf_nam3_tx_n(
+		.I(pam3_tx_n_out),
+		.T(pam3_tx_n_tris),
+		.O(pam3_tx_n));
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Output symbol decoding
+
+	typedef enum logic[1:0]
+	{
+		SYMBOL_MINUS_1,
+		SYMBOL_0,
+		SYMBOL_PLUS_1
+	} symbol_t;
+
+	symbol_t symout;
+
+	always_comb begin
+
+		case(symout)
+
+			SYMBOL_MINUS_1: begin
+				pam3_tx_p_tris	= 0;
+				pam3_tx_n_tris	= 0;
+
+				pam3_tx_p_out	= 0;
+				pam3_tx_n_out	= 1;
+			end
+
+			SYMBOL_PLUS_1: begin
+				pam3_tx_p_tris	= 0;
+				pam3_tx_n_tris	= 0;
+
+				pam3_tx_p_out	= 1;
+				pam3_tx_n_out	= 0;
+			end
+
+			//zero
+			default: begin
+				pam3_tx_p_tris	= 1;
+				pam3_tx_n_tris	= 1;
+
+				pam3_tx_p_out	= 0;
+				pam3_tx_n_out	= 0;
+			end
+
+		endcase
+
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PAM signal generation
+
+	//For now just do a PRBS
+	wire[1:0] prbs_out;
+	PRBS31 #(
+		.WIDTH(2),
+		.INITIAL_SEED(1)
+	) prbs (
+		.clk(clk_125mhz),
+		.update(1),
+		.init(1'b0),
+		.seed(31'h0),
+		.dout(prbs_out)
+	);
+
+	always_ff @(posedge clk_125mhz) begin
+
+		case(prbs_out)
+			2'b10:		symout <= SYMBOL_MINUS_1;
+			2'b11:	 	symout <= SYMBOL_PLUS_1;
+			default:	symout <= SYMBOL_0;
+		endcase
+
+	end
+
+endmodule

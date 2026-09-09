@@ -28,23 +28,96 @@
 ***********************************************************************************************************************/
 
 #include "demo.h"
-#include <peripheral/ITMStream.h>
+#include "ButtonTask.h"
 
-///@brief ITM serial trace data stream
-ITMStream g_itmStream(0);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-/**
-	@brief SPI interface for the display
+ButtonTask::ButtonTask()
+	: m_buttonDown{0}
+	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
+	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
+	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
+	, m_downButton(&GPIOJ, 10, GPIOPin::MODE_INPUT, 0, false)
+	, m_enterButton(&GPIOJ, 9, GPIOPin::MODE_INPUT, 0, false)
+{
+	m_buttons[BUTTON_LEFT] = &m_leftButton;
+	m_buttons[BUTTON_RIGHT] = &m_rightButton;
+	m_buttons[BUTTON_UP] = &m_upButton;
+	m_buttons[BUTTON_DOWN] = &m_downButton;
+	m_buttons[BUTTON_ENTER] = &m_enterButton;
 
-	SPI5 is on APB2, but uses kernel clock selected by RCC_D2CCIP1R.SPI45SEL.
-	Powerup default is all 3'b000 which selects APB clock (118.75) as kernel clock
+	for(auto& b : m_buttons)
+		b->SetPullMode(GPIOPin::PULL_DOWN);
+}
 
-	Display Fmax is 10 MHz for writes, 2 MHz for reads
- */
-DisplaySPIType g_displaySPI(&SPI5, false, 64);	//1.855 MHz
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-///@brief E-ink controller
-DisplayTask* g_display = nullptr;
+void ButtonTask::Iteration()
+{
+	//Get current button state
+	bool down[5];
+	for(size_t i=0; i<5; i++)
+		down[i] = *m_buttons[i];
 
-///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
-Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+	//Check for events
+	bool hit = false;
+	if(down[BUTTON_LEFT] && !m_buttonDown[BUTTON_LEFT])
+	{
+		OnLeft();
+		hit = true;
+	}
+	if(down[BUTTON_RIGHT] && !m_buttonDown[BUTTON_RIGHT])
+	{
+		OnRight();
+		hit = true;
+	}
+	if(down[BUTTON_UP] && !m_buttonDown[BUTTON_UP])
+	{
+		OnUp();
+		hit = true;
+	}
+	if(down[BUTTON_DOWN] && !m_buttonDown[BUTTON_DOWN])
+	{
+		OnDown();
+		hit = true;
+	}
+	if(down[BUTTON_ENTER] && !m_buttonDown[BUTTON_ENTER])
+	{
+		OnEnter();
+		hit = true;
+	}
+
+	//Ugly debounce delay but we can afford the time
+	if(hit)
+		g_logTimer.Sleep(5);
+
+	//Save state
+	for(size_t i=0; i<5; i++)
+		m_buttonDown[i] = down[i];
+}
+
+void ButtonTask::OnLeft()
+{
+	g_log("left\n");
+}
+
+void ButtonTask::OnRight()
+{
+	g_log("right\n");
+}
+
+void ButtonTask::OnUp()
+{
+	g_log("up\n");
+}
+
+void ButtonTask::OnDown()
+{
+	g_log("down\n");
+}
+
+void ButtonTask::OnEnter()
+{
+	g_log("enter\n");
+}

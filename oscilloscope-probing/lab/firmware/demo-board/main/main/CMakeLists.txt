@@ -1,5 +1,7 @@
 add_executable(main
 	DemoCLISessionContext.cpp
+	DisplayTask.cpp
+	ButtonTask.cpp
 
 	globals.cpp
 	Init.cpp
@@ -17,6 +19,7 @@ target_link_libraries(main
 	common-embedded-platform-boilerplate-h750
 	common-embedded-platform-cli
 	common-embedded-platform-core
+	common-embedded-platform-drivers
 	common-embedded-platform-fpga
 	embedded-cli
 	embedded-utils

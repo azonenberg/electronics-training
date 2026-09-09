@@ -1,3 +1,6 @@
+########################################################################################################################
+# IO standard and pinning constraints
+
 set_property IOSTANDARD LVCMOS33 [get_ports {clip_out[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {clip_out[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {clip_out[1]}]
@@ -163,10 +166,10 @@ set_property DRIVE 4 [get_ports led_ctrl]
 set_property SLEW SLOW [get_ports led_ctrl]
 set_property PACKAGE_PIN R19 [get_ports pam3_tx_n]
 set_property IOSTANDARD LVCMOS33 [get_ports pam3_tx_n]
-set_property SLEW FAST [get_ports pam3_tx_n]
+set_property SLEW SLOW [get_ports pam3_tx_n]
 set_property PACKAGE_PIN P19 [get_ports pam3_tx_p]
 set_property IOSTANDARD LVCMOS33 [get_ports pam3_tx_p]
-set_property SLEW FAST [get_ports pam3_tx_p]
+set_property SLEW SLOW [get_ports pam3_tx_p]
 set_property PACKAGE_PIN A18 [get_ports uart_cts_n]
 set_property PACKAGE_PIN A16 [get_ports {pmod_io[7]}]
 set_property PACKAGE_PIN A21 [get_ports uart_rts_n]
@@ -183,4 +186,79 @@ set_property SLEW SLOW [get_ports uart_rts_n]
 
 set_property PACKAGE_PIN F6 [get_ports gtp_ref_p]
 
+set_property PULLTYPE PULLUP [get_ports fmc_ne1]
+set_property PULLTYPE PULLUP [get_ports fmc_ne2]
+set_property PULLTYPE PULLUP [get_ports fmc_ne3]
+set_property PULLTYPE PULLUP [get_ports fmc_ne4]
+set_property PULLTYPE PULLUP [get_ports fmc_noe]
+set_property PULLTYPE PULLUP [get_ports fmc_nwe]
+
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[6]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[5]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[4]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[3]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[2]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[1]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_a_hi[0]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[15]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[14]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[13]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[12]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[11]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[10]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[9]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[8]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[7]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[6]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[5]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[4]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[3]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[2]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[1]}]
+set_property PULLTYPE PULLDOWN [get_ports {fmc_ad[0]}]
+
+########################################################################################################################
+# Input clocks
+
 create_clock -period 40.000 -name clk_25mhz -waveform {0.000 20.000} [get_ports clk_25mhz]
+create_clock -period 6.667 -name fmc_clk -waveform {0.000 3.334} [get_ports fmc_clk]
+
+########################################################################################################################
+# CDC
+
+# slow clock only used for getting DNA etc
+set_false_path -from [get_clocks clk_50mhz_raw] -to [get_clocks pclk_raw]
+set_clock_groups -asynchronous -group [get_clocks pclk_raw] -group [get_clocks clk_50mhz_raw]
+
+# Synchronizer max delays: 5 ns (200 MHz) is << 1 cycle of both clocks
+set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }] 5.000
+set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }] 5.000
+
+# APB clock domain crossings: 5 ns (200 MHz) is << 1 cycle of both clocks
+set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*apb_cdc*" }] -to [get_clocks pclk_raw] 5.000
+set_max_delay -from [get_clocks pclk_raw] -to [get_cells -hierarchical -filter { NAME =~  "*apb_cdc*" }] 5.000
+
+########################################################################################################################
+# Put the timestamp in the bitstream USERCODE
+
+set_property BITSTREAM.CONFIG.USR_ACCESS TIMESTAMP [current_design]
+
+########################################################################################################################
+# Bitstream generation settings
+
+set_property BITSTREAM.CONFIG.CONFIGRATE 33 [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS VCCO [current_design]
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
+
+########################################################################################################################
+# Vivado ILA
+
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets pclk_raw]
+
+set_property DRIVE 8 [get_ports pam3_tx_n]
+set_property DRIVE 8 [get_ports pam3_tx_p]

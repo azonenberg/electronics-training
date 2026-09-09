@@ -35,6 +35,8 @@
 
 module PeripheralTop(
 	input wire			clk_50mhz,
+	input wire			clk_66mhz,
+	input wire			clk_125mhz,
 
 	//APB1 (0xc000_0000, 1 kB per peripheral)
 	APB.completer		apb1,
@@ -228,6 +230,17 @@ module PeripheralTop(
 		.qspi_dq_in(flash_dq_in),
 		.qspi_dq_tris(flash_dq_tris),
 		.qspi_cs_n(flash_cs_n)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PAM3 signal generator on SMA connectors (TODO APB)
+
+	PAM3SignalGenerator pam3(
+		.clk_66mhz(clk_66mhz),
+		.clk_125mhz(clk_125mhz),
+
+		.pam3_tx_p(pam3_tx_p),
+		.pam3_tx_n(pam3_tx_n)
 	);
 
 endmodule

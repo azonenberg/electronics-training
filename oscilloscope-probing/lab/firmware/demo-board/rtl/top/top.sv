@@ -97,7 +97,9 @@ module top(
 
 	wire	gtp_refclk;
 	wire	clk_50mhz;
+	wire	clk_66mhz;
 	wire	clk_100mhz;
+	wire	clk_125mhz;
 
 	ClockGeneration clkgen(
 		.clk_25mhz(clk_25mhz),
@@ -108,7 +110,9 @@ module top(
 		.gtp_refclk(gtp_refclk),
 
 		.clk_50mhz(clk_50mhz),
-		.clk_100mhz(clk_100mhz)
+		.clk_66mhz(clk_66mhz),
+		.clk_100mhz(clk_100mhz),
+		.clk_125mhz(clk_125mhz)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,6 +168,8 @@ module top(
 
 	PeripheralTop peripherals(
 		.clk_50mhz(clk_50mhz),
+		.clk_66mhz(clk_66mhz),
+		.clk_125mhz(clk_125mhz),
 
 		.apb1(apb1),
 		.apb2(apb2),
@@ -183,5 +189,8 @@ module top(
 
 		.led_ctrl(led_ctrl)
 	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Debug ILA, for now just use the vivado one for sanity checking
 
 endmodule

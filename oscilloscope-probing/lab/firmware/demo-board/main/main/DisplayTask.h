@@ -27,24 +27,21 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "demo.h"
-#include <peripheral/ITMStream.h>
+#ifndef DisplayTask_h
+#define DisplayTask_h
 
-///@brief ITM serial trace data stream
-ITMStream g_itmStream(0);
+#include <drivers/PDIEinkDisplay.h>
 
-/**
-	@brief SPI interface for the display
+class DisplayTask : public PDIEinkDisplay
+{
+public:
+	DisplayTask(DisplaySPIType* spi, GPIOPin* busy_n, GPIOPin* cs_n, GPIOPin* dc, GPIOPin* rst)
+		: PDIEinkDisplay(spi, busy_n, cs_n, dc, rst)
+	{}
 
-	SPI5 is on APB2, but uses kernel clock selected by RCC_D2CCIP1R.SPI45SEL.
-	Powerup default is all 3'b000 which selects APB clock (118.75) as kernel clock
+	//For now use the FPGA temperature
+	virtual uint8_t GetBoardTempC()
+	{ return FXADC.die_temp >> 8; }
+};
 
-	Display Fmax is 10 MHz for writes, 2 MHz for reads
- */
-DisplaySPIType g_displaySPI(&SPI5, false, 64);	//1.855 MHz
-
-///@brief E-ink controller
-DisplayTask* g_display = nullptr;
-
-///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
-Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+#endif

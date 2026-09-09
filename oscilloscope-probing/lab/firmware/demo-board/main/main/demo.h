@@ -36,8 +36,11 @@
 #include <peripheral/SPI.h>
 #include <embedded-utils/StringBuffer.h>
 
+#include "DisplayTask.h"
+
 void InitLEDs();
 void InitSensors();
+void InitDisplay();
 
 //RGB LED color constants
 #define RGB_OFF		0x000000
@@ -45,5 +48,9 @@ void InitSensors();
 #define RGB_YELLOW	0x202000
 #define RGB_GREEN	0x002000
 #define RGB_BLUE	0x000020
+
+extern Timer g_fastTimer;
+extern DisplaySPIType g_displaySPI;
+extern DisplayTask* g_display;
 
 #endif

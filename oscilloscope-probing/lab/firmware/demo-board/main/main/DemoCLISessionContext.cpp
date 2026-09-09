@@ -65,6 +65,9 @@ enum cmdid_t
 	CMD_NTP,
 	CMD_PROGRAM,
 	CMD_RESCAN,
+	*/
+	CMD_REFRESH,
+	/*
 	CMD_RELOAD,
 	CMD_ROLLBACK,
 	CMD_ROUTE,
@@ -297,6 +300,9 @@ static const clikeyword_t g_rootCommands[] =
 	{"no",			CMD_NO,				g_noCommands,			"Remove or disable features"},
 	{"ntp",			CMD_NTP,			g_ntpCommands,			"Configure NTP client"},
 	{"reload",		CMD_RELOAD,			nullptr,				"Restart the system"},
+	*/
+	{"refresh",		CMD_REFRESH,		nullptr,				"Refresh the display"},
+	/*
 	{"rollback",	CMD_ROLLBACK,		nullptr,				"Revert changes made since last commit"},
 	{"show",		CMD_SHOW,			g_showCommands,			"Print information"},
 	{"ssh",			CMD_SSH,			g_sshCommands,			"Configure SSH protocol"},
@@ -324,6 +330,10 @@ void DemoCLISessionContext::PrintPrompt()
 
 void DemoCLISessionContext::LoadHostname()
 {
+	g_log(Logger::WARNING, "LoadHostname not runnning because KVS not set up in current firmware\n");
+	strncpy(m_hostname, "demo", sizeof(m_hostname)-1);
+	return;
+
 	memset(m_hostname, 0, sizeof(m_hostname));
 
 	//Read hostname, set to default value if not found
@@ -352,9 +362,9 @@ void DemoCLISessionContext::OnExecute()
  */
 void DemoCLISessionContext::OnExecuteRoot()
 {
-	/*
 	switch(m_command[0].m_commandID)
 	{
+		/*
 		case CMD_COMMIT:
 			OnCommit();
 			break;
@@ -409,7 +419,15 @@ void DemoCLISessionContext::OnExecuteRoot()
 		case CMD_RELOAD:
 			OnReload();
 			break;
+			*/
 
+		case CMD_REFRESH:
+			{
+			}
+
+			break;
+
+			/*
 		case CMD_ROLLBACK:
 			OnRollback();
 			break;
@@ -429,12 +447,11 @@ void DemoCLISessionContext::OnExecuteRoot()
 				OnReload();
 			}
 			break;
-
+		*/
 		default:
 			m_stream->Printf("Unrecognized command\n");
 			break;
 	}
-	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

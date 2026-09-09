@@ -28,23 +28,4 @@
 ***********************************************************************************************************************/
 
 #include "demo.h"
-#include <peripheral/ITMStream.h>
-
-///@brief ITM serial trace data stream
-ITMStream g_itmStream(0);
-
-/**
-	@brief SPI interface for the display
-
-	SPI5 is on APB2, but uses kernel clock selected by RCC_D2CCIP1R.SPI45SEL.
-	Powerup default is all 3'b000 which selects APB clock (118.75) as kernel clock
-
-	Display Fmax is 10 MHz for writes, 2 MHz for reads
- */
-DisplaySPIType g_displaySPI(&SPI5, false, 64);	//1.855 MHz
-
-///@brief E-ink controller
-DisplayTask* g_display = nullptr;
-
-///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
-Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+#include "DisplayTask.h"

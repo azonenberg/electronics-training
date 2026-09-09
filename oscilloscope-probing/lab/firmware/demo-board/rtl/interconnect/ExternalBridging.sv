@@ -69,11 +69,11 @@ module ExternalBridging(
 	APB #(.DATA_WIDTH(64), .ADDR_WIDTH(24), .USER_WIDTH(0)) apb_x64_unused();
 
 	FMC_APBBridge #(
-		.CLOCK_PERIOD(6.66),	//150 MHz
-		.VCO_MULT(8),			//1.25 GHz VCO
+		.CLOCK_PERIOD(8),			//125 MHz
+		.VCO_MULT(10),				//1.25 GHz VCO
 		.CAPTURE_CLOCK_PHASE(-30),
 		.LAUNCH_CLOCK_PHASE(-60),
-		.BASE_X64(32'h00000000)
+		.BASE_X64(32'hff000000)
 	) fmcbridge(
 
 		.apb_x32(apb_fmc),
@@ -92,6 +92,10 @@ module ExternalBridging(
 		.fmc_cs_n(fmc_ne1)
 		//TODO: support multiple ranges with multiple CSes
 	);
+
+	//Tie off the x64 APB so we don't hang if we try to access that range, just return bus error
+	assign apb_x64_unused.pready = apb_x64_unused.penable;
+	assign apb_x64_unused.pslverr = 1;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Debug APB

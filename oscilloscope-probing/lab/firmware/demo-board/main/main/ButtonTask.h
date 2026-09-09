@@ -27,24 +27,42 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "demo.h"
-#include <peripheral/ITMStream.h>
+#ifndef ButtonTask_h
+#define ButtonTask_h
 
-///@brief ITM serial trace data stream
-ITMStream g_itmStream(0);
+class ButtonTask : public Task
+{
+public:
+	ButtonTask();
 
-/**
-	@brief SPI interface for the display
+	virtual void Iteration() override;
 
-	SPI5 is on APB2, but uses kernel clock selected by RCC_D2CCIP1R.SPI45SEL.
-	Powerup default is all 3'b000 which selects APB clock (118.75) as kernel clock
+protected:
+	void OnLeft();
+	void OnRight();
+	void OnUp();
+	void OnDown();
+	void OnEnter();
 
-	Display Fmax is 10 MHz for writes, 2 MHz for reads
- */
-DisplaySPIType g_displaySPI(&SPI5, false, 64);	//1.855 MHz
+	enum Buttons
+	{
+		BUTTON_LEFT,
+		BUTTON_RIGHT,
+		BUTTON_UP,
+		BUTTON_DOWN,
+		BUTTON_ENTER
+	};
 
-///@brief E-ink controller
-DisplayTask* g_display = nullptr;
+	bool m_buttonDown[5];
 
-///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
-Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+	GPIOPin m_leftButton;
+	GPIOPin m_rightButton;
+	GPIOPin m_upButton;
+	GPIOPin m_downButton;
+	GPIOPin m_enterButton;
+
+	GPIOPin* m_buttons[5];
+};
+
+
+#endif

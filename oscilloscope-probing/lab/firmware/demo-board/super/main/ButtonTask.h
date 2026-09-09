@@ -36,7 +36,8 @@ class ButtonTask : public Task
 {
 public:
 	ButtonTask()
-		: m_buttonDown(false)
+		: m_powerButtonDown(false)
+		, m_resetButtonDown(false)
 		, m_pwrButton(&GPIOA, 6, GPIOPin::MODE_INPUT, 0, false)
 		, m_rstButton(&GPIOA, 7, GPIOPin::MODE_INPUT, 0, false)
 	{
@@ -46,7 +47,8 @@ public:
 
 	virtual void Iteration()
 	{
-		if(m_pwrButton && !m_buttonDown)
+		bool down = m_pwrButton;
+		if(down && !m_powerButtonDown)
 		{
 			g_log("Power button pressed\n");
 			if(g_super.IsPowerOn())
@@ -55,13 +57,23 @@ public:
 				g_super.PowerOn();
 		}
 
-		m_buttonDown = m_pwrButton;
+		m_powerButtonDown = down;
 
-		//TODO: make reset button do something
+		///
+
+		down = m_rstButton;
+
+		if(down && !m_resetButtonDown)
+		{
+			g_log("Reset button pressed, ignoring for now\n");
+		}
+
+		m_resetButtonDown = down;
 	}
 
 protected:
-	bool m_buttonDown;
+	bool m_powerButtonDown;
+	bool m_resetButtonDown;
 
 	GPIOPin m_pwrButton;
 	GPIOPin m_rstButton;

@@ -261,7 +261,6 @@ void NMI_Handler()
 
 void HardFault_Handler()
 {
-	/*
 	g_cliUART.BlockingFlush();
 
 	uint32_t* msp;
@@ -301,7 +300,7 @@ void HardFault_Handler()
 		g_cliUART.Printf("        %08x\n", msp[i]);
 		g_cliUART.BlockingFlush();
 	}
-	*/
+
 	while(1)
 	{}
 }
