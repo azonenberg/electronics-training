@@ -63,6 +63,42 @@ public:
 
 protected:
 
+	template<class T>
+	void RenderSelector(
+		const char* name,
+		uint16_t row,
+		T sel,
+		const char* names[],
+		int namewidth)
+	{
+		bool active = IsRowActive(row);
+		Printf("%s:  %c ", name, active ? '<' : ' ');
+
+		char format[16];
+		StringBuffer s(format, sizeof(format));
+		s.Printf("%%%ds %c\n", namewidth, active ? '>' : ' ');
+
+		Printf(format, names[sel]);
+	}
+
+	template<class T>
+	void EnumLeft(T& sel, T maxval)
+	{
+		if(sel > 0)
+			sel = static_cast<T>(sel - 1);
+		else
+			sel = static_cast<T>(maxval - 1);
+	}
+
+	template<class T>
+	void EnumRight(T& sel, T maxval)
+	{
+		if(sel < (maxval - 1))
+			sel = static_cast<T>(sel + 1);
+		else
+			sel = static_cast<T>(0);
+	}
+
 	bool IsRowActive(uint32_t row);
 
 	void Printf(const char* format, ...);

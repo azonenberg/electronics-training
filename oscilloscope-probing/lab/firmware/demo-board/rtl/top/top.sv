@@ -100,6 +100,8 @@ module top(
 	wire	clk_66mhz;
 	wire	clk_100mhz;
 	wire	clk_125mhz;
+	wire	clk_250mhz;
+	wire	clk_500mhz;
 
 	ClockGeneration clkgen(
 		.clk_25mhz(clk_25mhz),
@@ -112,7 +114,9 @@ module top(
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_100mhz(clk_100mhz),
-		.clk_125mhz(clk_125mhz)
+		.clk_125mhz(clk_125mhz),
+		.clk_250mhz(clk_250mhz),
+		.clk_500mhz(clk_500mhz)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +174,8 @@ module top(
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),
+		.clk_250mhz(clk_250mhz),
+		.clk_500mhz(clk_500mhz),
 
 		.apb1(apb1),
 		.apb2(apb2),

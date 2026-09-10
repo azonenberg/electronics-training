@@ -1,3 +1,4 @@
+set_max_delay -from [get_cells {peripherals/devinfo/sync_die_serial/sync_ack/sync/dout0_reg peripherals/devinfo/sync_die_serial/sync_en/sync/dout0_reg peripherals/devinfo/sync_idcode/sync_ack/sync/dout0_reg peripherals/devinfo/sync_idcode/sync_en/sync/dout0_reg}] -to [get_cells {extbridge/uartbridge/uart/sync_rx/dout1_reg peripherals/devinfo/sync_die_serial/sync_ack/sync/dout1_reg peripherals/devinfo/sync_die_serial/sync_en/sync/dout1_reg peripherals/devinfo/sync_idcode/sync_ack/sync/dout1_reg peripherals/devinfo/sync_idcode/sync_en/sync/dout1_reg}] 5.000
 ########################################################################################################################
 # IO standard and pinning constraints
 
@@ -37,9 +38,6 @@ set_property PACKAGE_PIN R21 [get_ports {flash_dq[3]}]
 set_property PACKAGE_PIN P21 [get_ports {flash_dq[2]}]
 set_property PACKAGE_PIN R22 [get_ports {flash_dq[1]}]
 set_property PACKAGE_PIN P22 [get_ports {flash_dq[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[9]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[8]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[6]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[5]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {fmc_a_hi[4]}]
@@ -235,8 +233,6 @@ set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "
 set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }] 5.000
 
 # APB clock domain crossings: 5 ns (200 MHz) is << 1 cycle of both clocks
-set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*apb_cdc*" }] -to [get_clocks pclk_raw] 5.000
-set_max_delay -from [get_clocks pclk_raw] -to [get_cells -hierarchical -filter { NAME =~  "*apb_cdc*" }] 5.000
 
 ########################################################################################################################
 # Put the timestamp in the bitstream USERCODE
@@ -255,10 +251,9 @@ set_property CONFIG_MODE SPIx4 [current_design]
 ########################################################################################################################
 # Vivado ILA
 
-set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
-set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
-set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets pclk_raw]
 
-set_property DRIVE 8 [get_ports pam3_tx_n]
-set_property DRIVE 8 [get_ports pam3_tx_p]
+set_property DRIVE 4 [get_ports pam3_tx_n]
+set_property DRIVE 4 [get_ports pam3_tx_p]
+
+
+

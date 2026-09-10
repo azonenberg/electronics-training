@@ -27,84 +27,55 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef MenuSystem_h
-#define MenuSystem_h
+#include "demo.h"
+#include "MenuSystem.h"
+#include "PAM3MenuPage.h"
 
-#include "MenuPageHandler.h"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rendering
 
-/**
-	@brief Data for a single menu page
- */
-struct MenuPageData
+void PAM3MenuPage::Render()
 {
-	const char* m_name;
-	MenuPageHandler* m_handler;
-};
-
-//TODO: Refactor this to something we can use on other projects
-class MenuSystem
-{
-public:
-	MenuSystem();
-
-	void Render();
-
-	void OnLeft();
-	void OnRight();
-	void OnUp();
-	void OnDown();
-	void OnEnter();
-
-	void Printf(const char* format, ...)
+	const char* names[] =
 	{
-		__builtin_va_list list;
-		__builtin_va_start(list, format);
-		Printf(format, list);
-		__builtin_va_end(list);
+		"100BASE-TX",
+		"100BASE-T1"
+	};
+
+	bool active = IsRowActive(0);
+	Printf("Pattern:  %c %10s %c\n",
+		active ? '<' : ' ',
+		names[m_mode],
+		active ? '>' : ' ');
+
+	if(m_mode == MODE_100BASET1)
+	{
+		Printf("Mod    :    PAM-3\n");
+		Printf("Rate   :     66.6 Mbaud\n");
 	}
 
-	void Printf(const char* format, __builtin_va_list list);
-
-	void MoveTo(uint16_t x, uint16_t y)
+	if(m_mode == MODE_100BASETX)
 	{
-		m_textStartX = x;
-		m_textStartY = y;
-
-		m_textPosX = x;
-		m_textPosY = y;
+		Printf("Mod    :    MLT-3\n");
+		Printf("Rate   :    125.0 Mbaud\n");
 	}
+}
 
-	bool IsInSettingsMode()
-	{ return m_selMode == MODE_SETTING; }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
 
-protected:
-	uint8_t m_menuRowIdx;
-	MenuPageData* m_currentMenuPage;
+void PAM3MenuPage::OnLeft()
+{
+	if(m_mode == MODE_100BASET1)
+		m_mode = MODE_100BASETX;
+	else
+		m_mode = MODE_100BASET1;
+}
 
-	bool m_nextRefreshIsFull;
-
-	enum SelectionMode
-	{
-		MODE_MENU_PAGE,
-		MODE_SETTING
-	} m_selMode;
-
-protected:
-
-	uint16_t m_textWidth;
-	uint16_t m_textHeight;
-	uint16_t m_textRowPitch;
-
-	//GUI state
-	uint16_t m_textStartX;
-	uint16_t m_textStartY;
-
-	uint16_t m_textPosX;
-	uint16_t m_textPosY;
-
-	//GUI working buffer (big enough to hold a full line of text)
-	char m_textBufferStorage[38];
-	StringBuffer m_textBuffer;
-};
-
-#endif
+void PAM3MenuPage::OnRight()
+{
+	if(m_mode == MODE_100BASET1)
+		m_mode = MODE_100BASETX;
+	else
+		m_mode = MODE_100BASET1;
+}

@@ -46,7 +46,9 @@ module ClockGeneration(
 	output wire		clk_50mhz,
 	output wire		clk_66mhz,
 	output wire		clk_100mhz,
-	output wire		clk_125mhz
+	output wire		clk_125mhz,
+	output wire		clk_250mhz,
+	output wire		clk_500mhz
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +62,8 @@ module ClockGeneration(
 	wire	clk_66mhz_raw;
 	wire	clk_100mhz_raw;
 	wire	clk_125mhz_raw;
+	wire	clk_250mhz_raw;
+	wire	clk_500mhz_raw;
 
 	MMCME2_BASE #(
 		.BANDWIDTH("OPTIMIZED"),
@@ -67,9 +71,9 @@ module ClockGeneration(
 		.CLKOUT0_DIVIDE_F(10),		//1 GHz VCO / 10 = 100 MHz
 		.CLKOUT1_DIVIDE(20),		//1 GHz VCO / 20 = 50 MHz
 		.CLKOUT2_DIVIDE(15),		//1 GHz VCO / 15 = 66.66 MHz
-		.CLKOUT3_DIVIDE(8),			//1 GHz VCO / 8 = 125 MHz
-		.CLKOUT4_DIVIDE(128),
-		.CLKOUT5_DIVIDE(128),
+		.CLKOUT3_DIVIDE(8),			//1 GHz VCO / 8  = 125 MHz
+		.CLKOUT4_DIVIDE(4),			//1 GHz VCO / 4  = 250 MHz
+		.CLKOUT5_DIVIDE(2),			//1 GHz VCO / 2  = 500 MHz
 		.CLKOUT6_DIVIDE(128),
 
 		.CLKOUT0_PHASE(0.0),
@@ -110,8 +114,8 @@ module ClockGeneration(
 		.CLKOUT2B(),
 		.CLKOUT3(clk_125mhz_raw),
 		.CLKOUT3B(),
-		.CLKOUT4(),
-		.CLKOUT5(),
+		.CLKOUT4(clk_250mhz_raw),
+		.CLKOUT5(clk_500mhz_raw),
 		.CLKOUT6(),
 
 		.CLKFBOUT(clk_fb),
@@ -127,6 +131,8 @@ module ClockGeneration(
 	BUFGCE bufg_clk_66mhz( .I(clk_66mhz_raw), .O(clk_66mhz), .CE(pll_lock));
 	BUFGCE bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));
 	BUFGCE bufg_clk_125mhz( .I(clk_125mhz_raw), .O(clk_125mhz), .CE(pll_lock));
+	BUFGCE bufg_clk_250mhz( .I(clk_250mhz_raw), .O(clk_250mhz), .CE(pll_lock));
+	BUFGCE bufg_clk_500mhz( .I(clk_500mhz_raw), .O(clk_500mhz), .CE(pll_lock));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Transceiver input refclk buffer

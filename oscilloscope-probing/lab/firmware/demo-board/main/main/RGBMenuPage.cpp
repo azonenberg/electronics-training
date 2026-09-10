@@ -37,17 +37,13 @@
 void RGBMenuPage::Render()
 {
 	//must match RGBTask::Pattern
-	const char* names[] =
+	static const char* names[] =
 	{
 		"Off",
 		"Chaser"
 	};
 
-	bool active = IsRowActive(0);
-	Printf("Pattern  %c %6s %c\n",
-		active ? '<' : ' ',
-		names[g_rgbTask->m_pattern],
-		active ? '>' : ' ');
+	RenderSelector("Pattern", 0, g_rgbTask->m_pattern, names, 6);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,16 +51,10 @@ void RGBMenuPage::Render()
 
 void RGBMenuPage::OnLeft()
 {
-	if(g_rgbTask->m_pattern > 0)
-		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(g_rgbTask->m_pattern - 1);
-	else
-		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(RGBTask::PATTERN_COUNT - 1);
+	EnumLeft(g_rgbTask->m_pattern, RGBTask::PATTERN_COUNT);
 }
 
 void RGBMenuPage::OnRight()
 {
-	if(g_rgbTask->m_pattern < (RGBTask::PATTERN_COUNT - 1))
-		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(g_rgbTask->m_pattern + 1);
-	else
-		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(0);
+	EnumRight(g_rgbTask->m_pattern, RGBTask::PATTERN_COUNT);
 }

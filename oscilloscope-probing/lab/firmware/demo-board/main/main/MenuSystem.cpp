@@ -29,6 +29,9 @@
 
 #include "demo.h"
 #include "AboutMenuPage.h"
+#include "ClipMenuPage.h"
+#include "ClocksMenuPage.h"
+#include "PAM3MenuPage.h"
 #include "RGBMenuPage.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,8 +40,10 @@
 //Forward declarations so they can go in the initialized vector
 extern MenuPageData g_aboutPage;
 extern MenuPageData g_clipPage;
+extern MenuPageData g_clockPage;
 extern MenuPageData g_dacPage;
 extern MenuPageData g_rgbPage;
+extern MenuPageData g_pam3Page;
 extern MenuPageData g_pmodPage;
 extern MenuPageData g_smaPage;
 extern MenuPageData g_transceiverPage;
@@ -47,7 +52,9 @@ etl::vector g_topLevelSidebar =
 {
 	&g_aboutPage,
 	&g_clipPage,
+	&g_clockPage,
 	&g_dacPage,
+	&g_pam3Page,
 	&g_pmodPage,
 	&g_rgbPage,
 	&g_smaPage,
@@ -55,21 +62,27 @@ etl::vector g_topLevelSidebar =
 };
 
 AboutMenuPage g_aboutHandler(&g_menu);
+ClipMenuPage g_clipHandler(&g_menu);
+ClocksMenuPage g_clocksHandler(&g_menu);
+PAM3MenuPage g_pam3Handler(&g_menu);
 RGBMenuPage g_rgbHandler(&g_menu);
 
-MenuPageData g_aboutPage		= { "About",	&g_topLevelSidebar, &g_aboutPage,	&g_clipPage,		&g_aboutHandler};
-MenuPageData g_clipPage			= { "Clip",		&g_topLevelSidebar, &g_aboutPage,	&g_dacPage,			nullptr};
-MenuPageData g_dacPage			= { "DAC",		&g_topLevelSidebar, &g_clipPage,	&g_pmodPage,		nullptr};
-MenuPageData g_pmodPage			= { "PMOD",		&g_topLevelSidebar, &g_dacPage,		&g_rgbPage,			nullptr};
-MenuPageData g_rgbPage			= { "RGB LED",	&g_topLevelSidebar, &g_pmodPage,	&g_smaPage,			&g_rgbHandler};
-MenuPageData g_smaPage			= { "SMA out",	&g_topLevelSidebar, &g_rgbPage,		&g_transceiverPage,	nullptr};
-MenuPageData g_transceiverPage	= { "Xcvrs",	&g_topLevelSidebar, &g_smaPage,		&g_transceiverPage,	nullptr};
+MenuPageData g_aboutPage		= { "About",	&g_aboutHandler};
+MenuPageData g_clipPage			= { "Clip",		&g_clipHandler};
+MenuPageData g_clockPage		= { "Clocks",	&g_clocksHandler};
+MenuPageData g_dacPage			= { "DAC",		nullptr};
+MenuPageData g_pam3Page			= { "PAM3 SMA",	&g_pam3Handler};
+MenuPageData g_pmodPage			= { "PMOD",		nullptr};
+MenuPageData g_rgbPage			= { "RGB LED",	&g_rgbHandler};
+MenuPageData g_smaPage			= { "SMA out",	nullptr};
+MenuPageData g_transceiverPage	= { "Xcvrs",	nullptr};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Construction / destruction
 
 MenuSystem::MenuSystem()
-	: m_currentMenuPage(&g_aboutPage)
+	: m_menuRowIdx(0)
+	, m_currentMenuPage(&g_aboutPage)
 	, m_nextRefreshIsFull(true)
 	, m_selMode(MODE_MENU_PAGE)
 	, m_textWidth(6)
@@ -99,7 +112,7 @@ void MenuSystem::Render()
 	const int16_t pageTextHeight		= 8;
 	const int16_t pageHighlightMargin	= 1;
 	const int16_t pageRowPitch			= pageTextHeight + 2*pageHighlightMargin;
-	const int16_t pageListWidthChars	= 7;
+	const int16_t pageListWidthChars	= 8;
 	const int16_t pageListWidth			= pageListWidthChars * pageTextWidth + menuLeftMargin + menuRightMargin;
 
 	//Draw background for the left side menu page list
@@ -108,7 +121,7 @@ void MenuSystem::Render()
 	//Draw the list of pages
 	//Origin is bottom left and we want to be top-down so start at top of the display
 	int16_t y = g_display->GetHeight() - (1 + pageRowPitch + menuTopMargin);
-	for(auto ppage : *m_currentMenuPage->m_sidebar)
+	for(auto ppage : g_topLevelSidebar)
 	{
 		//Draw the name, highlight if active
 		if(ppage == m_currentMenuPage)
@@ -199,7 +212,14 @@ void MenuSystem::OnUp()
 {
 	//menu mode
 	if(m_selMode == MODE_MENU_PAGE)
-		m_currentMenuPage = m_currentMenuPage->m_upPage;
+	{
+		if(m_menuRowIdx > 0 )
+			m_menuRowIdx --;
+		else
+			m_menuRowIdx = g_topLevelSidebar.size() - 1;
+
+		m_currentMenuPage = g_topLevelSidebar[m_menuRowIdx];
+	}
 
 	//settings mode
 	else if(m_currentMenuPage->m_handler)
@@ -209,7 +229,14 @@ void MenuSystem::OnUp()
 void MenuSystem::OnDown()
 {
 	if(m_selMode == MODE_MENU_PAGE)
-		m_currentMenuPage = m_currentMenuPage->m_downPage;
+	{
+		if(m_menuRowIdx >= (g_topLevelSidebar.size() - 1) )
+			m_menuRowIdx = 0;
+		else
+			m_menuRowIdx ++;
+
+		m_currentMenuPage = g_topLevelSidebar[m_menuRowIdx];
+	}
 
 	//settings mode
 	else if(m_currentMenuPage->m_handler)

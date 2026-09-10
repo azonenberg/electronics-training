@@ -68,8 +68,7 @@ void AboutMenuPage::Render()
 	Printf("      %s %2d %04d %02d%02d%02d\n", months[mon], day, yr, hr, min, sec);
 
 	//MCU hardware
-	Printf("MCU : STM32%s\n", GetPartName(DBGMCU.IDCODE & 0xfff));
-	Printf("      stepping %s\n", GetStepping(DBGMCU.IDCODE >> 16));
+	Printf("MCU : STM32%s rev %s\n", GetPartName(DBGMCU.IDCODE & 0xfff), GetStepping(DBGMCU.IDCODE >> 16));
 
 	//Firmware date / time
 	static const char* buildtime = __TIME__;

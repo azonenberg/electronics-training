@@ -27,84 +27,85 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef MenuSystem_h
-#define MenuSystem_h
+#include "demo.h"
+#include "MenuSystem.h"
+#include "ClocksMenuPage.h"
 
-#include "MenuPageHandler.h"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-/**
-	@brief Data for a single menu page
- */
-struct MenuPageData
+ClocksMenuPage::ClocksMenuPage(MenuSystem* parent)
+	: MenuPageHandler(parent)
 {
-	const char* m_name;
-	MenuPageHandler* m_handler;
-};
+	/*
+	for(size_t i=0; i<4; i++)
+		m_modes[i] = MODE_OFF;*/
+}
 
-//TODO: Refactor this to something we can use on other projects
-class MenuSystem
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rendering
+
+void ClocksMenuPage::Render()
 {
-public:
-	MenuSystem();
-
-	void Render();
-
-	void OnLeft();
-	void OnRight();
-	void OnUp();
-	void OnDown();
-	void OnEnter();
-
-	void Printf(const char* format, ...)
+	/*
+	const char* names[] =
 	{
-		__builtin_va_list list;
-		__builtin_va_start(list, format);
-		Printf(format, list);
-		__builtin_va_end(list);
+		"Off",
+		"I2C",
+		"UART",
+		"SPI",
+		"PRBS7",
+		"Pulse",
+		"Clock"
+	};
+
+	for(uint32_t i=0; i<4; i++)
+	{
+		bool active = IsRowActive(i);
+		Printf("CLIP%u:  %c %6s %c\n",
+			static_cast<unsigned int>(i) + 1,
+			active ? '<' : ' ',
+			names[m_modes[i]],
+			active ? '>' : ' ');
 	}
+	*/
+}
 
-	void Printf(const char* format, __builtin_va_list list);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
 
-	void MoveTo(uint16_t x, uint16_t y)
-	{
-		m_textStartX = x;
-		m_textStartY = y;
+void ClocksMenuPage::OnUp()
+{
+	/*
+	if(m_activeRow > 0)
+		m_activeRow --;
+	else
+		m_activeRow = 3;*/
+}
 
-		m_textPosX = x;
-		m_textPosY = y;
-	}
+void ClocksMenuPage::OnDown()
+{
+	/*
+	if(m_activeRow < 4)
+		m_activeRow ++;
+	else
+		m_activeRow = 0;*/
+}
 
-	bool IsInSettingsMode()
-	{ return m_selMode == MODE_SETTING; }
+void ClocksMenuPage::OnLeft()
+{
+	/*
+	if(m_modes[m_activeRow] > 0)
+		m_modes[m_activeRow] = static_cast<ClocksMode>(m_modes[m_activeRow] - 1);
+	else
+		m_modes[m_activeRow] = static_cast<ClocksMode>(MODE_COUNT - 1);*/
+}
 
-protected:
-	uint8_t m_menuRowIdx;
-	MenuPageData* m_currentMenuPage;
-
-	bool m_nextRefreshIsFull;
-
-	enum SelectionMode
-	{
-		MODE_MENU_PAGE,
-		MODE_SETTING
-	} m_selMode;
-
-protected:
-
-	uint16_t m_textWidth;
-	uint16_t m_textHeight;
-	uint16_t m_textRowPitch;
-
-	//GUI state
-	uint16_t m_textStartX;
-	uint16_t m_textStartY;
-
-	uint16_t m_textPosX;
-	uint16_t m_textPosY;
-
-	//GUI working buffer (big enough to hold a full line of text)
-	char m_textBufferStorage[38];
-	StringBuffer m_textBuffer;
-};
-
-#endif
+void ClocksMenuPage::OnRight()
+{
+	/*
+	if(m_modes[m_activeRow] < (MODE_COUNT - 1))
+		m_modes[m_activeRow] = static_cast<ClocksMode>(m_modes[m_activeRow] + 1);
+	else
+		m_modes[m_activeRow] = static_cast<ClocksMode>(0);*/
+}

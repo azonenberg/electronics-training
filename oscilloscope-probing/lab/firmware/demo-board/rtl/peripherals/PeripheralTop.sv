@@ -37,6 +37,8 @@ module PeripheralTop(
 	input wire			clk_50mhz,
 	input wire			clk_66mhz,
 	input wire			clk_125mhz,
+	input wire			clk_250mhz,
+	input wire			clk_500mhz,
 
 	//APB1 (0xc000_0000, 1 kB per peripheral)
 	APB.completer		apb1,
@@ -238,6 +240,8 @@ module PeripheralTop(
 	PAM3SignalGenerator pam3(
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),
+		.clk_250mhz(clk_250mhz),
+		.clk_500mhz(clk_500mhz),
 
 		.pam3_tx_p(pam3_tx_p),
 		.pam3_tx_n(pam3_tx_n)
