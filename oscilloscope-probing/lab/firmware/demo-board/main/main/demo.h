@@ -37,6 +37,8 @@
 #include <embedded-utils/StringBuffer.h>
 
 #include "DisplayTask.h"
+#include "MenuSystem.h"
+#include "RGBTask.h"
 
 void InitLEDs();
 void InitSensors();
@@ -52,5 +54,7 @@ void InitDisplay();
 extern Timer g_fastTimer;
 extern DisplaySPIType g_displaySPI;
 extern DisplayTask* g_display;
+extern MenuSystem g_menu;
+extern RGBTask* g_rgbTask;
 
 #endif

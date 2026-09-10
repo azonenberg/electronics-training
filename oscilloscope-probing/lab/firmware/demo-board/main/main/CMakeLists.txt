@@ -1,7 +1,12 @@
 add_executable(main
+	AboutMenuPage.cpp
+	ButtonTask.cpp
 	DemoCLISessionContext.cpp
 	DisplayTask.cpp
-	ButtonTask.cpp
+	MenuPageHandler.cpp
+	MenuSystem.cpp
+	RGBMenuPage.cpp
+	RGBTask.cpp
 
 	globals.cpp
 	Init.cpp

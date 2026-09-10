@@ -38,11 +38,6 @@ public:
 	virtual void Iteration() override;
 
 protected:
-	void OnLeft();
-	void OnRight();
-	void OnUp();
-	void OnDown();
-	void OnEnter();
 
 	enum Buttons
 	{

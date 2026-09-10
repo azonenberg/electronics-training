@@ -28,75 +28,43 @@
 ***********************************************************************************************************************/
 
 #include "demo.h"
-#include "ButtonTask.h"
+#include "MenuSystem.h"
+#include "RGBMenuPage.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Construction / destruction
+// Rendering
 
-ButtonTask::ButtonTask()
-	: m_buttonDown{0}
-	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
-	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
-	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
-	, m_downButton(&GPIOJ, 10, GPIOPin::MODE_INPUT, 0, false)
-	, m_enterButton(&GPIOJ, 9, GPIOPin::MODE_INPUT, 0, false)
+void RGBMenuPage::Render()
 {
-	m_buttons[BUTTON_LEFT] = &m_leftButton;
-	m_buttons[BUTTON_RIGHT] = &m_rightButton;
-	m_buttons[BUTTON_UP] = &m_upButton;
-	m_buttons[BUTTON_DOWN] = &m_downButton;
-	m_buttons[BUTTON_ENTER] = &m_enterButton;
+	//must match RGBTask::Pattern
+	const char* names[] =
+	{
+		"Off",
+		"Chaser"
+	};
 
-	for(auto& b : m_buttons)
-		b->SetPullMode(GPIOPin::PULL_DOWN);
+	bool active = IsRowActive(0);
+	Printf("Pattern  %c %6s %c\n",
+		active ? '<' : ' ',
+		names[g_rgbTask->m_pattern],
+		active ? '>' : ' ');
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
 
-void ButtonTask::Iteration()
+void RGBMenuPage::OnLeft()
 {
-	//Get current button state
-	bool down[5];
-	for(size_t i=0; i<5; i++)
-		down[i] = *m_buttons[i];
+	if(g_rgbTask->m_pattern > 0)
+		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(g_rgbTask->m_pattern - 1);
+	else
+		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(RGBTask::PATTERN_COUNT - 1);
+}
 
-	//Check for events and pass them up to the menu system
-	bool hit = false;
-	if(down[BUTTON_LEFT] && !m_buttonDown[BUTTON_LEFT])
-	{
-		g_menu.OnLeft();
-		hit = true;
-	}
-	if(down[BUTTON_RIGHT] && !m_buttonDown[BUTTON_RIGHT])
-	{
-		g_menu.OnRight();
-		hit = true;
-	}
-	if(down[BUTTON_UP] && !m_buttonDown[BUTTON_UP])
-	{
-		g_menu.OnUp();
-		hit = true;
-	}
-	if(down[BUTTON_DOWN] && !m_buttonDown[BUTTON_DOWN])
-	{
-		g_menu.OnDown();
-		hit = true;
-	}
-	if(down[BUTTON_ENTER] && !m_buttonDown[BUTTON_ENTER])
-	{
-		g_menu.OnEnter();
-		hit = true;
-	}
-
-	//Ugly debounce delay but we can afford the time
-	if(hit)
-		g_logTimer.Sleep(5);
-
-	//If a button was pressed, trigger a re-render of the display
-	if(hit)
-		g_menu.Render();
-
-	//Save state
-	for(size_t i=0; i<5; i++)
-		m_buttonDown[i] = down[i];
+void RGBMenuPage::OnRight()
+{
+	if(g_rgbTask->m_pattern < (RGBTask::PATTERN_COUNT - 1))
+		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(g_rgbTask->m_pattern + 1);
+	else
+		g_rgbTask->m_pattern = static_cast<RGBTask::Pattern>(0);
 }

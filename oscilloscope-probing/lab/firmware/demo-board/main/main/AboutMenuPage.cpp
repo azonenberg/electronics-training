@@ -28,75 +28,54 @@
 ***********************************************************************************************************************/
 
 #include "demo.h"
-#include "ButtonTask.h"
+#include "MenuSystem.h"
+#include "AboutMenuPage.h"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Construction / destruction
-
-ButtonTask::ButtonTask()
-	: m_buttonDown{0}
-	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
-	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
-	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
-	, m_downButton(&GPIOJ, 10, GPIOPin::MODE_INPUT, 0, false)
-	, m_enterButton(&GPIOJ, 9, GPIOPin::MODE_INPUT, 0, false)
+void AboutMenuPage::Render()
 {
-	m_buttons[BUTTON_LEFT] = &m_leftButton;
-	m_buttons[BUTTON_RIGHT] = &m_rightButton;
-	m_buttons[BUTTON_UP] = &m_upButton;
-	m_buttons[BUTTON_DOWN] = &m_downButton;
-	m_buttons[BUTTON_ENTER] = &m_enterButton;
+	//FPGA ID
+	uint32_t idcode = FDEVINFO.idcode;
+	Printf("FPGA: %s rev %u\n", GetNameOfFPGA(idcode), static_cast<unsigned int>(idcode >> 28));
 
-	for(auto& b : m_buttons)
-		b->SetPullMode(GPIOPin::PULL_DOWN);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ButtonTask::Iteration()
-{
-	//Get current button state
-	bool down[5];
-	for(size_t i=0; i<5; i++)
-		down[i] = *m_buttons[i];
-
-	//Check for events and pass them up to the menu system
-	bool hit = false;
-	if(down[BUTTON_LEFT] && !m_buttonDown[BUTTON_LEFT])
+	//Bitstream info
+	//Format FPGA firmware string based on the usercode (see XAPP1232)
+	//TODO: refactor this into a function we can use elsewhere
+	int day = g_usercode >> 27;
+	int mon = (g_usercode >> 23) & 0xf;
+	int yr = 2000 + ((g_usercode >> 17) & 0x3f);
+	int hr = (g_usercode >> 12) & 0x1f;
+	int min = (g_usercode >> 6) & 0x3f;
+	int sec = g_usercode & 0x3f;
+	static const char* months[16] =
 	{
-		g_menu.OnLeft();
-		hit = true;
-	}
-	if(down[BUTTON_RIGHT] && !m_buttonDown[BUTTON_RIGHT])
-	{
-		g_menu.OnRight();
-		hit = true;
-	}
-	if(down[BUTTON_UP] && !m_buttonDown[BUTTON_UP])
-	{
-		g_menu.OnUp();
-		hit = true;
-	}
-	if(down[BUTTON_DOWN] && !m_buttonDown[BUTTON_DOWN])
-	{
-		g_menu.OnDown();
-		hit = true;
-	}
-	if(down[BUTTON_ENTER] && !m_buttonDown[BUTTON_ENTER])
-	{
-		g_menu.OnEnter();
-		hit = true;
-	}
+		"",		//months in usercode use 1-based indexing
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+		"",
+		"",
+		""
+	};
+	Printf("      %s %2d %04d %02d%02d%02d\n", months[mon], day, yr, hr, min, sec);
 
-	//Ugly debounce delay but we can afford the time
-	if(hit)
-		g_logTimer.Sleep(5);
+	//MCU hardware
+	Printf("MCU : STM32%s\n", GetPartName(DBGMCU.IDCODE & 0xfff));
+	Printf("      stepping %s\n", GetStepping(DBGMCU.IDCODE >> 16));
 
-	//If a button was pressed, trigger a re-render of the display
-	if(hit)
-		g_menu.Render();
+	//Firmware date / time
+	static const char* buildtime = __TIME__;
+	Printf("      %s %c%c%c%c%c%c\n",
+		__DATE__, buildtime[0], buildtime[1], buildtime[3], buildtime[4], buildtime[6], buildtime[7]);
 
-	//Save state
-	for(size_t i=0; i<5; i++)
-		m_buttonDown[i] = down[i];
+	//For now, hard code PCB rev since there's no revision straps defined yet
+	Printf("PCB : rev 0.1");
 }

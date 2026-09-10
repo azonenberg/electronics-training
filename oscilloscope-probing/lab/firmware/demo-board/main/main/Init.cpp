@@ -33,6 +33,7 @@
 #include "LocalConsoleTask.h"
 #include "DisplayTask.h"
 #include "ButtonTask.h"
+#include "RGBTask.h"
 
 /**
 	@brief Initialize global GPIO LEDs
@@ -52,14 +53,8 @@ void InitLEDs()
 	g_fpgaLEDs[3] = 1;
 
 	//Turn off all of the RGB LEDs
-	/*for(int i=0; i<4; i++)
-		FRGBLED.framebuffer[i] = 0x000000;*/
-
-	//Configure the RGB LEDs
-	FRGBLED.framebuffer[0] = 0x200000;	//red
-	FRGBLED.framebuffer[1] = 0x002000;	//green
-	FRGBLED.framebuffer[2] = 0x000020;	//blue
-	FRGBLED.framebuffer[3] = 0x202020;	//white
+	for(int i=0; i<4; i++)
+		FRGBLED.framebuffer[i] = 0x000000;
 }
 
 /**
@@ -120,28 +115,11 @@ void InitDisplay()
 	//div 8 = 14.842 MHz
 	g_displaySPI.SetBaudDiv(8);
 
-	//Clear the display
-	g_display->Clear();
-
-	//Fill with a checkerboard
-	uint32_t size = 8;
-	uint h = g_display->GetHeight();
-	uint w = g_display->GetWidth();
-	for(uint32_t y=0; y < h; y += size)
-	{
-		for(uint32_t x=0; x < w; x += size)
-		{
-			uint32_t bx = (x / size) & 1;
-			uint32_t by = (y / size) & 1;
-			g_display->FilledRect(x, y, x + size, y + size, (bx == by));
-		}
-	}
-
-	//Actually refresh it
-	g_display->StartRefresh(true);
-
 	//Add the task
 	g_tasks.push_back(g_display);
+
+	//Do an initial render of the menus
+	g_menu.Render();
 }
 
 void App_Init()
@@ -156,9 +134,13 @@ void App_Init()
 
 	static LocalConsoleTask localConsoleTask;
 	static ButtonTask buttonTask;
+	static RGBTask rgbTask;
 
 	g_tasks.push_back(&localConsoleTask);
 	g_tasks.push_back(&buttonTask);
+	g_tasks.push_back(&rgbTask);
 
-	//g_timerTasks.push_back(&phyTask);
+	g_timerTasks.push_back(&rgbTask);
+
+	g_rgbTask = &rgbTask;
 }

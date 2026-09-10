@@ -27,76 +27,49 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "demo.h"
-#include "ButtonTask.h"
+#ifndef MenuPageHandler_h
+#define MenuPageHandler_h
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Construction / destruction
+class MenuSystem;
 
-ButtonTask::ButtonTask()
-	: m_buttonDown{0}
-	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
-	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
-	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
-	, m_downButton(&GPIOJ, 10, GPIOPin::MODE_INPUT, 0, false)
-	, m_enterButton(&GPIOJ, 9, GPIOPin::MODE_INPUT, 0, false)
+/**
+	@brief Base class for menu event handlers
+ */
+class MenuPageHandler
 {
-	m_buttons[BUTTON_LEFT] = &m_leftButton;
-	m_buttons[BUTTON_RIGHT] = &m_rightButton;
-	m_buttons[BUTTON_UP] = &m_upButton;
-	m_buttons[BUTTON_DOWN] = &m_downButton;
-	m_buttons[BUTTON_ENTER] = &m_enterButton;
+public:
+	MenuPageHandler(MenuSystem* parent)
+		: m_parent(parent)
+		, m_activeRow(0)
+	{}
 
-	for(auto& b : m_buttons)
-		b->SetPullMode(GPIOPin::PULL_DOWN);
-}
+	virtual void Render()
+	{}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	virtual void OnLeft()
+	{}
 
-void ButtonTask::Iteration()
-{
-	//Get current button state
-	bool down[5];
-	for(size_t i=0; i<5; i++)
-		down[i] = *m_buttons[i];
+	virtual void OnRight()
+	{}
 
-	//Check for events and pass them up to the menu system
-	bool hit = false;
-	if(down[BUTTON_LEFT] && !m_buttonDown[BUTTON_LEFT])
-	{
-		g_menu.OnLeft();
-		hit = true;
-	}
-	if(down[BUTTON_RIGHT] && !m_buttonDown[BUTTON_RIGHT])
-	{
-		g_menu.OnRight();
-		hit = true;
-	}
-	if(down[BUTTON_UP] && !m_buttonDown[BUTTON_UP])
-	{
-		g_menu.OnUp();
-		hit = true;
-	}
-	if(down[BUTTON_DOWN] && !m_buttonDown[BUTTON_DOWN])
-	{
-		g_menu.OnDown();
-		hit = true;
-	}
-	if(down[BUTTON_ENTER] && !m_buttonDown[BUTTON_ENTER])
-	{
-		g_menu.OnEnter();
-		hit = true;
-	}
+	virtual void OnUp()
+	{}
 
-	//Ugly debounce delay but we can afford the time
-	if(hit)
-		g_logTimer.Sleep(5);
+	virtual void OnDown()
+	{}
 
-	//If a button was pressed, trigger a re-render of the display
-	if(hit)
-		g_menu.Render();
+	virtual void OnEnter()
+	{}
 
-	//Save state
-	for(size_t i=0; i<5; i++)
-		m_buttonDown[i] = down[i];
-}
+protected:
+
+	bool IsRowActive(uint32_t row);
+
+	void Printf(const char* format, ...);
+
+	MenuSystem* m_parent;
+
+	uint32_t m_activeRow;
+};
+
+#endif

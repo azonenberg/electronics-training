@@ -27,76 +27,86 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#include "demo.h"
-#include "ButtonTask.h"
+#ifndef MenuSystem_h
+#define MenuSystem_h
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Construction / destruction
+#include "MenuPageHandler.h"
 
-ButtonTask::ButtonTask()
-	: m_buttonDown{0}
-	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
-	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
-	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
-	, m_downButton(&GPIOJ, 10, GPIOPin::MODE_INPUT, 0, false)
-	, m_enterButton(&GPIOJ, 9, GPIOPin::MODE_INPUT, 0, false)
+/**
+	@brief Data for a single menu page
+ */
+struct MenuPageData
 {
-	m_buttons[BUTTON_LEFT] = &m_leftButton;
-	m_buttons[BUTTON_RIGHT] = &m_rightButton;
-	m_buttons[BUTTON_UP] = &m_upButton;
-	m_buttons[BUTTON_DOWN] = &m_downButton;
-	m_buttons[BUTTON_ENTER] = &m_enterButton;
+	const char* m_name;
+	etl::ivector<MenuPageData*>* m_sidebar;
+	MenuPageData* m_upPage;
+	MenuPageData* m_downPage;
+	MenuPageHandler* m_handler;
+};
 
-	for(auto& b : m_buttons)
-		b->SetPullMode(GPIOPin::PULL_DOWN);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ButtonTask::Iteration()
+//TODO: Refactor this to something we can use on other projects
+class MenuSystem
 {
-	//Get current button state
-	bool down[5];
-	for(size_t i=0; i<5; i++)
-		down[i] = *m_buttons[i];
+public:
+	MenuSystem();
 
-	//Check for events and pass them up to the menu system
-	bool hit = false;
-	if(down[BUTTON_LEFT] && !m_buttonDown[BUTTON_LEFT])
+	void Render();
+
+	void OnLeft();
+	void OnRight();
+	void OnUp();
+	void OnDown();
+	void OnEnter();
+
+	void Printf(const char* format, ...)
 	{
-		g_menu.OnLeft();
-		hit = true;
-	}
-	if(down[BUTTON_RIGHT] && !m_buttonDown[BUTTON_RIGHT])
-	{
-		g_menu.OnRight();
-		hit = true;
-	}
-	if(down[BUTTON_UP] && !m_buttonDown[BUTTON_UP])
-	{
-		g_menu.OnUp();
-		hit = true;
-	}
-	if(down[BUTTON_DOWN] && !m_buttonDown[BUTTON_DOWN])
-	{
-		g_menu.OnDown();
-		hit = true;
-	}
-	if(down[BUTTON_ENTER] && !m_buttonDown[BUTTON_ENTER])
-	{
-		g_menu.OnEnter();
-		hit = true;
+		__builtin_va_list list;
+		__builtin_va_start(list, format);
+		Printf(format, list);
+		__builtin_va_end(list);
 	}
 
-	//Ugly debounce delay but we can afford the time
-	if(hit)
-		g_logTimer.Sleep(5);
+	void Printf(const char* format, __builtin_va_list list);
 
-	//If a button was pressed, trigger a re-render of the display
-	if(hit)
-		g_menu.Render();
+	void MoveTo(uint16_t x, uint16_t y)
+	{
+		m_textStartX = x;
+		m_textStartY = y;
 
-	//Save state
-	for(size_t i=0; i<5; i++)
-		m_buttonDown[i] = down[i];
-}
+		m_textPosX = x;
+		m_textPosY = y;
+	}
+
+	bool IsInSettingsMode()
+	{ return m_selMode == MODE_SETTING; }
+
+protected:
+	MenuPageData* m_currentMenuPage;
+
+	bool m_nextRefreshIsFull;
+
+	enum SelectionMode
+	{
+		MODE_MENU_PAGE,
+		MODE_SETTING
+	} m_selMode;
+
+protected:
+
+	uint16_t m_textWidth;
+	uint16_t m_textHeight;
+	uint16_t m_textRowPitch;
+
+	//GUI state
+	uint16_t m_textStartX;
+	uint16_t m_textStartY;
+
+	uint16_t m_textPosX;
+	uint16_t m_textPosY;
+
+	//GUI working buffer (big enough to hold a full line of text)
+	char m_textBufferStorage[38];
+	StringBuffer m_textBuffer;
+};
+
+#endif

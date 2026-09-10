@@ -48,3 +48,9 @@ DisplayTask* g_display = nullptr;
 
 ///@brief Fast timer used by the display. APB1 is 118.75 MHz so div 128 gives 927 kHz
 Timer g_fastTimer(&TIM5, Timer::FEATURE_GENERAL_PURPOSE, 128);
+
+///@brief The menus displayed on the eink display
+MenuSystem g_menu;
+
+///@brief RGB LED task
+RGBTask* g_rgbTask = nullptr;
