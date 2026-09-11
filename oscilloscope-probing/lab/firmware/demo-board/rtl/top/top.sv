@@ -83,19 +83,18 @@ module top(
 
 	//GTP TX
 	input wire			gtp_ref_p,
-	input wire			gtp_ref_n/*,
+	input wire			gtp_ref_n,
 
 	output wire			gtp_tx0_p,
 	output wire			gtp_tx0_n,
 
 	output wire			gtp_tx1_p,
-	output wire			gtp_tx1_n*/
+	output wire			gtp_tx1_n
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Top level clocking
 
-	wire	gtp_refclk;
 	wire	clk_50mhz;
 	wire	clk_66mhz;
 	wire	clk_100mhz;
@@ -105,11 +104,6 @@ module top(
 
 	ClockGeneration clkgen(
 		.clk_25mhz(clk_25mhz),
-
-		.gtp_ref_p(gtp_ref_p),
-		.gtp_ref_n(gtp_ref_n),
-
-		.gtp_refclk(gtp_refclk),
 
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
@@ -171,6 +165,8 @@ module top(
 	// APB peripherals
 
 	PeripheralTop peripherals(
+		.gtp_refclk_p(gtp_ref_p),
+		.gtp_refclk_n(gtp_ref_n),
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),
@@ -193,7 +189,13 @@ module top(
 
 		.led(led),
 
-		.led_ctrl(led_ctrl)
+		.led_ctrl(led_ctrl),
+
+		.gtp_tx0_p(gtp_tx0_p),
+		.gtp_tx0_n(gtp_tx0_n),
+
+		.gtp_tx1_p(gtp_tx1_p),
+		.gtp_tx1_n(gtp_tx1_n)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

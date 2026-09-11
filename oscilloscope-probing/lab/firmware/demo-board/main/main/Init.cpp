@@ -119,6 +119,7 @@ void InitDisplay()
 	g_tasks.push_back(g_display);
 
 	//Do an initial render of the menus
+	g_menu.DeferredInit();
 	g_menu.Render();
 }
 

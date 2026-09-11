@@ -47,6 +47,7 @@ class MenuSystem
 public:
 	MenuSystem();
 
+	void DeferredInit();
 	void Render();
 
 	void OnLeft();

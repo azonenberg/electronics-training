@@ -59,7 +59,27 @@ void InitFPGAFlash();
 void InitI2C();
 void InitITM();
 
-//Common hardware interface stuff (mostly Ethernet related)
+//must match mode_t in NRZSignalGenerator.sv
+enum class NRZMode
+{
+	Off,
+	I2C,
+	UART,
+	SPI,
+	PRBS7,
+	PRBS31,
+	Pulse,
+	Clock,
+
+	Count
+};
+
+struct APB_NRZSignalGenerator
+{
+	uint32_t MUXSEL[4];
+};
+
+//Common hardware interface stuff
 extern GPIOPin g_leds[4];
 extern APB_GPIOPin g_fpgaLEDs[4];
 extern APB_SpiFlashInterface* g_fpgaFlash;
@@ -72,5 +92,9 @@ extern volatile APB_XADC FXADC;
 extern volatile APB_SerialLED FRGBLED;
 extern volatile APB_GPIO FPGA_GPIOA;
 extern volatile APB_SPIHostInterface FQSPI;
+extern volatile APB_NRZSignalGenerator FSMAGEN;
+extern volatile APB_NRZSignalGenerator FCLIPGEN;
+
+extern const char* g_nrzmodeNames[];
 
 #endif

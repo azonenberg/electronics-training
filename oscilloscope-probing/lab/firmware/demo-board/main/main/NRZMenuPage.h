@@ -27,13 +27,16 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef ClipMenuPage_h
-#define ClipMenuPage_h
+#ifndef NRZMenuPage_h
+#define NRZMenuPage_h
 
-class ClipMenuPage : public MenuPageHandler
+class NRZMenuPage : public MenuPageHandler
 {
 public:
-	ClipMenuPage(MenuSystem* parent);
+	NRZMenuPage(MenuSystem* parent, volatile APB_NRZSignalGenerator* gen);
+
+	virtual void DeferredInit() override
+	{ UpdateFPGA(); }
 
 	virtual void Render() override;
 
@@ -44,20 +47,10 @@ public:
 
 protected:
 
-	enum ClipMode
-	{
-		MODE_OFF,
-		MODE_I2C,
-		MODE_UART,
-		MODE_SPI,
-		MODE_PRBS7,
-		MODE_PULSE,
-		MODE_CLOCK,
+	NRZMode m_muxsel[4];
+	volatile APB_NRZSignalGenerator* m_gen;
 
-		MODE_COUNT
-	};
-
-	ClipMode m_modes[4];
+	void UpdateFPGA();
 };
 
 #endif

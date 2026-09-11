@@ -24,6 +24,12 @@ SECTIONS
 		. = ALIGN(1024);
 		KEEP (*(.fqspi))
 
+		. = ALIGN(1024);
+		KEEP (*(.fsmagen))
+
+		. = ALIGN(1024);
+		KEEP (*(.fclipgen))
+
 	} > FMC_APB1
 
 	/*

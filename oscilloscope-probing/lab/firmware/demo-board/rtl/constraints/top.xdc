@@ -18,10 +18,6 @@ set_property IOSTANDARD LVCMOS18 [get_ports {coax_out[3]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {coax_out[2]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {coax_out[1]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {coax_out[0]}]
-set_property DRIVE 4 [get_ports {coax_out[3]}]
-set_property DRIVE 4 [get_ports {coax_out[2]}]
-set_property DRIVE 4 [get_ports {coax_out[1]}]
-set_property DRIVE 4 [get_ports {coax_out[0]}]
 set_property SLEW FAST [get_ports {coax_out[3]}]
 set_property SLEW FAST [get_ports {coax_out[2]}]
 set_property SLEW FAST [get_ports {coax_out[1]}]
@@ -232,6 +228,13 @@ set_clock_groups -asynchronous -group [get_clocks pclk_raw] -group [get_clocks c
 set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*a_ff*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*reg_b*" }] 5.000
 set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout0_reg*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME =~  "*dout1_reg*" }] 5.000
 
+set _xlnx_shared_i0 [get_cells -hierarchical -filter { NAME =~  "*p*_reg*" }]
+set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*sync_apb*" && NAME =~  "*upstream*" }] -to $_xlnx_shared_i0 5.000
+set _xlnx_shared_i1 [get_cells -hierarchical -filter { NAME =~  "*sync_apb*" && NAME =~ "*downstream*" }]
+set_max_delay -datapath_only -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 5.000
+
+set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~ "*rst_n_reg*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync_rst*" && NAME =~ "*_reg*" }] 5.000
+
 # APB clock domain crossings: 5 ns (200 MHz) is << 1 cycle of both clocks
 
 ########################################################################################################################
@@ -257,3 +260,15 @@ set_property DRIVE 4 [get_ports pam3_tx_p]
 
 
 
+
+
+set_property DRIVE 16 [get_ports {coax_out[3]}]
+set_property DRIVE 16 [get_ports {coax_out[2]}]
+set_property DRIVE 16 [get_ports {coax_out[1]}]
+set_property DRIVE 16 [get_ports {coax_out[0]}]
+
+
+set_property PACKAGE_PIN B4 [get_ports gtp_tx0_p]
+set_property PACKAGE_PIN D5 [get_ports gtp_tx1_p]
+
+create_clock -period 6.400 -name gtp_ref_p -waveform {0.000 3.200} [get_ports gtp_ref_p]

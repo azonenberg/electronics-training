@@ -27,88 +27,65 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef MenuPageHandler_h
-#define MenuPageHandler_h
+#include "demo.h"
+#include "MenuSystem.h"
+#include "NRZMenuPage.h"
 
-class MenuSystem;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-/**
-	@brief Base class for menu event handlers
- */
-class MenuPageHandler
+NRZMenuPage::NRZMenuPage(MenuSystem* parent, volatile APB_NRZSignalGenerator* gen)
+	: MenuPageHandler(parent)
+	, m_gen(gen)
 {
-public:
-	MenuPageHandler(MenuSystem* parent)
-		: m_parent(parent)
-		, m_activeRow(0)
-	{}
+	for(size_t i=0; i<4; i++)
+		m_muxsel[i] = NRZMode::Off;
+}
 
-	virtual void DeferredInit()
-	{}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rendering
 
-	virtual void Render()
-	{}
+void NRZMenuPage::Render()
+{
+	RenderSelector("OUT1", 0, m_muxsel[0], g_nrzmodeNames, 6);
+	RenderSelector("OUT2", 1, m_muxsel[1], g_nrzmodeNames, 6);
+	RenderSelector("OUT3", 2, m_muxsel[2], g_nrzmodeNames, 6);
+	RenderSelector("OUT4", 3, m_muxsel[3], g_nrzmodeNames, 6);
+}
 
-	virtual void OnLeft()
-	{}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
 
-	virtual void OnRight()
-	{}
+void NRZMenuPage::OnUp()
+{
+	if(m_activeRow > 0)
+		m_activeRow --;
+	else
+		m_activeRow = 3;
+}
 
-	virtual void OnUp()
-	{}
+void NRZMenuPage::OnDown()
+{
+	if(m_activeRow < 4)
+		m_activeRow ++;
+	else
+		m_activeRow = 0;
+}
 
-	virtual void OnDown()
-	{}
+void NRZMenuPage::OnLeft()
+{
+	EnumLeft(m_muxsel[m_activeRow], NRZMode::Count);
+	UpdateFPGA();
+}
 
-	virtual void OnEnter()
-	{}
+void NRZMenuPage::OnRight()
+{
+	EnumRight(m_muxsel[m_activeRow], NRZMode::Count);
+	UpdateFPGA();
+}
 
-protected:
-
-	template<class T>
-	void RenderSelector(
-		const char* name,
-		uint16_t row,
-		T sel,
-		const char* names[],
-		int namewidth)
-	{
-		bool active = IsRowActive(row);
-		Printf("%s:  %c ", name, active ? '<' : ' ');
-
-		char format[16];
-		StringBuffer s(format, sizeof(format));
-		s.Printf("%%%ds %c\n", namewidth, active ? '>' : ' ');
-
-		Printf(format, names[static_cast<uint32_t>(sel)]);
-	}
-
-	template<class T>
-	void EnumLeft(T& sel, T maxval)
-	{
-		if(static_cast<uint32_t>(sel) > 0)
-			sel = static_cast<T>(static_cast<uint32_t>(sel) - 1);
-		else
-			sel = static_cast<T>(static_cast<uint32_t>(maxval) - 1);
-	}
-
-	template<class T>
-	void EnumRight(T& sel, T maxval)
-	{
-		if(static_cast<uint32_t>(sel) < (static_cast<uint32_t>(maxval) - 1))
-			sel = static_cast<T>(static_cast<uint32_t>(sel) + 1);
-		else
-			sel = static_cast<T>(0);
-	}
-
-	bool IsRowActive(uint32_t row);
-
-	void Printf(const char* format, ...);
-
-	MenuSystem* m_parent;
-
-	uint32_t m_activeRow;
-};
-
-#endif
+void NRZMenuPage::UpdateFPGA()
+{
+	for(size_t i=0; i<4; i++)
+		m_gen->MUXSEL[i] = static_cast<uint32_t>(m_muxsel[i]);
+}

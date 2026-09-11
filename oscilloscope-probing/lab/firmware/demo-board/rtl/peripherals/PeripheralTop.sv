@@ -34,6 +34,9 @@
  */
 
 module PeripheralTop(
+	input wire			gtp_refclk_p,
+	input wire			gtp_refclk_n,
+
 	input wire			clk_50mhz,
 	input wire			clk_66mhz,
 	input wire			clk_125mhz,
@@ -68,13 +71,20 @@ module PeripheralTop(
 	output wire[3:0]	led,
 
 	//RGB LED controller
-	output wire			led_ctrl
+	output wire			led_ctrl,
+
+	//SERDES
+	output wire			gtp_tx0_p,
+	output wire			gtp_tx0_n,
+
+	output wire			gtp_tx1_p,
+	output wire			gtp_tx1_n
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 bridging (0xc000_0000, 1 kB per peripheral)
 
-	localparam NUM_APB1_PERIPHERALS	= 5;
+	localparam NUM_APB1_PERIPHERALS	= 7;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1_devices[NUM_APB1_PERIPHERALS-1:0]();
@@ -232,6 +242,38 @@ module PeripheralTop(
 		.qspi_dq_in(flash_dq_in),
 		.qspi_dq_tris(flash_dq_tris),
 		.qspi_cs_n(flash_cs_n)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// NRZ signal generator on SMA connectors (c000_1400)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_sma();
+	APB_CDC sync_apb_sma(.upstream(apb1_devices[5]), .downstream_pclk(clk_250mhz), .downstream(apb_sma));
+
+	NRZSignalGenerator sma(.apb(apb_sma), .dout(coax_out) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// NRZ signal generator on probe clips (c000_1800)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_clip();
+	APB_CDC sync_apb_clip(.upstream(apb1_devices[6]), .downstream_pclk(clk_250mhz), .downstream(apb_clip));
+
+	NRZSignalGenerator clip(.apb(apb_clip), .dout(clip_out) );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// GTP signal generator on probe clips (TODO APB)
+
+	TransceiverSignalGenerator gtp(
+		.clk_125mhz(clk_125mhz),
+
+		.gtp_refclk_p(gtp_refclk_p),
+		.gtp_refclk_n(gtp_refclk_n),
+
+		.gtp_tx0_p(gtp_tx0_p),
+		.gtp_tx0_n(gtp_tx0_n),
+
+		.gtp_tx1_p(gtp_tx1_p),
+		.gtp_tx1_n(gtp_tx1_n)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

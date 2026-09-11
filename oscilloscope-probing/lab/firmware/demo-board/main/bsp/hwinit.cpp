@@ -51,6 +51,23 @@ volatile APB_XADC FXADC __attribute__((section(".fxadc")));
 volatile APB_SerialLED FRGBLED __attribute__((section(".frgbled")));
 volatile APB_GPIO FPGA_GPIOA __attribute__((section(".fgpioa")));
 volatile APB_SPIHostInterface FQSPI __attribute__((section(".fqspi")));
+volatile APB_NRZSignalGenerator FSMAGEN __attribute__((section(".fsmagen")));
+volatile APB_NRZSignalGenerator FCLIPGEN __attribute__((section(".fclipgen")));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Common global constants
+
+const char* g_nrzmodeNames[] =
+{
+	"Off",
+	"I2C",
+	"UART",
+	"SPI",
+	"PRBS7",
+	"PRBS31",
+	"Pulse",
+	"Clock"
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common peripherals used by application and bootloader

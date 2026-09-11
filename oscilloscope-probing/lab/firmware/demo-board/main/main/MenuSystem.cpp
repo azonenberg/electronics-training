@@ -28,9 +28,10 @@
 ***********************************************************************************************************************/
 
 #include "demo.h"
+
 #include "AboutMenuPage.h"
-#include "ClipMenuPage.h"
 #include "ClocksMenuPage.h"
+#include "NRZMenuPage.h"
 #include "PAM3MenuPage.h"
 #include "RGBMenuPage.h"
 
@@ -62,10 +63,11 @@ etl::vector g_topLevelSidebar =
 };
 
 AboutMenuPage g_aboutHandler(&g_menu);
-ClipMenuPage g_clipHandler(&g_menu);
+NRZMenuPage g_clipHandler(&g_menu, &FCLIPGEN);
 ClocksMenuPage g_clocksHandler(&g_menu);
 PAM3MenuPage g_pam3Handler(&g_menu);
 RGBMenuPage g_rgbHandler(&g_menu);
+NRZMenuPage g_smaHandler(&g_menu, &FSMAGEN);
 
 MenuPageData g_aboutPage		= { "About",	&g_aboutHandler};
 MenuPageData g_clipPage			= { "Clip",		&g_clipHandler};
@@ -74,7 +76,7 @@ MenuPageData g_dacPage			= { "DAC",		nullptr};
 MenuPageData g_pam3Page			= { "PAM3 SMA",	&g_pam3Handler};
 MenuPageData g_pmodPage			= { "PMOD",		nullptr};
 MenuPageData g_rgbPage			= { "RGB LED",	&g_rgbHandler};
-MenuPageData g_smaPage			= { "SMA out",	nullptr};
+MenuPageData g_smaPage			= { "SMA out",	&g_smaHandler};
 MenuPageData g_transceiverPage	= { "Xcvrs",	nullptr};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +95,15 @@ MenuSystem::MenuSystem()
 	, m_textBuffer(m_textBufferStorage, sizeof(m_textBufferStorage))
 {
 
+}
+
+void MenuSystem::DeferredInit()
+{
+	for(auto ppage : g_topLevelSidebar)
+	{
+		if(ppage->m_handler)
+			ppage->m_handler->DeferredInit();
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

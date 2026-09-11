@@ -29,104 +29,181 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-/**
-	@brief Clock synthesis PLLs
- */
-module ClockGeneration(
+module NRZSignalGenerator(
+	APB.completer		apb,
 
-	//Main system clock input
-	input wire		clk_25mhz,
+	output logic[3:0]	dout
+);
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Sanity check bus configuration
 
-	//Clocks out to system
-	output wire		clk_50mhz,
-	output wire		clk_66mhz,
-	output wire		clk_100mhz,
-	output wire		clk_125mhz,
-	output wire		clk_250mhz,
-	output wire		clk_500mhz
+	if(apb.DATA_WIDTH != 32)
+		apb_bus_width_is_invalid();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Tie off unused APB signals
+
+	assign apb.pruser = 0;
+	assign apb.pbuser = 0;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interface registers
+
+	//must match NRZMode in hwinit.h
+	typedef enum logic[3:0]
+	{
+		MODE_OFF,
+		MODE_I2C,
+		MODE_UART,
+		MODE_SPI,
+		MODE_PRBS7,
+		MODE_PRBS31,
+		MODE_PULSE,
+		MODE_CLOCK
+	} mode_t;
+
+	mode_t modesel[4];
+
+	initial begin
+		for(integer i=0; i<4; i++)
+			modesel[i] = MODE_OFF;
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interface logic
+
+	//Combinatorial readback
+	always_comb begin
+
+		apb.pready	= apb.psel && apb.penable;
+		apb.prdata	= 0;
+		apb.pslverr	= 0;
+
+		if(apb.pready) begin
+
+			//read
+			if(!apb.pwrite) begin
+				apb.prdata = modesel[apb.paddr[3:2]];
+			end
+
+			//write
+			else begin
+				if( (apb.paddr != 'h0) && (apb.paddr != 'h4) && (apb.paddr != 'h8) && (apb.paddr != 'hc) ) begin
+					apb.pslverr	 = 1;
+				end
+			end
+
+		end
+	end
+
+	always_ff @(posedge apb.pclk or negedge apb.preset_n) begin
+
+		//Reset
+		if(!apb.preset_n) begin
+			for(integer i=0; i<4; i++)
+				modesel[i] = MODE_OFF;
+		end
+
+		//Normal path
+		else begin
+
+			if(apb.pready && apb.pwrite) begin
+				modesel[apb.paddr[3:2]]	<= mode_t'(apb.pwdata);
+			end
+
+		end
+
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PRBS generators
+
+	wire	prbs7_out;
+	wire	prbs31_out;
+
+	PRBS7 #(
+		.WIDTH(1),
+		.INITIAL_SEED(1)
+	) prbs7 (
+		.clk(apb.pclk),
+		.update(1'b1),
+		.init(1'b0),
+		.seed(7'b0),
+		.dout(prbs7_out)
+	);
+
+	PRBS31 #(
+		.WIDTH(1),
+		.INITIAL_SEED(1)
+	) prbs31 (
+		.clk(apb.pclk),
+		.update(1'b1),
+		.init(1'b0),
+		.seed(31'b0),
+		.dout(prbs31_out)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Main system PLL
+	// Clock generator (half rate)
 
-	wire	clk_fb;
+	logic toggle = 0;
 
-	wire	pll_lock;
-
-	wire	clk_50mhz_raw;
-	wire	clk_66mhz_raw;
-	wire	clk_100mhz_raw;
-	wire	clk_125mhz_raw;
-	wire	clk_250mhz_raw;
-	wire	clk_500mhz_raw;
-
-	MMCME2_BASE #(
-		.BANDWIDTH("OPTIMIZED"),
-
-		.CLKOUT0_DIVIDE_F(10),		//1 GHz VCO / 10 = 100 MHz
-		.CLKOUT1_DIVIDE(20),		//1 GHz VCO / 20 = 50 MHz
-		.CLKOUT2_DIVIDE(15),		//1 GHz VCO / 15 = 66.66 MHz
-		.CLKOUT3_DIVIDE(8),			//1 GHz VCO / 8  = 125 MHz
-		.CLKOUT4_DIVIDE(4),			//1 GHz VCO / 4  = 250 MHz
-		.CLKOUT5_DIVIDE(2),			//1 GHz VCO / 2  = 500 MHz
-		.CLKOUT6_DIVIDE(128),
-
-		.CLKOUT0_PHASE(0.0),
-		.CLKOUT1_PHASE(0.0),
-		.CLKOUT2_PHASE(0.0),
-		.CLKOUT3_PHASE(0.0),
-		.CLKOUT4_PHASE(0.0),
-		.CLKOUT5_PHASE(0.0),
-		.CLKOUT6_PHASE(0.0),
-
-		.CLKOUT0_DUTY_CYCLE(0.50),
-		.CLKOUT1_DUTY_CYCLE(0.50),
-		.CLKOUT2_DUTY_CYCLE(0.50),
-		.CLKOUT3_DUTY_CYCLE(0.50),
-		.CLKOUT4_DUTY_CYCLE(0.50),
-		.CLKOUT5_DUTY_CYCLE(0.50),
-		.CLKOUT6_DUTY_CYCLE(0.50),
-
-		.CLKFBOUT_MULT_F(40),		//1 GHz VCO
-		.DIVCLK_DIVIDE(1),			//no PFD divider
-		.CLKFBOUT_PHASE(0.0),		//no phase shift
-		.CLKIN1_PERIOD(40.0),		//40 ns = 25 MHz
-
-		.STARTUP_WAIT("FALSE"),
-		.CLKOUT4_CASCADE("FALSE")
-
-	) mmcm_main (
-		.CLKIN1(clk_25mhz),
-		.CLKFBIN(clk_fb),
-		.RST(1'b0),
-		.PWRDWN(1'b0),
-
-		.CLKOUT0(clk_100mhz_raw),
-		.CLKOUT0B(),
-		.CLKOUT1(clk_50mhz_raw),
-		.CLKOUT1B(),
-		.CLKOUT2(clk_66mhz_raw),
-		.CLKOUT2B(),
-		.CLKOUT3(clk_125mhz_raw),
-		.CLKOUT3B(),
-		.CLKOUT4(clk_250mhz_raw),
-		.CLKOUT5(clk_500mhz_raw),
-		.CLKOUT6(),
-
-		.CLKFBOUT(clk_fb),
-		.CLKFBOUTB(),
-
-		.LOCKED(pll_lock)
-	);
+	always_ff @(posedge apb.pclk) begin
+		toggle	<= !toggle;
+	end
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Clock buffers
+	// Output muxing
 
-	BUFGCE bufg_clk_50mhz( .I(clk_50mhz_raw), .O(clk_50mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_66mhz( .I(clk_66mhz_raw), .O(clk_66mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_125mhz( .I(clk_125mhz_raw), .O(clk_125mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_250mhz( .I(clk_250mhz_raw), .O(clk_250mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_500mhz( .I(clk_500mhz_raw), .O(clk_500mhz), .CE(pll_lock));
+	/*
+	MODE_I2C,
+	MODE_UART,
+	MODE_SPI,
+	MODE_PULSE,
+	*/
+
+	//Combinatorial mux input configuration
+	logic[7:0]	dout3_in;
+	logic[7:0]	dout2_in;
+	logic[7:0]	dout1_in;
+	logic[7:0]	dout0_in;
+
+	always_comb begin
+
+		//Default everything to off
+		dout3_in	= 0;
+		dout2_in	= 0;
+		dout1_in	= 0;
+		dout0_in	= 0;
+
+		//MODE_OFF is just zero nothing needed there
+
+		//PRBS7
+		dout3_in[MODE_PRBS7]	= prbs7_out;
+		dout2_in[MODE_PRBS7]	= prbs7_out;
+		dout1_in[MODE_PRBS7]	= prbs7_out;
+		dout0_in[MODE_PRBS7]	= prbs7_out;
+
+		//PRBS31
+		dout3_in[MODE_PRBS31]	= prbs31_out;
+		dout2_in[MODE_PRBS31]	= prbs31_out;
+		dout1_in[MODE_PRBS31]	= prbs31_out;
+		dout0_in[MODE_PRBS31]	= prbs31_out;
+
+		//CLOCK
+		dout3_in[MODE_CLOCK]	= toggle;
+		dout2_in[MODE_CLOCK]	= toggle;
+		dout1_in[MODE_CLOCK]	= toggle;
+		dout0_in[MODE_CLOCK]	= toggle;
+
+	end
+
+	//Registered muxes since all pattern generators use the same clock
+	always_ff @(posedge apb.pclk) begin
+		dout[0]		<= dout0_in[modesel[0]];
+		dout[1]		<= dout1_in[modesel[1]];
+		dout[2]		<= dout2_in[modesel[2]];
+		dout[3]		<= dout3_in[modesel[3]];
+	end
 
 endmodule
