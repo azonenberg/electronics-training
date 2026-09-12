@@ -53,6 +53,7 @@ volatile APB_GPIO FPGA_GPIOA __attribute__((section(".fgpioa")));
 volatile APB_SPIHostInterface FQSPI __attribute__((section(".fqspi")));
 volatile APB_NRZSignalGenerator FSMAGEN __attribute__((section(".fsmagen")));
 volatile APB_NRZSignalGenerator FCLIPGEN __attribute__((section(".fclipgen")));
+volatile APB_TransceiverSignalGenerator FGTPGEN __attribute__((section(".fgtpgen")));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global constants
@@ -67,6 +68,39 @@ const char* g_nrzmodeNames[] =
 	"PRBS31",
 	"Pulse",
 	"Clock"
+};
+
+const char* g_gtpmodeNames[] =
+{
+	"PRBS7"
+};
+
+const char* g_gtpswingNames[] =
+{
+	" 253",
+	" 316",
+	" 377",
+	" 439",
+	" 499",
+	" 561",
+	" 621",
+	" 682",
+	" 743",
+	" 799",
+	" 857",
+	" 909",
+	" 959",
+	"1002",
+	"1043",
+	"1074"
+};
+
+const char* g_gtprateNames[] =
+{
+	"5.00  Gbps",
+	"2.50  Gbps",
+	"1.25  Gbps",
+	"0.625 Gbps"
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

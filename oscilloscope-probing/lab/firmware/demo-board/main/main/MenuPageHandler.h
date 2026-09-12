@@ -66,6 +66,22 @@ public:
 
 protected:
 
+	void RenderSpinner(
+		const char* name,
+		uint16_t row,
+		uint32_t sel,
+		int numwidth)
+	{
+		bool active = IsRowActive(row);
+		Printf("%s: %c ", name, active ? '<' : ' ');
+
+		char format[16];
+		StringBuffer s(format, sizeof(format));
+		s.Printf("%%%dd %c\n", numwidth, active ? '>' : ' ');
+
+		Printf(format, sel);
+	}
+
 	template<class T>
 	void RenderSelector(
 		const char* name,
@@ -75,7 +91,7 @@ protected:
 		int namewidth)
 	{
 		bool active = IsRowActive(row);
-		Printf("%s:  %c ", name, active ? '<' : ' ');
+		Printf("%s: %c ", name, active ? '<' : ' ');
 
 		char format[16];
 		StringBuffer s(format, sizeof(format));

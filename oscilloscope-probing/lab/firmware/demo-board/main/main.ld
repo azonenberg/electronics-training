@@ -30,6 +30,9 @@ SECTIONS
 		. = ALIGN(1024);
 		KEEP (*(.fclipgen))
 
+		. = ALIGN(1024);
+		KEEP (*(.fgtpgen))
+
 	} > FMC_APB1
 
 	/*

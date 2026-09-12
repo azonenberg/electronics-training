@@ -34,6 +34,7 @@
 #include "NRZMenuPage.h"
 #include "PAM3MenuPage.h"
 #include "RGBMenuPage.h"
+#include "TransceiverMenuPage.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Menu pages
@@ -68,6 +69,7 @@ ClocksMenuPage g_clocksHandler(&g_menu);
 PAM3MenuPage g_pam3Handler(&g_menu);
 RGBMenuPage g_rgbHandler(&g_menu);
 NRZMenuPage g_smaHandler(&g_menu, &FSMAGEN);
+TransceiverMenuPage g_transceiverHandler(&g_menu);
 
 MenuPageData g_aboutPage		= { "About",	&g_aboutHandler};
 MenuPageData g_clipPage			= { "Clip",		&g_clipHandler};
@@ -77,7 +79,7 @@ MenuPageData g_pam3Page			= { "PAM3 SMA",	&g_pam3Handler};
 MenuPageData g_pmodPage			= { "PMOD",		nullptr};
 MenuPageData g_rgbPage			= { "RGB LED",	&g_rgbHandler};
 MenuPageData g_smaPage			= { "SMA out",	&g_smaHandler};
-MenuPageData g_transceiverPage	= { "Xcvrs",	nullptr};
+MenuPageData g_transceiverPage	= { "Xcvrs",	&g_transceiverHandler};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Construction / destruction

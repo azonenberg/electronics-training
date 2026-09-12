@@ -84,7 +84,7 @@ module PeripheralTop(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 bridging (0xc000_0000, 1 kB per peripheral)
 
-	localparam NUM_APB1_PERIPHERALS	= 7;
+	localparam NUM_APB1_PERIPHERALS	= 8;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1_devices[NUM_APB1_PERIPHERALS-1:0]();
@@ -261,9 +261,16 @@ module PeripheralTop(
 	NRZSignalGenerator clip(.apb(apb_clip), .dout(clip_out) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// GTP signal generator on probe clips (TODO APB)
+	// GTP signal generator on probe clips (c000_1c00)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_gtp_gen();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_gtp_gen(
+		.upstream(apb1_devices[7]),
+		.downstream(apb_gtp_gen));
 
 	TransceiverSignalGenerator gtp(
+		.apb(apb_gtp_gen),
+
 		.clk_125mhz(clk_125mhz),
 
 		.gtp_refclk_p(gtp_refclk_p),

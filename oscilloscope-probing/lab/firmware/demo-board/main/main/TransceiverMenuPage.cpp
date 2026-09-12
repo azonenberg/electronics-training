@@ -27,126 +27,150 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef hwinit_h
-#define hwinit_h
+#include "demo.h"
+#include "MenuSystem.h"
+#include "TransceiverMenuPage.h"
 
-#include <cli/UARTOutputStream.h>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-#include <peripheral/CRC.h>
-#include <peripheral/Flash.h>
-#include <peripheral/GPIO.h>
-#include <peripheral/RTC.h>
-#include <peripheral/SPI.h>
-#include <peripheral/UART.h>
-
-#include <APB_DeviceInfo_7series.h>
-#include <APB_GPIO.h>
-#include <APB_SerialLED.h>
-#include <APB_SPIHostInterface.h>
-#include <APB_XADC.h>
-
-#include <embedded-utils/LogSink.h>
-#include <embedded-utils/APB_SpiFlashInterface.h>
-
-#include <bootloader/BootloaderAPI.h>
-
-#include <boilerplate/h750/StandardBSP.h>
-#include <fpga/FMCUtils.h>
-
-void App_Init();
-void InitFMC();
-void InitFPGAFlash();
-void InitI2C();
-void InitITM();
-
-//must match mode_t in NRZSignalGenerator.sv
-enum class NRZMode
+TransceiverMenuPage::TransceiverMenuPage(MenuSystem* parent)
+	: MenuPageHandler(parent)
 {
-	Off,
-	I2C,
-	UART,
-	SPI,
-	PRBS7,
-	PRBS31,
-	Pulse,
-	Clock,
+	m_gtp0MuxSel 	= GTPMode::PRBS7;
+	m_gtp1MuxSel 	= GTPMode::PRBS7;
 
-	Count
-};
+	m_lane0Rate		= GTPRate::RATE_5GBPS;
+	m_lane1Rate		= GTPRate::RATE_5GBPS;
 
-//must match xx
-enum class GTPMode
+	m_txPreCursor	= 0;
+	m_txPostCursor	= 3;
+	m_txSwing		= GTPSwing::SWING_561MV;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rendering
+
+void TransceiverMenuPage::Render()
 {
-	PRBS7,
+	//TODO: actually make these do stuff
+	RenderSelector("GTP0  data", 0, m_gtp0MuxSel, g_gtpmodeNames, 6);
+	RenderSelector("      rate", 1, m_lane0Rate, g_gtprateNames, 10);
 
-	Count
-};
+	RenderSelector("GTP1  data", 2, m_gtp1MuxSel, g_gtpmodeNames, 6);
+	RenderSelector("      rate", 3, m_lane1Rate, g_gtprateNames, 10);
 
-enum class GTPSwing
+	RenderSpinner("Precursor ", 4, m_txPreCursor, 2);
+	RenderSpinner("Postcursor", 5, m_txPostCursor, 2);
+
+	RenderSelector("Swing (mv)", 6, m_txSwing, g_gtpswingNames, 4);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event handlers
+
+void TransceiverMenuPage::OnUp()
 {
-	SWING_253MV,
-	SWING_316MV,
-	SWING_377MV,
-	SWING_439MV,
-	SWING_499MV,
-	SWING_561MV,
-	SWING_621MV,
-	SWING_682MV,
-	SWING_743MV,
-	SWING_799MV,
-	SWING_857MV,
-	SWING_909MV,
-	SWING_959MV,
-	SWING_1002MV,
-	SWING_1043MV,
-	SWING_1074MV,
+	if(m_activeRow > 0)
+		m_activeRow --;
+	else
+		m_activeRow = 6;
+}
 
-	Count
-};
-
-enum class GTPRate
+void TransceiverMenuPage::OnDown()
 {
-	RATE_5GBPS,
-	RATE_2P5GBPS,
-	RATE_1P25GBPS,
-	RATE_625MBPS,
+	if(m_activeRow < 7)
+		m_activeRow ++;
+	else
+		m_activeRow = 0;
+}
 
-	RATE_Count,
-};
-
-struct APB_NRZSignalGenerator
+void TransceiverMenuPage::OnLeft()
 {
-	uint32_t MUXSEL[4];
-};
+	switch(m_activeRow)
+	{
+		case 0:
+			EnumLeft(m_gtp0MuxSel, GTPMode::Count);
+			break;
 
-struct APB_TransceiverSignalGenerator
+		case 1:
+			EnumRight(m_lane0Rate, GTPRate::RATE_Count);	//reverse order
+			break;
+
+		case 2:
+			EnumLeft(m_gtp1MuxSel, GTPMode::Count);
+			break;
+
+		case 3:
+			EnumRight(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			break;
+
+		case 4:
+			if(m_txPreCursor > 0)
+				m_txPreCursor --;
+			break;
+
+		case 5:
+			if(m_txPostCursor > 0)
+				m_txPostCursor --;
+			break;
+
+		case 6:
+			EnumLeft(m_txSwing, GTPSwing::Count);
+			break;
+
+	}
+
+	UpdateFPGA();
+}
+
+void TransceiverMenuPage::OnRight()
 {
-	uint32_t	LANE0_DRIVER;
-	uint32_t	LANE0_RATE;
-	uint32_t	LANE1_DRIVER;
-	uint32_t	LANE1_RATE;
-};
+	switch(m_activeRow)
+	{
+		case 0:
+			EnumRight(m_gtp0MuxSel, GTPMode::Count);
+			break;
 
-//Common hardware interface stuff
-extern GPIOPin g_leds[4];
-extern APB_GPIOPin g_fpgaLEDs[4];
-extern APB_SpiFlashInterface* g_fpgaFlash;
-extern APB_GPIOPin g_fpgaIRQ;
+		case 1:
+			EnumLeft(m_lane0Rate, GTPRate::RATE_Count);	//reverse order
+			break;
 
-void USART1_Handler();
+		case 2:
+			EnumRight(m_gtp1MuxSel, GTPMode::Count);
+			break;
 
-extern volatile APB_DeviceInfo_7series FDEVINFO;
-extern volatile APB_XADC FXADC;
-extern volatile APB_SerialLED FRGBLED;
-extern volatile APB_GPIO FPGA_GPIOA;
-extern volatile APB_SPIHostInterface FQSPI;
-extern volatile APB_NRZSignalGenerator FSMAGEN;
-extern volatile APB_NRZSignalGenerator FCLIPGEN;
-extern volatile APB_TransceiverSignalGenerator FGTPGEN;
+		case 3:
+			EnumLeft(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			break;
 
-extern const char* g_nrzmodeNames[];
-extern const char* g_gtpmodeNames[];
-extern const char* g_gtpswingNames[];
-extern const char* g_gtprateNames[];
+		case 4:
+			if(m_txPreCursor < 31)
+				m_txPreCursor ++;
+			break;
 
-#endif
+		case 5:
+			if(m_txPostCursor < 31)
+				m_txPostCursor ++;
+			break;
+
+		case 6:
+			EnumRight(m_txSwing, GTPSwing::Count);
+			break;
+
+	}
+
+	UpdateFPGA();
+}
+
+void TransceiverMenuPage::UpdateFPGA()
+{
+	uint32_t drivercfg = (static_cast<int>(m_txSwing) << 16) | (m_txPreCursor << 8) | (m_txPostCursor);
+	FGTPGEN.LANE0_DRIVER = drivercfg;
+	FGTPGEN.LANE1_DRIVER = drivercfg;
+
+	FGTPGEN.LANE0_RATE = static_cast<uint32_t>(m_lane0Rate) + 1;
+	FGTPGEN.LANE1_RATE = static_cast<uint32_t>(m_lane1Rate) + 1;
+
+	//TODO: pattern config
+}

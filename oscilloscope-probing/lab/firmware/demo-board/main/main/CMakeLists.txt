@@ -10,6 +10,7 @@ add_executable(main
 	PAM3MenuPage.cpp
 	RGBMenuPage.cpp
 	RGBTask.cpp
+	TransceiverMenuPage.cpp
 
 	globals.cpp
 	Init.cpp
