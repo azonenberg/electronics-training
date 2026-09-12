@@ -74,7 +74,7 @@ enum class NRZMode
 	Count
 };
 
-//must match xx
+//must match pattern_t in TransceiverSignalGenerator.sv
 enum class GTPMode
 {
 	PRBS7,
@@ -123,8 +123,12 @@ struct APB_TransceiverSignalGenerator
 {
 	uint32_t	LANE0_DRIVER;
 	uint32_t	LANE0_RATE;
+	uint32_t	LANE0_PATTERN;
+	uint32_t	reserved0;
 	uint32_t	LANE1_DRIVER;
 	uint32_t	LANE1_RATE;
+	uint32_t	LANE1_PATTERN;
+	uint32_t	reserved1;
 };
 
 //Common hardware interface stuff

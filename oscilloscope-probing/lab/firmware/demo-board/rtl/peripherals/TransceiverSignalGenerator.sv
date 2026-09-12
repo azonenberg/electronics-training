@@ -65,10 +65,12 @@ module TransceiverSignalGenerator(
 		//19:16	txdiffctrl
 		REG_LANE0_DRIVER	= 'h00,
 		REG_LANE0_RATE		= 'h04,
-		REG_LANE1_DRIVER	= 'h08,
-		REG_LANE1_RATE		= 'h0c
+		REG_LANE0_PATTERN	= 'h08,
 
-		//TODO: pattern control
+		REG_LANE1_DRIVER	= 'h10,
+		REG_LANE1_RATE		= 'h14,
+		REG_LANE1_PATTERN	= 'h18
+
 	} regid_t;
 
 	logic[4:0]	lane0_tx_postcursor		= 0;

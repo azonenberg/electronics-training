@@ -423,6 +423,7 @@ void DemoCLISessionContext::OnExecuteRoot()
 
 		case CMD_REFRESH:
 			{
+				g_display->StartRefresh(true);
 			}
 
 			break;
