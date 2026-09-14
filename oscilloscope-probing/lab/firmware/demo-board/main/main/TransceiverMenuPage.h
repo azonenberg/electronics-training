@@ -46,13 +46,17 @@ public:
 	virtual void OnDown() override;
 
 protected:
-	GTPMode m_gtp0MuxSel;
-	GTPMode m_gtp1MuxSel;
+	GTPMode m_lane0MuxSel;
+	GTPMode m_lane1MuxSel;
 
-	uint32_t m_txPreCursor;
-	uint32_t m_txPostCursor;
+	uint32_t m_lane0PreCursor;
+	uint32_t m_lane0PostCursor;
 
-	GTPSwing m_txSwing;
+	uint32_t m_lane1PreCursor;
+	uint32_t m_lane1PostCursor;
+
+	GTPSwing m_lane0Swing;
+	GTPSwing m_lane1Swing;
 
 	GTPRate m_lane0Rate;
 	GTPRate m_lane1Rate;

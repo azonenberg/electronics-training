@@ -79,7 +79,10 @@ module TransceiverSignalGenerator(
 	{
 		PATTERN_PRBS7,
 		PATTERN_PRBS31,
-		PATTERN_BASEX
+		PATTERN_BASEX,
+		PATTERN_QSGMII,
+		PATTERN_2UI_CLOCK,
+		PATTERN_80UI_CLOCK
 	} pattern_t;
 
 	logic		rate_update				= 0;
@@ -356,6 +359,7 @@ module TransceiverSignalGenerator(
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Datapath muxes
+	// TODO: refactor this to not be doubled up
 
 	logic[19:0] lane0_txd 		= 0;
 	logic[1:0]	lane0_tx_kchar	= 0;
@@ -365,6 +369,9 @@ module TransceiverSignalGenerator(
 	logic[1:0]	lane1_tx_kchar	= 0;
 	logic		lane1_is_8b10b	= 0;
 
+	logic[1:0]	lane0_count		= 0;
+	logic[1:0]	lane1_count		= 0;
+
 	always_ff @(posedge lane0_txusrclk2) begin
 		lane0_tx_kchar	<= 0;
 		lane0_is_8b10b	<= 0;
@@ -372,16 +379,60 @@ module TransceiverSignalGenerator(
 		case(lane0_tx_pattern_sync)
 			PATTERN_PRBS7:	lane0_txd	<= lane0_prbs7;
 			PATTERN_PRBS31:	lane0_txd	<= lane0_prbs31;
+
 			PATTERN_BASEX: begin
 				lane0_txd				<= 16'h50bc;
 				lane0_tx_kchar			<= 2'b01;
 				lane0_is_8b10b			<= 1;
 			end
 
+			PATTERN_QSGMII: begin
+				lane0_count				<= lane0_count + 1;
+				lane0_is_8b10b			<= 1;
+
+				case(lane0_count)
+					0: begin
+						lane0_txd		<= 16'h3cbc;
+						lane0_tx_kchar	<= 2'b11;
+					end
+
+					1: begin
+						lane0_txd		<= 16'hbcbc;
+						lane0_tx_kchar	<= 2'b11;
+					end
+
+					2: begin
+						lane0_txd		<= 16'h5050;
+						lane0_tx_kchar	<= 2'b00;
+					end
+
+					3: begin
+						lane0_txd		<= 16'h5050;
+						lane0_tx_kchar	<= 2'b00;
+					end
+
+				endcase
+
+			end	//PATTERN_QSGMII
+
+			PATTERN_2UI_CLOCK:	lane0_txd	<= 20'h55555;
+
+			PATTERN_80UI_CLOCK: begin
+				lane0_count				<= lane0_count + 1;
+
+				case(lane0_count)
+					0:			lane0_txd <= 20'h00000;
+					1:			lane0_txd <= 20'h00000;
+					2:			lane0_txd <= 20'hfffff;
+					3:			lane0_txd <= 20'hfffff;
+				endcase
+			end //PATTERN_80UI_CLOCK
+
 			default:		lane0_txd	<= 0;
 		endcase
 	end
 
+	//this should always be an exact copy of the above block with lane numbers swapped, until we refactor
 	always_ff @(posedge lane1_txusrclk2) begin
 		lane1_tx_kchar	<= 0;
 		lane1_is_8b10b	<= 0;
@@ -394,6 +445,48 @@ module TransceiverSignalGenerator(
 				lane1_tx_kchar			<= 2'b01;
 				lane1_is_8b10b			<= 1;
 			end
+
+			PATTERN_QSGMII: begin
+				lane1_count				<= lane1_count + 1;
+				lane1_is_8b10b			<= 1;
+
+				case(lane1_count)
+					0: begin
+						lane1_txd		<= 16'h3cbc;
+						lane1_tx_kchar	<= 2'b11;
+					end
+
+					1: begin
+						lane1_txd		<= 16'hbcbc;
+						lane1_tx_kchar	<= 2'b11;
+					end
+
+					2: begin
+						lane1_txd		<= 16'h5050;
+						lane1_tx_kchar	<= 2'b00;
+					end
+
+					3: begin
+						lane1_txd		<= 16'h5050;
+						lane1_tx_kchar	<= 2'b00;
+					end
+
+				endcase
+
+			end	//PATTERN_QSGMII
+
+			PATTERN_2UI_CLOCK:	lane1_txd	<= 20'h55555;
+
+			PATTERN_80UI_CLOCK: begin
+				lane1_count				<= lane1_count + 1;
+
+				case(lane1_count)
+					0:			lane1_txd <= 20'h00000;
+					1:			lane1_txd <= 20'h00000;
+					2:			lane1_txd <= 20'hfffff;
+					3:			lane1_txd <= 20'hfffff;
+				endcase
+			end //PATTERN_80UI_CLOCK
 
 			default:		lane1_txd	<= 0;
 		endcase

@@ -37,15 +37,20 @@
 TransceiverMenuPage::TransceiverMenuPage(MenuSystem* parent)
 	: MenuPageHandler(parent)
 {
-	m_gtp0MuxSel 	= GTPMode::PRBS7;
-	m_gtp1MuxSel 	= GTPMode::PRBS7;
+	m_lane0MuxSel 	= GTPMode::PRBS7;
+	m_lane1MuxSel 	= GTPMode::PRBS7;
 
 	m_lane0Rate		= GTPRate::RATE_5GBPS;
 	m_lane1Rate		= GTPRate::RATE_5GBPS;
 
-	m_txPreCursor	= 0;
-	m_txPostCursor	= 3;
-	m_txSwing		= GTPSwing::SWING_561MV;
+	m_lane0PreCursor	= 0;
+	m_lane1PreCursor	= 0;
+
+	m_lane0PostCursor	= 3;
+	m_lane1PostCursor	= 3;
+
+	m_lane0Swing		= GTPSwing::SWING_561MV;
+	m_lane1Swing		= GTPSwing::SWING_561MV;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,17 +58,22 @@ TransceiverMenuPage::TransceiverMenuPage(MenuSystem* parent)
 
 void TransceiverMenuPage::Render()
 {
-	//TODO: actually make these do stuff
-	RenderSelector("GTP0  data", 0, m_gtp0MuxSel, g_gtpmodeNames, 9);
+	RenderSelector("GTP0  data", 0, m_lane0MuxSel, g_gtpmodeNames, 9);
 	RenderSelector("      rate", 1, m_lane0Rate, g_gtprateNames, 10);
+	RenderSpinner(" Precursor", 2, m_lane0PreCursor, 2);
+	RenderSpinner("Postcursor", 3, m_lane0PostCursor, 2);
+	RenderSelector("Swing (mv)", 4, m_lane0Swing, g_gtpswingNames, 4);
 
-	RenderSelector("GTP1  data", 2, m_gtp1MuxSel, g_gtpmodeNames, 9);
-	RenderSelector("      rate", 3, m_lane1Rate, g_gtprateNames, 10);
+	//Divider
+	int16_t y = g_display->GetHeight() - 1 - (10 * 5);
+	g_display->Line(0, y, g_display->GetWidth(), y, true);
 
-	RenderSpinner("Precursor ", 4, m_txPreCursor, 2);
-	RenderSpinner("Postcursor", 5, m_txPostCursor, 2);
+	RenderSelector("GTP1  data", 5, m_lane1MuxSel, g_gtpmodeNames, 9);
+	RenderSelector("      rate", 6, m_lane1Rate, g_gtprateNames, 10);
 
-	RenderSelector("Swing (mv)", 6, m_txSwing, g_gtpswingNames, 4);
+	RenderSpinner(" Precursor", 7, m_lane1PreCursor, 2);
+	RenderSpinner("Postcursor", 8, m_lane1PostCursor, 2);
+	RenderSelector("Swing (mv)", 9, m_lane1Swing, g_gtpswingNames, 4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,12 +84,12 @@ void TransceiverMenuPage::OnUp()
 	if(m_activeRow > 0)
 		m_activeRow --;
 	else
-		m_activeRow = 6;
+		m_activeRow = 9;
 }
 
 void TransceiverMenuPage::OnDown()
 {
-	if(m_activeRow < 7)
+	if(m_activeRow < 10)
 		m_activeRow ++;
 	else
 		m_activeRow = 0;
@@ -90,7 +100,7 @@ void TransceiverMenuPage::OnLeft()
 	switch(m_activeRow)
 	{
 		case 0:
-			EnumLeft(m_gtp0MuxSel, GTPMode::Count);
+			EnumLeft(m_lane0MuxSel, GTPMode::Count);
 			break;
 
 		case 1:
@@ -98,25 +108,39 @@ void TransceiverMenuPage::OnLeft()
 			break;
 
 		case 2:
-			EnumLeft(m_gtp1MuxSel, GTPMode::Count);
+			if(m_lane0PreCursor > 0)
+				m_lane0PreCursor --;
 			break;
 
 		case 3:
-			EnumRight(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			if(m_lane0PostCursor > 0)
+				m_lane0PostCursor --;
 			break;
 
 		case 4:
-			if(m_txPreCursor > 0)
-				m_txPreCursor --;
+			EnumLeft(m_lane0Swing, GTPSwing::Count);
 			break;
 
 		case 5:
-			if(m_txPostCursor > 0)
-				m_txPostCursor --;
+			EnumLeft(m_lane1MuxSel, GTPMode::Count);
 			break;
 
 		case 6:
-			EnumLeft(m_txSwing, GTPSwing::Count);
+			EnumRight(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			break;
+
+		case 7:
+			if(m_lane1PreCursor > 0)
+				m_lane1PreCursor --;
+			break;
+
+		case 8:
+			if(m_lane1PostCursor > 0)
+				m_lane1PostCursor --;
+			break;
+
+		case 9:
+			EnumLeft(m_lane1Swing, GTPSwing::Count);
 			break;
 
 	}
@@ -129,7 +153,7 @@ void TransceiverMenuPage::OnRight()
 	switch(m_activeRow)
 	{
 		case 0:
-			EnumRight(m_gtp0MuxSel, GTPMode::Count);
+			EnumRight(m_lane0MuxSel, GTPMode::Count);
 			break;
 
 		case 1:
@@ -137,25 +161,39 @@ void TransceiverMenuPage::OnRight()
 			break;
 
 		case 2:
-			EnumRight(m_gtp1MuxSel, GTPMode::Count);
+			if(m_lane0PreCursor < 31)
+				m_lane0PreCursor ++;
 			break;
 
 		case 3:
-			EnumLeft(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			if(m_lane0PostCursor < 31)
+				m_lane0PostCursor ++;
 			break;
 
 		case 4:
-			if(m_txPreCursor < 31)
-				m_txPreCursor ++;
+			EnumRight(m_lane0Swing, GTPSwing::Count);
 			break;
 
 		case 5:
-			if(m_txPostCursor < 31)
-				m_txPostCursor ++;
+			EnumRight(m_lane1MuxSel, GTPMode::Count);
 			break;
 
 		case 6:
-			EnumRight(m_txSwing, GTPSwing::Count);
+			EnumLeft(m_lane1Rate, GTPRate::RATE_Count);	//reverse order
+			break;
+
+		case 7:
+			if(m_lane1PreCursor < 31)
+				m_lane1PreCursor ++;
+			break;
+
+		case 8:
+			if(m_lane1PostCursor < 31)
+				m_lane1PostCursor ++;
+			break;
+
+		case 9:
+			EnumRight(m_lane1Swing, GTPSwing::Count);
 			break;
 
 	}
@@ -165,13 +203,12 @@ void TransceiverMenuPage::OnRight()
 
 void TransceiverMenuPage::UpdateFPGA()
 {
-	uint32_t drivercfg = (static_cast<uint32_t>(m_txSwing) << 16) | (m_txPreCursor << 8) | (m_txPostCursor);
-	FGTPGEN.LANE0_DRIVER = drivercfg;
-	FGTPGEN.LANE1_DRIVER = drivercfg;
+	FGTPGEN.LANE0_DRIVER = (static_cast<uint32_t>(m_lane0Swing) << 16) | (m_lane0PreCursor << 8) | (m_lane0PostCursor);
+	FGTPGEN.LANE1_DRIVER = (static_cast<uint32_t>(m_lane1Swing) << 16) | (m_lane1PreCursor << 8) | (m_lane1PostCursor);
 
 	FGTPGEN.LANE0_RATE = static_cast<uint32_t>(m_lane0Rate) + 1;
 	FGTPGEN.LANE1_RATE = static_cast<uint32_t>(m_lane1Rate) + 1;
 
-	FGTPGEN.LANE0_PATTERN = static_cast<uint32_t>(m_gtp0MuxSel);
-	FGTPGEN.LANE1_PATTERN = static_cast<uint32_t>(m_gtp1MuxSel);
+	FGTPGEN.LANE0_PATTERN = static_cast<uint32_t>(m_lane0MuxSel);
+	FGTPGEN.LANE1_PATTERN = static_cast<uint32_t>(m_lane1MuxSel);
 }

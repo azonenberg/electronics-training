@@ -74,7 +74,10 @@ const char* g_gtpmodeNames[] =
 {
 	"PRBS7",
 	"PRBS31",
-	"1000baseX"
+	"1000baseX",
+	"QSGMII",
+	"/2 clock",
+	"/80 clock"
 };
 
 const char* g_gtpswingNames[] =

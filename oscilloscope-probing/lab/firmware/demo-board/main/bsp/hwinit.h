@@ -80,6 +80,9 @@ enum class GTPMode
 	PRBS7,
 	PRBS31,
 	BaseX,
+	QSGMII,
+	Clock2UI,
+	Clock80UI,
 
 	Count
 };
