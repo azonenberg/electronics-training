@@ -230,8 +230,7 @@ set_max_delay -from [get_cells -hierarchical -filter { NAME =~  "*sync*" && NAME
 
 set _xlnx_shared_i0 [get_cells -hierarchical -filter { NAME =~  "*p*_reg*" }]
 set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~  "*sync_apb*" && NAME =~  "*upstream*" }] -to $_xlnx_shared_i0 5.000
-set _xlnx_shared_i1 [get_cells -hierarchical -filter { NAME =~  "*sync_apb*" && NAME =~ "*downstream*" }]
-set_max_delay -datapath_only -from $_xlnx_shared_i0 -to $_xlnx_shared_i1 5.000
+set_max_delay -datapath_only -from $_xlnx_shared_i0 -to [get_cells -hierarchical -filter { NAME =~  "*sync_apb*" && NAME =~ "*downstream*" }] 5.000
 
 set_max_delay -datapath_only -from [get_cells -hierarchical -filter { NAME =~ "*rst_n_reg*" }] -to [get_cells -hierarchical -filter { NAME =~  "*sync_rst*" && NAME =~ "*_reg*" }] 5.000
 
@@ -255,8 +254,8 @@ set_property CONFIG_MODE SPIx4 [current_design]
 # Vivado ILA
 
 
-set_property DRIVE 4 [get_ports pam3_tx_n]
-set_property DRIVE 4 [get_ports pam3_tx_p]
+set_property DRIVE 12 [get_ports pam3_tx_n]
+set_property DRIVE 12 [get_ports pam3_tx_p]
 
 
 
@@ -272,3 +271,5 @@ set_property PACKAGE_PIN B4 [get_ports gtp_tx0_p]
 set_property PACKAGE_PIN D5 [get_ports gtp_tx1_p]
 
 create_clock -period 6.400 -name gtp_ref_p -waveform {0.000 3.200} [get_ports gtp_ref_p]
+
+

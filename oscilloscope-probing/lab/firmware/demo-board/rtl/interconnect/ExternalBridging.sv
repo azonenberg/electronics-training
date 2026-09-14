@@ -71,7 +71,7 @@ module ExternalBridging(
 	FMC_APBBridge #(
 		.CLOCK_PERIOD(8),			//125 MHz
 		.VCO_MULT(10),				//1.25 GHz VCO
-		.CAPTURE_CLOCK_PHASE(-30),
+		.CAPTURE_CLOCK_PHASE(-31.5),
 		.LAUNCH_CLOCK_PHASE(-60),
 		.BASE_X64(32'hff000000)
 	) fmcbridge(

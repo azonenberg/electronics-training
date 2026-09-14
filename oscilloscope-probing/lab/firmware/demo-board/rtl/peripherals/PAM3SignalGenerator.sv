@@ -59,6 +59,20 @@ module PAM3SignalGenerator(
 		.O(pam3_tx_n));
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Reset the SERDES so they start in the same state
+
+	logic[3:0] 	reset_count 	= 0;
+	logic		serdes_reset	= 1;
+
+	always_ff @(posedge clk_250mhz) begin
+		if(serdes_reset) begin
+			reset_count	<= reset_count + 1;
+			if(reset_count == 'hf)
+				serdes_reset	<= 0;
+		end
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output SERDES
 
 	logic[3:0] 	data_p	= 0;
@@ -94,7 +108,7 @@ module PAM3SignalGenerator(
 		.OCE(1'b1),
 		.TBYTEIN(),
 		.TBYTEOUT(),
-		.RST(1'b0),
+		.RST(serdes_reset),
 		.SHIFTIN1(),
 		.SHIFTIN2(),
 		.T1(tris_p[0]),
@@ -130,7 +144,7 @@ module PAM3SignalGenerator(
 		.OCE(1'b1),
 		.TBYTEIN(),
 		.TBYTEOUT(),
-		.RST(1'b0),
+		.RST(serdes_reset),
 		.SHIFTIN1(),
 		.SHIFTIN2(),
 		.T1(tris_n[0]),
@@ -192,7 +206,7 @@ module PAM3SignalGenerator(
 						data_p <= 4'h0;
 						data_n <= 4'h1;
 					end
-					/*
+
 					//0 following a -1: drive +1 for 1/8 UI, then tristate
 					SYMBOL_MINUS_1: begin
 						tris_p <= 4'he;
@@ -200,7 +214,7 @@ module PAM3SignalGenerator(
 
 						data_p <= 4'h1;
 						data_n <= 4'h0;
-					end*/
+					end
 
 					//0 following a 0: just tristate
 					default: begin
@@ -222,11 +236,10 @@ module PAM3SignalGenerator(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// PAM signal generation
 
-	/*
 	//For now just do a PRBS
-	wire[1:0] prbs_out;
-	PRBS31 #(
-		.WIDTH(2),
+	wire prbs_out;
+	PRBS7 #(
+		.WIDTH(1),
 		.INITIAL_SEED(1)
 	) prbs (
 		.clk(clk_125mhz),
@@ -236,21 +249,15 @@ module PAM3SignalGenerator(
 		.dout(prbs_out)
 	);
 
-	always_ff @(posedge clk_125mhz) begin
+	wire mlt3_out = prbs_out;
 
-		case(prbs_out)
-			2'b10:		symout <= SYMBOL_MINUS_1;
-			2'b11:	 	symout <= SYMBOL_PLUS_1;
-			default:	symout <= SYMBOL_0;
-		endcase
-
-	end
-	*/
-
-	//MLT-3 repeating
+	//MLT-3 encoder
+	//TODO: mux to PAM encoder
 	logic[1:0] count = 0;
 	always_ff @(posedge clk_125mhz) begin
-		count <= count + 1;
+
+		if(mlt3_out)
+			count <= count + 1;
 
 		case(count)
 			0:			symout <= SYMBOL_MINUS_1;
