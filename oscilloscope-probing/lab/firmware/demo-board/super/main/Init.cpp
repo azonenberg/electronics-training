@@ -180,7 +180,7 @@ void App_Init()
 		//3V3_SB hasn't come up fully yet, give it time
 		//The FT234 doesn't have a very high output current so decoupling caps take a while to charge,
 		//and if we don't let the rails stabilize then ADC readings used by the boot process will be wrong
-		const int min_vdd = 3280;
+		const int min_vdd = 3200;
 		if(vdd < min_vdd)
 		{
 			g_log("Waiting for 3V3_SB rail to stabilize\n");

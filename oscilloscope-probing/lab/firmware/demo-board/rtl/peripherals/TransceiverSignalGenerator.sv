@@ -58,7 +58,7 @@ module TransceiverSignalGenerator(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Register IDs
 
-	typedef enum logic[3:0]
+	typedef enum logic[7:0]
 	{
 		//4:0	txpostcursor
 		//12:8	txprecursor
@@ -66,6 +66,7 @@ module TransceiverSignalGenerator(
 		REG_LANE0_DRIVER	= 'h00,
 		REG_LANE0_RATE		= 'h04,
 		REG_LANE0_PATTERN	= 'h08,
+		//0c reserved
 
 		REG_LANE1_DRIVER	= 'h10,
 		REG_LANE1_RATE		= 'h14,
@@ -73,16 +74,30 @@ module TransceiverSignalGenerator(
 
 	} regid_t;
 
+	//must match GTPMode in hwinit.h
+	typedef enum logic[3:0]
+	{
+		PATTERN_PRBS7,
+		PATTERN_PRBS31,
+		PATTERN_BASEX
+	} pattern_t;
+
+	logic		rate_update				= 0;
+	logic		pattern_update			= 0;
+
 	logic[4:0]	lane0_tx_postcursor		= 0;
 	logic[4:0]	lane0_tx_precursor		= 0;
 	logic[3:0]	lane0_tx_diffctrl		= 0;
 
-	logic		rate_update				= 0;
+	pattern_t	lane0_tx_pattern		= PATTERN_PRBS7;
+
 	logic[2:0]	lane0_tx_rate			= 1;
 
 	logic[4:0]	lane1_tx_postcursor		= 0;
 	logic[4:0]	lane1_tx_precursor		= 0;
 	logic[3:0]	lane1_tx_diffctrl		= 0;
+
+	pattern_t	lane1_tx_pattern		= PATTERN_PRBS7;
 
 	logic[2:0]	lane1_tx_rate			= 1;
 
@@ -103,8 +118,13 @@ module TransceiverSignalGenerator(
 				case(apb.paddr)
 					REG_LANE0_DRIVER:	apb.prdata	= { 12'h0, lane0_tx_diffctrl, 3'h0, lane0_tx_precursor, 3'h0, lane0_tx_postcursor };
 					REG_LANE1_DRIVER:	apb.prdata	= { 12'h0, lane1_tx_diffctrl, 3'h0, lane1_tx_precursor, 3'h0, lane1_tx_postcursor };
+
 					REG_LANE0_RATE:		apb.prdata	= { 29'h0, lane0_tx_rate };
 					REG_LANE1_RATE:		apb.prdata	= { 29'h0, lane1_tx_rate };
+
+					REG_LANE0_PATTERN:	apb.prdata	= lane0_tx_pattern;
+					REG_LANE1_PATTERN:	apb.prdata	= lane1_tx_pattern;
+
 					default:			apb.pslverr	= 1;
 				endcase
 			end
@@ -113,6 +133,8 @@ module TransceiverSignalGenerator(
 			else begin
 				if( (apb.paddr != REG_LANE0_DRIVER) &&
 					(apb.paddr != REG_LANE1_DRIVER) &&
+					(apb.paddr != REG_LANE0_PATTERN) &&
+					(apb.paddr != REG_LANE1_PATTERN) &&
 					(apb.paddr != REG_LANE0_RATE) &&
 					(apb.paddr != REG_LANE1_RATE)
 					) begin
@@ -146,6 +168,7 @@ module TransceiverSignalGenerator(
 		else begin
 
 			rate_update			<= 0;
+			pattern_update		<= 0;
 
 			if(apb.pready && apb.pwrite) begin
 
@@ -162,6 +185,11 @@ module TransceiverSignalGenerator(
 						rate_update			<= 1;
 					end
 
+					REG_LANE0_PATTERN: begin
+						lane0_tx_pattern	<= pattern_t'(apb.pwdata);
+						pattern_update		<= 1;
+					end
+
 					REG_LANE1_DRIVER: begin
 						lane1_tx_postcursor	<= apb.pwdata[4:0];
 						lane1_tx_precursor	<= apb.pwdata[12:8];
@@ -171,6 +199,11 @@ module TransceiverSignalGenerator(
 					REG_LANE1_RATE: begin
 						lane1_tx_rate		<= apb.pwdata[2:0];
 						rate_update			<= 1;
+					end
+
+					REG_LANE1_PATTERN: begin
+						lane1_tx_pattern	<= pattern_t'(apb.pwdata);
+						pattern_update		<= 1;
 					end
 
 					default: begin
@@ -193,10 +226,13 @@ module TransceiverSignalGenerator(
 	wire lane1_txusrclk2;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Synchronizers for rate switching
+	// Synchronizers for pushing registers into TX clock domain
 
 	wire[2:0]	lane0_tx_rate_sync;
 	wire[2:0]	lane1_tx_rate_sync;
+
+	pattern_t	lane0_tx_pattern_sync;
+	pattern_t	lane1_tx_pattern_sync;
 
 	RegisterSynchronizer #(
 		.WIDTH(3),
@@ -230,14 +266,46 @@ module TransceiverSignalGenerator(
 		.reg_b(lane1_tx_rate_sync)
 	);
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// PRBS generators
+	RegisterSynchronizer #(
+		.WIDTH($bits(pattern_t)),
+		.INIT(PATTERN_PRBS7),
+		.IN_REG(1)
+	) sync_lane0_pattern(
+		.clk_a(apb.pclk),
+		.en_a(pattern_update),
+		.ack_a(),
+		.reg_a(lane0_tx_pattern),
 
-	wire[15:0] lane0_prbs7;
-	wire[15:0] lane1_prbs7;
+		.clk_b(lane0_txusrclk2),
+		.updated_b(),
+		.reset_b(1'b0),
+		.reg_b(lane0_tx_pattern_sync)
+	);
+
+	RegisterSynchronizer #(
+		.WIDTH($bits(pattern_t)),
+		.INIT(PATTERN_PRBS7),
+		.IN_REG(1)
+	) sync_lane1_pattern(
+		.clk_a(apb.pclk),
+		.en_a(pattern_update),
+		.ack_a(),
+		.reg_a(lane1_tx_pattern),
+
+		.clk_b(lane1_txusrclk2),
+		.updated_b(),
+		.reset_b(1'b0),
+		.reg_b(lane1_tx_pattern_sync)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PRBS-7 generators
+
+	wire[19:0] lane0_prbs7;
+	wire[19:0] lane1_prbs7;
 
 	PRBS7 #(
-		.WIDTH(16),
+		.WIDTH(20),
 		.INITIAL_SEED(1)
 	) lane0_prbs7_gen (
 		.clk(lane0_txusrclk2),
@@ -248,7 +316,7 @@ module TransceiverSignalGenerator(
 	);
 
 	PRBS7 #(
-		.WIDTH(16),
+		.WIDTH(20),
 		.INITIAL_SEED(1)
 	) lane1_prbs7_gen (
 		.clk(lane1_txusrclk2),
@@ -257,6 +325,140 @@ module TransceiverSignalGenerator(
 		.seed(7'b0),
 		.dout(lane1_prbs7)
 	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PRBS-31 generators
+
+	wire[19:0] lane0_prbs31;
+	wire[19:0] lane1_prbs31;
+
+	PRBS31 #(
+		.WIDTH(20),
+		.INITIAL_SEED(1)
+	) lane0_prbs31_gen (
+		.clk(lane0_txusrclk2),
+		.update(1'b1),
+		.init(1'b0),
+		.seed(7'b0),
+		.dout(lane0_prbs31)
+	);
+
+	PRBS31 #(
+		.WIDTH(20),
+		.INITIAL_SEED(1)
+	) lane1_prbs31_gen (
+		.clk(lane1_txusrclk2),
+		.update(1'b1),
+		.init(1'b0),
+		.seed(7'b0),
+		.dout(lane1_prbs31)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Datapath muxes
+
+	logic[19:0] lane0_txd 		= 0;
+	logic[1:0]	lane0_tx_kchar	= 0;
+	logic		lane0_is_8b10b	= 0;
+
+	logic[19:0] lane1_txd 		= 0;
+	logic[1:0]	lane1_tx_kchar	= 0;
+	logic		lane1_is_8b10b	= 0;
+
+	always_ff @(posedge lane0_txusrclk2) begin
+		lane0_tx_kchar	<= 0;
+		lane0_is_8b10b	<= 0;
+
+		case(lane0_tx_pattern_sync)
+			PATTERN_PRBS7:	lane0_txd	<= lane0_prbs7;
+			PATTERN_PRBS31:	lane0_txd	<= lane0_prbs31;
+			PATTERN_BASEX: begin
+				lane0_txd				<= 16'h50bc;
+				lane0_tx_kchar			<= 2'b01;
+				lane0_is_8b10b			<= 1;
+			end
+
+			default:		lane0_txd	<= 0;
+		endcase
+	end
+
+	always_ff @(posedge lane1_txusrclk2) begin
+		lane1_tx_kchar	<= 0;
+		lane1_is_8b10b	<= 0;
+
+		case(lane1_tx_pattern_sync)
+			PATTERN_PRBS7:	lane1_txd	<= lane1_prbs7;
+			PATTERN_PRBS31:	lane1_txd	<= lane1_prbs31;
+			PATTERN_BASEX: begin
+				lane1_txd				<= 16'h50bc;
+				lane1_tx_kchar			<= 2'b01;
+				lane1_is_8b10b			<= 1;
+			end
+
+			default:		lane1_txd	<= 0;
+		endcase
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 8b10b unpacking
+
+	logic[15:0] lane0_tx_data			= 0;
+	logic[1:0]	lane0_tx_charisk		= 0;
+	logic[1:0]	lane0_tx_chardispmode	= 0;
+	logic[1:0]	lane0_tx_chardispval	= 0;
+	logic		lane0_tx_8b10b_en		= 0;
+
+	logic[15:0] lane1_tx_data 			= 0;
+	logic[1:0]	lane1_tx_charisk		= 0;
+	logic[1:0]	lane1_tx_chardispmode	= 0;
+	logic[1:0]	lane1_tx_chardispval	= 0;
+	logic		lane1_tx_8b10b_en		= 0;
+
+	always_ff @(posedge lane0_txusrclk2) begin
+
+		//Enable 8b10b mode
+		lane0_tx_8b10b_en				<= lane0_is_8b10b;
+
+		if(lane0_is_8b10b) begin
+			lane0_tx_data				<= lane0_txd[15:0];
+			lane0_tx_charisk			<= lane0_tx_kchar;
+			lane0_tx_chardispmode		<= 2'b0;
+			lane0_tx_chardispval		<= 0;
+		end
+
+		//See UG482 table 3-2
+		else begin
+			lane0_tx_data				<= { lane0_txd[17:10], lane0_txd[7:0] };
+			lane0_tx_chardispval[0]		<= lane0_txd[8];
+			lane0_tx_chardispval[1]		<= lane0_txd[18];
+			lane0_tx_chardispmode[0]	<= lane0_txd[9];
+			lane0_tx_chardispmode[1]	<= lane0_txd[19];
+		end
+
+	end
+
+	always_ff @(posedge lane1_txusrclk2) begin
+
+		//Enable 8b10b mode
+		lane1_tx_8b10b_en	<= lane1_is_8b10b;
+
+		if(lane1_is_8b10b) begin
+			lane1_tx_data			<= lane1_txd[15:0];
+			lane1_tx_charisk		<= lane1_tx_kchar;
+			lane1_tx_chardispmode	<= 2'b0;
+			lane1_tx_chardispval	<= 0;
+		end
+
+		//See UG482 table 3-2
+		else begin
+			lane1_tx_data				<= { lane1_txd[17:10], lane1_txd[7:0] };
+			lane1_tx_chardispval[0]		<= lane1_txd[8];
+			lane1_tx_chardispval[1]		<= lane1_txd[18];
+			lane1_tx_chardispmode[0]	<= lane1_txd[9];
+			lane1_tx_chardispmode[1]	<= lane1_txd[19];
+		end
+
+	end
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// The transceiver
@@ -345,8 +547,17 @@ module TransceiverSignalGenerator(
 		.gt1_txdiffctrl_in(lane1_tx_diffctrl),
 
 		//Transmit data
-		.gt0_txdata_in(lane0_prbs7),
-		.gt1_txdata_in(lane1_prbs7),
+		.gt0_tx8b10ben_in(lane0_tx_8b10b_en),
+		.gt0_txdata_in(lane0_tx_data),
+		.gt0_txcharisk_in(lane0_tx_charisk),
+		.gt0_txchardispmode_in(lane0_tx_chardispmode),
+		.gt0_txchardispval_in(lane0_tx_chardispval),
+
+		.gt1_tx8b10ben_in(lane1_tx_8b10b_en),
+		.gt1_txdata_in(lane1_tx_data),
+		.gt1_txcharisk_in(lane1_tx_charisk),
+		.gt1_txchardispmode_in(lane1_tx_chardispmode),
+		.gt1_txchardispval_in(lane1_tx_chardispval),
 
 		//Sub-rate control
 		.gt0_txrate_in(lane0_tx_rate_sync),

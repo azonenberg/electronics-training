@@ -78,6 +78,8 @@ enum class NRZMode
 enum class GTPMode
 {
 	PRBS7,
+	PRBS31,
+	BaseX,
 
 	Count
 };

@@ -54,10 +54,10 @@ TransceiverMenuPage::TransceiverMenuPage(MenuSystem* parent)
 void TransceiverMenuPage::Render()
 {
 	//TODO: actually make these do stuff
-	RenderSelector("GTP0  data", 0, m_gtp0MuxSel, g_gtpmodeNames, 6);
+	RenderSelector("GTP0  data", 0, m_gtp0MuxSel, g_gtpmodeNames, 9);
 	RenderSelector("      rate", 1, m_lane0Rate, g_gtprateNames, 10);
 
-	RenderSelector("GTP1  data", 2, m_gtp1MuxSel, g_gtpmodeNames, 6);
+	RenderSelector("GTP1  data", 2, m_gtp1MuxSel, g_gtpmodeNames, 9);
 	RenderSelector("      rate", 3, m_lane1Rate, g_gtprateNames, 10);
 
 	RenderSpinner("Precursor ", 4, m_txPreCursor, 2);
@@ -165,12 +165,13 @@ void TransceiverMenuPage::OnRight()
 
 void TransceiverMenuPage::UpdateFPGA()
 {
-	uint32_t drivercfg = (static_cast<int>(m_txSwing) << 16) | (m_txPreCursor << 8) | (m_txPostCursor);
+	uint32_t drivercfg = (static_cast<uint32_t>(m_txSwing) << 16) | (m_txPreCursor << 8) | (m_txPostCursor);
 	FGTPGEN.LANE0_DRIVER = drivercfg;
 	FGTPGEN.LANE1_DRIVER = drivercfg;
 
 	FGTPGEN.LANE0_RATE = static_cast<uint32_t>(m_lane0Rate) + 1;
 	FGTPGEN.LANE1_RATE = static_cast<uint32_t>(m_lane1Rate) + 1;
 
-	//TODO: pattern config
+	FGTPGEN.LANE0_PATTERN = static_cast<uint32_t>(m_gtp0MuxSel);
+	FGTPGEN.LANE1_PATTERN = static_cast<uint32_t>(m_gtp1MuxSel);
 }
