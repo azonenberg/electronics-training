@@ -44,9 +44,9 @@ module APBInterconnect(
 	APB.requester		apb2,
 
 	//Debug APB in
-	APB.completer 		apb_debug
+	APB.completer 		apb_debug,
 
-	//Small debug APB TODO
+	output wire			ila_trig_out
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,17 +81,33 @@ module APBInterconnect(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Debug top level bus bridge (0x4000_0000, 1 MB blocks)
 
-	localparam NUM_APB_L1 = 2;
-	APB #(.ADDR_WIDTH(20), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug_root[NUM_APB_L1-1:0]();
+	localparam NUM_DEBUG_L1 = 3;
+	APB #(.ADDR_WIDTH(20), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug_root[NUM_DEBUG_L1-1:0]();
 
 	//Root bridge
 	APBBridge #(
 		.BASE_ADDR(32'h4000_0000),
 		.BLOCK_SIZE(32'h10_0000),
-		.NUM_PORTS(NUM_APB_L1)
+		.NUM_PORTS(NUM_DEBUG_L1)
 	) debug_root_bridge (
 		.upstream(apb_debug),
 		.downstream(apb_debug_root)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Debug second level bus bridge (0x4000_0000, 1 kB per peripheral)
+
+	localparam NUM_DEBUG_L2	= 2;
+	localparam DEBUG_L2_BLOCK_SIZE		= 32'h400;
+	localparam DEBUG_L2_ADDR_WIDTH		= $clog2(DEBUG_L2_BLOCK_SIZE);
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(DEBUG_L2_ADDR_WIDTH), .USER_WIDTH(0)) apb_debug_l2[NUM_DEBUG_L2-1:0]();
+	APBBridge #(
+		.BASE_ADDR(32'h0000_0000),
+		.BLOCK_SIZE(DEBUG_L2_BLOCK_SIZE),
+		.NUM_PORTS(NUM_DEBUG_L2)
+	) debug_l2_bridge (
+		.upstream(apb_debug_root[0]),
+		.downstream(apb_debug_l2)
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,14 +116,66 @@ module APBInterconnect(
 	APB #(.ADDR_WIDTH(20), .DATA_WIDTH(32), .USER_WIDTH(0)) apb_debug_rom();
 
 	APBRegisterSlice #(.DOWN_REG(0), .UP_REG(0)) regslice_apb_debug_rom(
-		.upstream(apb_debug_root[0]),
+		.upstream(apb_debug_l2[0]),
 		.downstream(apb_debug_rom));
 
 	DebugROM #(
-		//.DEVICE_0_TYPE("ILA_"),
-		//.DEVICE_0_ADDR(32'h4000_0800),
+		.DEVICE_0_TYPE("ILA_"),
+		.DEVICE_0_ADDR(32'h4000_0400)
 	) debugrom (
 		.apb(apb_debug_rom)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Debug ILA on the top level APB bus (0x4000_0400)
+
+	APB_ILA #(
+		.DEPTH(2048),
+		.CLK_PERIOD(8000),
+		.DATA_BUF_ADDR(32'h4010_0000),
+		.ROM_ADDR(32'h4020_0000),
+
+		.PROBE0_WIDTH(1),
+		.PROBE0_NAME("apb_fmc.penable"),
+
+		.PROBE1_WIDTH(1),
+		.PROBE1_NAME("apb_fmc.psel"),
+
+		.PROBE2_WIDTH(1),
+		.PROBE2_NAME("apb_fmc.pwrite"),
+
+		.PROBE3_WIDTH(1),
+		.PROBE3_NAME("apb_fmc.pready"),
+
+		.PROBE4_WIDTH(1),
+		.PROBE4_NAME("apb_fmc.pslverr"),
+
+		.PROBE5_WIDTH(apb_fmc.ADDR_WIDTH),
+		.PROBE5_NAME("apb_fmc.paddr"),
+
+		.PROBE6_WIDTH(apb_fmc.DATA_WIDTH),
+		.PROBE6_NAME("apb_fmc.pwdata"),
+
+		.PROBE7_WIDTH(apb_fmc.DATA_WIDTH),
+		.PROBE7_NAME("apb_fmc.prdata")
+
+	) ilaTop (
+		.apbControl(apb_debug_l2[1]),
+		.apbData(apb_debug_root[1]),
+		.apbRom(apb_debug_root[2]),
+
+		.clk(apb_fmc.pclk),
+		.probe0(apb_fmc.penable),
+		.probe1(apb_fmc.psel),
+		.probe2(apb_fmc.pwrite),
+		.probe3(apb_fmc.pready),
+		.probe4(apb_fmc.pslverr),
+		.probe5(apb_fmc.paddr),
+		.probe6(apb_fmc.pwdata),
+		.probe7(apb_fmc.prdata),
+
+		.trig_in(apb_fmc.penable),
+		.trig_out(ila_trig_out)
 	);
 
 endmodule

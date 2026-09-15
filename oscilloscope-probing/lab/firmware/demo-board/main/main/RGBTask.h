@@ -41,6 +41,7 @@ public:
 	{
 		PATTERN_OFF,
 		PATTERN_GREEN_CHASE,
+		PATTERN_PINGPONG,
 
 		PATTERN_COUNT
 	} m_pattern;
@@ -51,6 +52,8 @@ protected:
 
 	void ClearFramebuffer()
 	{ memset(m_framebuffer, 0, sizeof(m_framebuffer)); }
+
+	bool m_lastWasOff;
 };
 
 

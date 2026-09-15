@@ -40,10 +40,11 @@ void RGBMenuPage::Render()
 	static const char* names[] =
 	{
 		"Off",
-		"Chaser"
+		"Chaser",
+		"Ping-pong"
 	};
 
-	RenderSelector("Pattern", 0, g_rgbTask->m_pattern, names, 6);
+	RenderSelector("Pattern", 0, g_rgbTask->m_pattern, names, 9);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

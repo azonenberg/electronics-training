@@ -145,6 +145,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../../../antikernel-ipcores/debug/APB_ILA.sv">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../../../antikernel-ipcores/interface/qspi/APB_QSPIHostInterface.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>

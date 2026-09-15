@@ -124,12 +124,12 @@ module ClockGeneration(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Clock buffers
 
-	BUFGCE bufg_clk250mhz( .I(clk_25mhz_pll_raw), .O(clk_25mhz_pll), .CE(pll_lock));
-	BUFGCE bufg_clk_50mhz( .I(clk_50mhz_raw), .O(clk_50mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_66mhz( .I(clk_66mhz_raw), .O(clk_66mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_125mhz( .I(clk_125mhz_raw), .O(clk_125mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_250mhz( .I(clk_250mhz_raw), .O(clk_250mhz), .CE(pll_lock));
-	BUFGCE bufg_clk_500mhz( .I(clk_500mhz_raw), .O(clk_500mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk250mhz( .I(clk_25mhz_pll_raw), .O(clk_25mhz_pll), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_50mhz( .I(clk_50mhz_raw), .O(clk_50mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_66mhz( .I(clk_66mhz_raw), .O(clk_66mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_125mhz( .I(clk_125mhz_raw), .O(clk_125mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_250mhz( .I(clk_250mhz_raw), .O(clk_250mhz), .CE(pll_lock));
+	BUFGCE #(.SIM_DEVICE("7SERIES")) bufg_clk_500mhz( .I(clk_500mhz_raw), .O(clk_500mhz), .CE(pll_lock));
 
 endmodule

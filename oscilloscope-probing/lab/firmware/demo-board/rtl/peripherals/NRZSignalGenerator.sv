@@ -32,6 +32,8 @@
 module NRZSignalGenerator(
 	APB.completer		apb,
 
+	input wire			ila_trig_out,
+
 	output logic[3:0]	dout
 );
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +61,8 @@ module NRZSignalGenerator(
 		MODE_PRBS7,
 		MODE_PRBS31,
 		MODE_PULSE,
-		MODE_CLOCK
+		MODE_CLOCK,
+		MODE_ILA_TRIG
 	} mode_t;
 
 	mode_t modesel[4];
@@ -163,10 +166,10 @@ module NRZSignalGenerator(
 	*/
 
 	//Combinatorial mux input configuration
-	logic[7:0]	dout3_in;
-	logic[7:0]	dout2_in;
-	logic[7:0]	dout1_in;
-	logic[7:0]	dout0_in;
+	logic[8:0]	dout3_in;
+	logic[8:0]	dout2_in;
+	logic[8:0]	dout1_in;
+	logic[8:0]	dout0_in;
 
 	always_comb begin
 
@@ -195,6 +198,12 @@ module NRZSignalGenerator(
 		dout2_in[MODE_CLOCK]	= toggle;
 		dout1_in[MODE_CLOCK]	= toggle;
 		dout0_in[MODE_CLOCK]	= toggle;
+
+		//ILA TRIG
+		dout3_in[MODE_ILA_TRIG]	= ila_trig_out;
+		dout2_in[MODE_ILA_TRIG]	= ila_trig_out;
+		dout1_in[MODE_ILA_TRIG]	= ila_trig_out;
+		dout0_in[MODE_ILA_TRIG]	= ila_trig_out;
 
 	end
 

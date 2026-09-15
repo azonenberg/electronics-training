@@ -59,6 +59,9 @@ module PeripheralTop(
 	output wire			pam3_tx_p,
 	output wire			pam3_tx_n,
 
+	//Trigger from top level APB ILA
+	input wire			ila_trig_out,
+
 	//Coax outputs
 	output wire[3:0]	coax_out,
 
@@ -101,6 +104,7 @@ module PeripheralTop(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB2 bridging (0xc001_0000, 4 kB per peripheral)
 
+	/*
 	localparam NUM_APB2_PERIPHERALS	= 2;
 	localparam APB2_BLOCK_SIZE		= 32'h1000;
 	localparam APB2_ADDR_WIDTH		= $clog2(APB2_BLOCK_SIZE);
@@ -115,6 +119,14 @@ module PeripheralTop(
 	);
 
 	//TODO: what if anything do we want to put on APB2
+	*/
+
+	//For now tie off APB2
+	assign apb2.pready = apb2.penable;
+	assign apb2.pslverr = 1;
+	assign apb2.prdata = 0;
+	assign apb2.pbuser = 0;
+	assign apb2.pruser = 0;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Device information (c000_0000)
@@ -147,13 +159,13 @@ module PeripheralTop(
 	APBRegisterSlice #(.UP_REG(1), .DOWN_REG(0))
 		apb_regslice_led( .upstream(apb1_devices[2]), .downstream(ledBus) );
 
-	//TODO: update timings here
+	//PCLK is 125 MHz
 	APB_SerialLED #(
 		.NUM_LEDS(4),
-		.SHORT_TIME(30),	//Number of PCLK cycles in a "short" pulse (300 ns)
-		.LONG_TIME(90),		//Number of PCLK cycles in a "long" pulse (900 ns)
-		.IFG_TIME(200),		//Number of PCLK cycles between data words
-		.RESET_TIME(750)	//Number of PCLK cycles in a reset pulse (>50us, do 75 to be safe)
+		.SHORT_TIME(38),	//Number of PCLK cycles in a "short" pulse (300 ns)
+		.LONG_TIME(112),	//Number of PCLK cycles in a "long" pulse (900 ns)
+		.IFG_TIME(225),		//Number of PCLK cycles between data words
+		.RESET_TIME(9375)	//Number of PCLK cycles in a reset pulse (>50us, do 75 to be safe)
 	)  rgbled (
 		.apb(ledBus),
 
@@ -251,7 +263,7 @@ module PeripheralTop(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_sma();
 	APB_CDC sync_apb_sma(.upstream(apb1_devices[5]), .downstream_pclk(clk_250mhz), .downstream(apb_sma));
 
-	NRZSignalGenerator sma(.apb(apb_sma), .dout(coax_out) );
+	NRZSignalGenerator sma(.apb(apb_sma), .ila_trig_out(ila_trig_out), .dout(coax_out) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NRZ signal generator on probe clips (c000_1800)
@@ -259,7 +271,7 @@ module PeripheralTop(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_clip();
 	APB_CDC sync_apb_clip(.upstream(apb1_devices[6]), .downstream_pclk(clk_250mhz), .downstream(apb_clip));
 
-	NRZSignalGenerator clip(.apb(apb_clip), .dout(clip_out) );
+	NRZSignalGenerator clip(.apb(apb_clip), .ila_trig_out(ila_trig_out), .dout(clip_out) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTP signal generator on probe clips (c000_1c00)

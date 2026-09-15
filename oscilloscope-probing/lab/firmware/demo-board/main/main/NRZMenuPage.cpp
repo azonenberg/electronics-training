@@ -47,10 +47,10 @@ NRZMenuPage::NRZMenuPage(MenuSystem* parent, volatile APB_NRZSignalGenerator* ge
 
 void NRZMenuPage::Render()
 {
-	RenderSelector("OUT1", 0, m_muxsel[0], g_nrzmodeNames, 6);
-	RenderSelector("OUT2", 1, m_muxsel[1], g_nrzmodeNames, 6);
-	RenderSelector("OUT3", 2, m_muxsel[2], g_nrzmodeNames, 6);
-	RenderSelector("OUT4", 3, m_muxsel[3], g_nrzmodeNames, 6);
+	RenderSelector("OUT1", 0, m_muxsel[0], g_nrzmodeNames, 7);
+	RenderSelector("OUT2", 1, m_muxsel[1], g_nrzmodeNames, 7);
+	RenderSelector("OUT3", 2, m_muxsel[2], g_nrzmodeNames, 7);
+	RenderSelector("OUT4", 3, m_muxsel[3], g_nrzmodeNames, 7);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -70,6 +70,7 @@ enum class NRZMode
 	PRBS31,
 	Pulse,
 	Clock,
+	ILATrig,
 
 	Count
 };

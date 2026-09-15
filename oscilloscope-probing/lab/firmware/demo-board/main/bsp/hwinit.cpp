@@ -67,7 +67,8 @@ const char* g_nrzmodeNames[] =
 	"PRBS7",
 	"PRBS31",
 	"Pulse",
-	"Clock"
+	"Clock",
+	"ILA Trg"
 };
 
 const char* g_gtpmodeNames[] =

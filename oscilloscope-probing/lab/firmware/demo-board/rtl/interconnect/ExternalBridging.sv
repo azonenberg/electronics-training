@@ -64,6 +64,9 @@ module ExternalBridging(
 );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Tie off flow control
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// FMC APB
 
 	APB #(.DATA_WIDTH(64), .ADDR_WIDTH(24), .USER_WIDTH(0)) apb_x64_unused();
@@ -72,7 +75,7 @@ module ExternalBridging(
 		.CLOCK_PERIOD(8),			//125 MHz
 		.VCO_MULT(10),				//1.25 GHz VCO
 		.CAPTURE_CLOCK_PHASE(-31.5),
-		.LAUNCH_CLOCK_PHASE(-60),
+		.LAUNCH_CLOCK_PHASE(-63),
 		.BASE_X64(32'hff000000)
 	) fmcbridge(
 
@@ -96,6 +99,9 @@ module ExternalBridging(
 	//Tie off the x64 APB so we don't hang if we try to access that range, just return bus error
 	assign apb_x64_unused.pready = apb_x64_unused.penable;
 	assign apb_x64_unused.pslverr = 1;
+	assign apb_x64_unused.prdata = 0;
+	assign apb_x64_unused.pbuser = 0;
+	assign apb_x64_unused.pruser = 0;
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Debug APB

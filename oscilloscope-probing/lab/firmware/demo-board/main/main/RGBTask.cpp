@@ -37,6 +37,7 @@ RGBTask::RGBTask()
 	: TimerTask(0, 10 * 100)	//10 Hz refresh rate
 	, m_pattern(PATTERN_OFF)
 	, m_step(0)
+	, m_lastWasOff(true)
 {
 	ClearFramebuffer();
 }
@@ -45,6 +46,14 @@ RGBTask::RGBTask()
 
 void RGBTask::OnTimer()
 {
+	static uint32_t color_rgbw[] =
+	{
+		0x200000,
+		0x002000,
+		0x000020,
+		0x202020
+	};
+
 	switch(m_pattern)
 	{
 		case PATTERN_GREEN_CHASE:
@@ -53,11 +62,38 @@ void RGBTask::OnTimer()
 			m_framebuffer[m_step / 4] = 0x002000;
 			break;
 
+		case PATTERN_PINGPONG:
+			{
+				ClearFramebuffer();
+
+				m_step ++;
+
+				//Every 2 steps, change position
+				uint32_t tick = m_step;
+				uint32_t pos = tick & 3;
+
+				//Invert position alternate steps so we pingpong
+				if(tick & 4)
+					pos = (3 - pos);
+
+				//Next bits select color
+				uint32_t coloridx = (tick >> 2) & 3;
+				m_framebuffer[pos] = color_rgbw[coloridx];
+			}
+			break;
+
 		case PATTERN_OFF:
 		default:
+			if(m_lastWasOff)
+				return;
+
+			m_lastWasOff = true;
 			ClearFramebuffer();
 			break;
 	}
+
+	if(m_pattern != PATTERN_OFF)
+		m_lastWasOff = false;
 
 	//Push it
 	for(uint32_t i=0; i<4; i++)

@@ -155,16 +155,31 @@ module top(
 	//APB2 (0xc001_0000, 4 kB per peripheral)
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(16), .USER_WIDTH(0)) apb2();
 
+	wire	ila_trig_out;
 	APBInterconnect busmatrix(
 		.apb_fmc(apb_fmc),
 		.apb_debug(apb_debug),
 
 		.apb1(apb1),
-		.apb2(apb2)
+		.apb2(apb2),
+
+		.ila_trig_out(ila_trig_out)	//TODO go to muxing
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB peripherals
+
+	wire	ila_trig_sync;
+
+	PulseSynchronizer #(
+		.SYNC_IN_REG(1)
+	) sync_ila_trig(
+		.clk_a(apb1.pclk),
+		.pulse_a(ila_trig_out),
+
+		.clk_b(clk_250mhz),
+		.pulse_b(ila_trig_sync)
+	);
 
 	PeripheralTop peripherals(
 		.gtp_refclk_p(gtp_ref_p),
@@ -178,6 +193,8 @@ module top(
 
 		.apb1(apb1),
 		.apb2(apb2),
+
+		.ila_trig_out(ila_trig_sync),
 
 		.flash_dq(flash_dq),
 		.flash_cs_n(flash_cs_n),
