@@ -273,3 +273,6 @@ set_property PACKAGE_PIN D5 [get_ports gtp_tx1_p]
 create_clock -period 6.400 -name gtp_ref_p -waveform {0.000 3.200} [get_ports gtp_ref_p]
 
 
+
+
+

@@ -38,6 +38,7 @@ module ClockGeneration(
 	input wire		clk_25mhz,
 
 	//Clocks out to system
+	output wire		clk_25mhz_pll,
 	output wire		clk_50mhz,
 	output wire		clk_66mhz,
 	output wire		clk_100mhz,
@@ -53,6 +54,7 @@ module ClockGeneration(
 
 	wire	pll_lock;
 
+	wire	clk_25mhz_pll_raw;
 	wire	clk_50mhz_raw;
 	wire	clk_66mhz_raw;
 	wire	clk_100mhz_raw;
@@ -69,7 +71,7 @@ module ClockGeneration(
 		.CLKOUT3_DIVIDE(8),			//1 GHz VCO / 8  = 125 MHz
 		.CLKOUT4_DIVIDE(4),			//1 GHz VCO / 4  = 250 MHz
 		.CLKOUT5_DIVIDE(2),			//1 GHz VCO / 2  = 500 MHz
-		.CLKOUT6_DIVIDE(128),
+		.CLKOUT6_DIVIDE(40),		//1 GHz VCO / 40 = 25 MHz
 
 		.CLKOUT0_PHASE(0.0),
 		.CLKOUT1_PHASE(0.0),
@@ -111,7 +113,7 @@ module ClockGeneration(
 		.CLKOUT3B(),
 		.CLKOUT4(clk_250mhz_raw),
 		.CLKOUT5(clk_500mhz_raw),
-		.CLKOUT6(),
+		.CLKOUT6(clk_25mhz_pll_raw),
 
 		.CLKFBOUT(clk_fb),
 		.CLKFBOUTB(),
@@ -122,6 +124,7 @@ module ClockGeneration(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Clock buffers
 
+	BUFGCE bufg_clk250mhz( .I(clk_25mhz_pll_raw), .O(clk_25mhz_pll), .CE(pll_lock));
 	BUFGCE bufg_clk_50mhz( .I(clk_50mhz_raw), .O(clk_50mhz), .CE(pll_lock));
 	BUFGCE bufg_clk_66mhz( .I(clk_66mhz_raw), .O(clk_66mhz), .CE(pll_lock));
 	BUFGCE bufg_clk_100mhz( .I(clk_100mhz_raw), .O(clk_100mhz), .CE(pll_lock));

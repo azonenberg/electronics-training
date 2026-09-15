@@ -30,6 +30,7 @@
 ***********************************************************************************************************************/
 
 module PAM3SignalGenerator(
+	input wire	clk_25mhz,
 	input wire	clk_66mhz,
 	input wire	clk_125mhz,
 	input wire	clk_250mhz,
@@ -154,7 +155,7 @@ module PAM3SignalGenerator(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Output symbol decoding
+	// H-bridge control logic
 
 	typedef enum logic[1:0]
 	{
@@ -234,22 +235,105 @@ module PAM3SignalGenerator(
 	end
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Ethernet frame generation
+
+	logic		mii_tx_en	= 0;
+	logic[3:0]	mii_txd		= 0;
+
+	logic[7:0]	mii_count	= 0;
+
+	//TODO: dont just hardcode one packet forever
+	logic		mii_byte_valid	= 0;
+	logic[7:0]	mii_byte		= 0;
+	logic		mii_toggle		= 0;
+	always_ff @(posedge clk_25mhz) begin
+
+		//Nibble to byte deserialization
+		mii_toggle	<= !mii_toggle;
+		mii_tx_en	<= mii_byte_valid;
+		if(!mii_toggle)
+			mii_txd	<= mii_byte[3:0];
+		else
+			mii_txd	<= mii_byte[7:4];
+
+		//new byte
+		if(mii_toggle) begin
+
+			mii_count		<= mii_count + 1;
+
+			//default to sending
+			mii_byte_valid	<= 1;
+
+			case(mii_count)
+
+				//preamble
+				'h00:	mii_byte	<= 'h55;
+				'h01:	mii_byte	<= 'h55;
+				'h02:	mii_byte	<= 'h55;
+				'h03:	mii_byte	<= 'h55;
+				'h04:	mii_byte	<= 'h55;
+				'h05:	mii_byte	<= 'h55;
+				'h06:	mii_byte	<= 'h55;
+				'h07:	mii_byte	<= 'hd5;
+
+				//Dest MAC
+				'h08:	mii_byte	<= 'h01;
+				'h09:	mii_byte	<= 'h23;
+				'h0a:	mii_byte	<= 'h45;
+				'h0b:	mii_byte	<= 'h67;
+				'h0c:	mii_byte	<= 'h89;
+				'h0d:	mii_byte	<= 'hab;
+
+				//Src MAC
+				'h0e:	mii_byte	<= 'hde;
+				'h0f:	mii_byte	<= 'had;
+				'h10:	mii_byte	<= 'hbe;
+				'h11:	mii_byte	<= 'hef;
+				'h12:	mii_byte	<= 'h00;
+				'h13:	mii_byte	<= 'h00;
+
+				//Ethertype
+				'h14:	mii_byte	<= 'h08;
+				'h15:	mii_byte	<= 'h00;
+
+				//Dummy payload byte
+				'h16:	mii_byte	<= 'h00;
+
+				//FCS
+				'h17:	mii_byte	<= 'heb;
+				'h18:	mii_byte	<= 'h7c;
+				'h19:	mii_byte	<= 'h97;
+				'h1a:	mii_byte	<= 'h0a;
+
+				//interframe gap
+				default: begin
+					mii_byte_valid	<= 0;
+					mii_byte		<= 0;
+				end
+
+			endcase
+		end
+
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// PAM signal generation
 
-	//For now just do a PRBS
-	wire prbs_out;
-	PRBS7 #(
-		.WIDTH(1),
-		.INITIAL_SEED(1)
-	) prbs (
-		.clk(clk_125mhz),
-		.update(1),
-		.init(1'b0),
-		.seed(31'h0),
-		.dout(prbs_out)
-	);
+	//TODO: 100baseT1 PAM3 generator
 
-	wire mlt3_out = prbs_out;
+	//100baseTX MLT3 generator
+	wire mlt3_out;
+	BaseTXSignalGenerator basetx_siggen(
+		.clk_25mhz(clk_25mhz),
+		.clk_125mhz(clk_125mhz),
+
+		//25 MHz domain
+		.mii_tx_en(mii_tx_en),
+		.mii_tx_er(1'b0),
+		.mii_txd(mii_txd),
+
+		.data_out(mlt3_out)
+	);
 
 	//MLT-3 encoder
 	//TODO: mux to PAM encoder

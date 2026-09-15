@@ -95,6 +95,7 @@ module top(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Top level clocking
 
+	wire	clk_25mhz_pll;
 	wire	clk_50mhz;
 	wire	clk_66mhz;
 	wire	clk_100mhz;
@@ -105,6 +106,7 @@ module top(
 	ClockGeneration clkgen(
 		.clk_25mhz(clk_25mhz),
 
+		.clk_25mhz_pll(clk_25mhz_pll),
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_100mhz(clk_100mhz),
@@ -167,6 +169,7 @@ module top(
 	PeripheralTop peripherals(
 		.gtp_refclk_p(gtp_ref_p),
 		.gtp_refclk_n(gtp_ref_n),
+		.clk_25mhz(clk_25mhz_pll),
 		.clk_50mhz(clk_50mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),

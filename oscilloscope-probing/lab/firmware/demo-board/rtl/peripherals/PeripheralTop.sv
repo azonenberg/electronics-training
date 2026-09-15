@@ -37,6 +37,7 @@ module PeripheralTop(
 	input wire			gtp_refclk_p,
 	input wire			gtp_refclk_n,
 
+	input wire			clk_25mhz,
 	input wire			clk_50mhz,
 	input wire			clk_66mhz,
 	input wire			clk_125mhz,
@@ -287,6 +288,7 @@ module PeripheralTop(
 	// PAM3 signal generator on SMA connectors (TODO APB)
 
 	PAM3SignalGenerator pam3(
+		.clk_25mhz(clk_25mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),
 		.clk_250mhz(clk_250mhz),
