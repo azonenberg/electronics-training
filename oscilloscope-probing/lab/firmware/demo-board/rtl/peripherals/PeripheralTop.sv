@@ -88,7 +88,7 @@ module PeripheralTop(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 bridging (0xc000_0000, 1 kB per peripheral)
 
-	localparam NUM_APB1_PERIPHERALS	= 8;
+	localparam NUM_APB1_PERIPHERALS	= 9;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1_devices[NUM_APB1_PERIPHERALS-1:0]();
@@ -297,9 +297,16 @@ module PeripheralTop(
 	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// PAM3 signal generator on SMA connectors (TODO APB)
+	// PAM3 signal generator on SMA connectors (c000_2000)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_pam3_gen();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_pam3_gen(
+		.upstream(apb1_devices[8]),
+		.downstream(apb_pam3_gen));
 
 	PAM3SignalGenerator pam3(
+		.apb(apb_pam3_gen),
+
 		.clk_25mhz(clk_25mhz),
 		.clk_66mhz(clk_66mhz),
 		.clk_125mhz(clk_125mhz),

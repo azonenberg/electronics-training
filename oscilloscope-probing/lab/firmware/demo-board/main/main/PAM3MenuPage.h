@@ -35,7 +35,7 @@ class PAM3MenuPage : public MenuPageHandler
 public:
 	PAM3MenuPage(MenuSystem* parent)
 		: MenuPageHandler(parent)
-		, m_mode(MODE_100BASETX)
+		, m_mode(PAM3Mode::MODE_OFF)
 	{}
 
 	virtual void Render() override;
@@ -44,12 +44,7 @@ public:
 	virtual void OnRight() override;
 
 protected:
-
-	enum PAM3Mode
-	{
-		MODE_100BASETX,
-		MODE_100BASET1
-	} m_mode;
+	PAM3Mode m_mode;
 };
 
 #endif

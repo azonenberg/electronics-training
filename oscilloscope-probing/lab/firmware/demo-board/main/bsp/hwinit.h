@@ -120,6 +120,17 @@ enum class GTPRate
 	RATE_Count,
 };
 
+//must match mode_t in PAM3SignalGenerator.sv
+enum class PAM3Mode
+{
+	MODE_OFF,
+	MODE_100BASETX,
+	MODE_100BASET1,
+	MODE_PAM3_PRBS31,
+
+	Count
+};
+
 struct APB_NRZSignalGenerator
 {
 	uint32_t MUXSEL[4];
@@ -135,6 +146,11 @@ struct APB_TransceiverSignalGenerator
 	uint32_t	LANE1_RATE;
 	uint32_t	LANE1_PATTERN;
 	uint32_t	reserved1;
+};
+
+struct APB_PAM3SignalGenerator
+{
+	uint32_t	MUXSEL;
 };
 
 //Common hardware interface stuff
@@ -153,8 +169,10 @@ extern volatile APB_SPIHostInterface FQSPI;
 extern volatile APB_NRZSignalGenerator FSMAGEN;
 extern volatile APB_NRZSignalGenerator FCLIPGEN;
 extern volatile APB_TransceiverSignalGenerator FGTPGEN;
+extern volatile APB_PAM3SignalGenerator FPAM3GEN;
 
 extern const char* g_nrzmodeNames[];
+extern const char* g_pam3modeNames[];
 extern const char* g_gtpmodeNames[];
 extern const char* g_gtpswingNames[];
 extern const char* g_gtprateNames[];

@@ -30,15 +30,122 @@
 ***********************************************************************************************************************/
 
 module PAM3SignalGenerator(
-	input wire	clk_25mhz,
-	input wire	clk_66mhz,
-	input wire	clk_125mhz,
-	input wire	clk_250mhz,
-	input wire	clk_500mhz,
+	APB.completer	apb,
 
-	output wire	pam3_tx_p,
-	output wire	pam3_tx_n
+	input wire		clk_25mhz,
+	input wire		clk_66mhz,
+	input wire		clk_125mhz,
+	input wire		clk_250mhz,
+	input wire		clk_500mhz,
+
+	output wire		pam3_tx_p,
+	output wire		pam3_tx_n
 );
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Sanity check bus configuration
+
+	if(apb.DATA_WIDTH != 32)
+		apb_bus_width_is_invalid();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Tie off unused APB signals
+
+	assign apb.pruser = 0;
+	assign apb.pbuser = 0;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interface registers
+
+	//must match PAM3Mode in hwinit.h
+	typedef enum logic[1:0]
+	{
+		MODE_OFF,
+		MODE_100BASETX,
+		MODE_100BASET1,			//not yet implemented
+		MODE_2D_PAM3_PRBS31
+	} mode_t;
+
+	logic	mode_update	= 0;
+	mode_t	mode = MODE_OFF;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB interface logic
+
+	typedef enum logic[7:0]
+	{
+		REG_MODE	= 0
+	}
+	regid_t;
+
+	//Combinatorial readback
+	always_comb begin
+
+		apb.pready	= apb.psel && apb.penable;
+		apb.prdata	= 0;
+		apb.pslverr	= 0;
+
+		if(apb.pready) begin
+
+			//read
+			if(!apb.pwrite) begin
+				apb.prdata = mode;
+			end
+
+			//write
+			else begin
+				if( (apb.paddr != REG_MODE) ) begin
+					apb.pslverr	 = 1;
+				end
+			end
+
+		end
+	end
+
+	always_ff @(posedge apb.pclk or negedge apb.preset_n) begin
+
+		//Reset
+		if(!apb.preset_n) begin
+			mode_update	<= 0;
+			mode		<= MODE_OFF;
+		end
+
+		//Normal path
+		else begin
+
+			mode_update	<= 0;
+
+			if(apb.pready && apb.pwrite) begin
+				if(apb.paddr == REG_MODE) begin
+					mode		<= mode_t'(apb.pwdata);
+					mode_update	<= 1;
+				end
+			end
+
+		end
+
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Mode CDC
+
+	mode_t mode_sync;
+
+	RegisterSynchronizer #(
+		.WIDTH($bits(mode_t)),
+		.INIT(MODE_OFF),
+		.IN_REG(1)
+	) sync_mode(
+		.clk_a(apb.pclk),
+		.en_a(mode_update),
+		.ack_a(),
+		.reg_a(mode),
+
+		.clk_b(clk_125mhz),
+		.updated_b(),
+		.reset_b(1'b0),
+		.reg_b(mode_sync)
+	);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output buffers
@@ -240,7 +347,7 @@ module PAM3SignalGenerator(
 	logic		mii_tx_en	= 0;
 	logic[3:0]	mii_txd		= 0;
 
-	logic[7:0]	mii_count	= 0;
+	logic[6:0]	mii_count	= 0;
 
 	//TODO: dont just hardcode one packet forever
 	logic		mii_byte_valid	= 0;
@@ -296,14 +403,22 @@ module PAM3SignalGenerator(
 				'h14:	mii_byte	<= 'h08;
 				'h15:	mii_byte	<= 'h00;
 
-				//Dummy payload byte
+				//Dummy payload
 				'h16:	mii_byte	<= 'h00;
+				'h17:	mii_byte	<= 'h11;
+				'h18:	mii_byte	<= 'h22;
+				'h19:	mii_byte	<= 'h33;
+				'h1a:	mii_byte	<= 'h44;
+				'h1b:	mii_byte	<= 'h55;
+				'h1c:	mii_byte	<= 'h66;
+				'h1d:	mii_byte	<= 'h77;
+				'h1e:	mii_byte	<= 'h88;
 
 				//FCS
-				'h17:	mii_byte	<= 'heb;
-				'h18:	mii_byte	<= 'h7c;
-				'h19:	mii_byte	<= 'h97;
-				'h1a:	mii_byte	<= 'h0a;
+				'h1f:	mii_byte	<= 'hf0;
+				'h20:	mii_byte	<= 'h5c;
+				'h21:	mii_byte	<= 'hb9;
+				'h22:	mii_byte	<= 'h2e;
 
 				//interframe gap
 				default: begin
@@ -312,6 +427,80 @@ module PAM3SignalGenerator(
 				end
 
 			endcase
+		end
+
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 2D-PAM3 PRBS generation
+
+	logic		toggle = 0;
+	wire[2:0]	prbs_out;
+
+	PRBS31 #(
+		.WIDTH(3),
+		.INITIAL_SEED(1)
+	) prbs31 (
+		.clk(clk_125mhz),
+		.update(toggle),
+		.init(1'b0),
+		.seed(31'b0),
+		.dout(prbs_out)
+	);
+
+	symbol_t prbs_symbol_i = SYMBOL_0;
+	symbol_t prbs_symbol_q = SYMBOL_0;
+
+	always_ff @(posedge clk_125mhz) begin
+		toggle	<= !toggle;
+
+		//TODO: actually use 100baseT1 symbol coding
+		if(!toggle) begin
+
+			case(prbs_out)
+
+				3'd0: begin
+					prbs_symbol_i <= SYMBOL_MINUS_1;
+					prbs_symbol_q <= SYMBOL_MINUS_1;
+				end
+
+				3'd1: begin
+					prbs_symbol_i <= SYMBOL_0;
+					prbs_symbol_q <= SYMBOL_MINUS_1;
+				end
+
+				3'd2: begin
+					prbs_symbol_i <= SYMBOL_PLUS_1;
+					prbs_symbol_q <= SYMBOL_MINUS_1;
+				end
+
+				3'd3: begin
+					prbs_symbol_i <= SYMBOL_MINUS_1;
+					prbs_symbol_q <= SYMBOL_0;
+				end
+
+				3'd4: begin
+					prbs_symbol_i <= SYMBOL_PLUS_1;
+					prbs_symbol_q <= SYMBOL_0;
+				end
+
+				3'd5: begin
+					prbs_symbol_i <= SYMBOL_MINUS_1;
+					prbs_symbol_q <= SYMBOL_PLUS_1;
+				end
+
+				3'd6: begin
+					prbs_symbol_i <= SYMBOL_0;
+					prbs_symbol_q <= SYMBOL_PLUS_1;
+				end
+
+				3'd7: begin
+					prbs_symbol_i <= SYMBOL_PLUS_1;
+					prbs_symbol_q <= SYMBOL_PLUS_1;
+				end
+
+			endcase
+
 		end
 
 	end
@@ -335,18 +524,46 @@ module PAM3SignalGenerator(
 		.data_out(mlt3_out)
 	);
 
-	//MLT-3 encoder
-	//TODO: mux to PAM encoder
+	//Output line coder and mux
 	logic[1:0] count = 0;
 	always_ff @(posedge clk_125mhz) begin
 
-		if(mlt3_out)
-			count <= count + 1;
+		case(mode_sync)
 
-		case(count)
-			0:			symout <= SYMBOL_MINUS_1;
-			2:			symout <= SYMBOL_PLUS_1;
-			default:	symout <= SYMBOL_0;
+			//MLT-3 encoder
+			MODE_100BASETX: begin
+				if(mlt3_out)
+					count <= count + 1;
+
+				case(count)
+					0:			symout <= SYMBOL_MINUS_1;
+					2:			symout <= SYMBOL_PLUS_1;
+					default:	symout <= SYMBOL_0;
+				endcase
+			end	//MODE_100BASETX
+
+			//TODO
+			MODE_100BASET1: begin
+				symout	<= SYMBOL_0;
+			end
+
+			//PAM3 PRBS
+			MODE_2D_PAM3_PRBS31: begin
+				if(toggle)
+					symout	<= prbs_symbol_i;
+				else
+					symout	<= prbs_symbol_q;
+			end
+
+			//Nothing to do
+			MODE_OFF: begin
+				symout	<= SYMBOL_0;
+			end
+
+			default: begin
+				symout	<= SYMBOL_0;
+			end
+
 		endcase
 	end
 

@@ -36,12 +36,9 @@
 
 void PAM3MenuPage::Render()
 {
-	const char* names[] =
-	{
-		"100BASE-TX",
-		"100BASE-T1"
-	};
+	RenderSelector("Pattern", 0, m_mode, g_pam3modeNames, 11);
 
+	/*
 	bool active = IsRowActive(0);
 	Printf("Pattern:  %c %10s %c\n",
 		active ? '<' : ' ',
@@ -59,6 +56,7 @@ void PAM3MenuPage::Render()
 		Printf("Mod    :    MLT-3\n");
 		Printf("Rate   :    125.0 Mbaud\n");
 	}
+	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,16 +64,14 @@ void PAM3MenuPage::Render()
 
 void PAM3MenuPage::OnLeft()
 {
-	if(m_mode == MODE_100BASET1)
-		m_mode = MODE_100BASETX;
-	else
-		m_mode = MODE_100BASET1;
+	EnumLeft(m_mode, PAM3Mode::Count);
+
+	FPAM3GEN.MUXSEL = static_cast<uint32_t>(m_mode);
 }
 
 void PAM3MenuPage::OnRight()
 {
-	if(m_mode == MODE_100BASET1)
-		m_mode = MODE_100BASETX;
-	else
-		m_mode = MODE_100BASET1;
+	EnumRight(m_mode, PAM3Mode::Count);
+
+	FPAM3GEN.MUXSEL = static_cast<uint32_t>(m_mode);
 }

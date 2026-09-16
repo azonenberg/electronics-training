@@ -54,6 +54,7 @@ volatile APB_SPIHostInterface FQSPI __attribute__((section(".fqspi")));
 volatile APB_NRZSignalGenerator FSMAGEN __attribute__((section(".fsmagen")));
 volatile APB_NRZSignalGenerator FCLIPGEN __attribute__((section(".fclipgen")));
 volatile APB_TransceiverSignalGenerator FGTPGEN __attribute__((section(".fgtpgen")));
+volatile APB_PAM3SignalGenerator FPAM3GEN __attribute__((section(".fpam3gen")));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global constants
@@ -69,6 +70,14 @@ const char* g_nrzmodeNames[] =
 	"Pulse",
 	"Clock",
 	"ILA Trg"
+};
+
+const char* g_pam3modeNames[] =
+{
+	"Off",
+	"100Base-TX",
+	"100Base-T1",
+	"PAM3 PRBS31"
 };
 
 const char* g_gtpmodeNames[] =
