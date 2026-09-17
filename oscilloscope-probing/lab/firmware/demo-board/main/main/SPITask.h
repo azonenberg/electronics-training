@@ -27,157 +27,21 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef hwinit_h
-#define hwinit_h
+#ifndef SPITask_h
+#define SPITask_h
 
-#include <cli/UARTOutputStream.h>
-
-#include <peripheral/CRC.h>
-#include <peripheral/Flash.h>
-#include <peripheral/GPIO.h>
-#include <peripheral/RTC.h>
-#include <peripheral/SPI.h>
-#include <peripheral/UART.h>
-
-#include <APB_DeviceInfo_7series.h>
-#include <APB_GPIO.h>
-#include <APB_SerialLED.h>
-#include <APB_SPIHostInterface.h>
-#include <APB_UART.h>
-#include <APB_XADC.h>
-
-#include <embedded-utils/LogSink.h>
-#include <embedded-utils/APB_SpiFlashInterface.h>
-
-#include <bootloader/BootloaderAPI.h>
-
-#include <boilerplate/h750/StandardBSP.h>
-#include <fpga/FMCUtils.h>
-
-void App_Init();
-void InitFMC();
-void InitFPGAFlash();
-void InitI2C();
-void InitITM();
-
-//must match mode_t in NRZSignalGenerator.sv
-enum class NRZMode
+class SPITask : public TimerTask
 {
-	Off,
-	I2C,
-	UART,
-	SPI,
-	PRBS7,
-	PRBS31,
-	Pulse,
-	Clock,
-	ILATrig,
+public:
+	SPITask();
 
-	Count
+	virtual void OnTimer() override;
+
+protected:
+	APB_SPIHostInterfaceDriver m_spi;
+
+	int m_idx;
 };
 
-//must match pattern_t in TransceiverSignalGenerator.sv
-enum class GTPMode
-{
-	PRBS7,
-	PRBS31,
-	BaseX,
-	QSGMII,
-	Clock2UI,
-	Clock80UI,
-
-	Count
-};
-
-enum class GTPSwing
-{
-	SWING_253MV,
-	SWING_316MV,
-	SWING_377MV,
-	SWING_439MV,
-	SWING_499MV,
-	SWING_561MV,
-	SWING_621MV,
-	SWING_682MV,
-	SWING_743MV,
-	SWING_799MV,
-	SWING_857MV,
-	SWING_909MV,
-	SWING_959MV,
-	SWING_1002MV,
-	SWING_1043MV,
-	SWING_1074MV,
-
-	Count
-};
-
-enum class GTPRate
-{
-	RATE_5GBPS,
-	RATE_2P5GBPS,
-	RATE_1P25GBPS,
-	RATE_625MBPS,
-
-	RATE_Count,
-};
-
-//must match mode_t in PAM3SignalGenerator.sv
-enum class PAM3Mode
-{
-	MODE_OFF,
-	MODE_100BASETX,
-	MODE_100BASET1,
-	MODE_PAM3_PRBS31,
-
-	Count
-};
-
-struct APB_NRZSignalGenerator
-{
-	uint32_t MUXSEL[4];
-};
-
-struct APB_TransceiverSignalGenerator
-{
-	uint32_t	LANE0_DRIVER;
-	uint32_t	LANE0_RATE;
-	uint32_t	LANE0_PATTERN;
-	uint32_t	reserved0;
-	uint32_t	LANE1_DRIVER;
-	uint32_t	LANE1_RATE;
-	uint32_t	LANE1_PATTERN;
-	uint32_t	reserved1;
-};
-
-struct APB_PAM3SignalGenerator
-{
-	uint32_t	MUXSEL;
-};
-
-//Common hardware interface stuff
-extern GPIOPin g_leds[4];
-extern APB_GPIOPin g_fpgaLEDs[4];
-extern APB_SpiFlashInterface* g_fpgaFlash;
-extern APB_GPIOPin g_fpgaIRQ;
-
-void USART1_Handler();
-
-extern volatile APB_DeviceInfo_7series FDEVINFO;
-extern volatile APB_XADC FXADC;
-extern volatile APB_SerialLED FRGBLED;
-extern volatile APB_GPIO FPGA_GPIOA;
-extern volatile APB_SPIHostInterface FQSPI;
-extern volatile APB_NRZSignalGenerator FSMAGEN;
-extern volatile APB_NRZSignalGenerator FCLIPGEN;
-extern volatile APB_TransceiverSignalGenerator FGTPGEN;
-extern volatile APB_PAM3SignalGenerator FPAM3GEN;
-extern volatile APB_UART FUART;
-extern volatile APB_SPIHostInterface FSPI;
-
-extern const char* g_nrzmodeNames[];
-extern const char* g_pam3modeNames[];
-extern const char* g_gtpmodeNames[];
-extern const char* g_gtpswingNames[];
-extern const char* g_gtprateNames[];
 
 #endif

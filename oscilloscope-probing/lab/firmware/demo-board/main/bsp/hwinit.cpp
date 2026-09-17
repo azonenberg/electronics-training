@@ -56,6 +56,7 @@ volatile APB_NRZSignalGenerator FCLIPGEN __attribute__((section(".fclipgen")));
 volatile APB_TransceiverSignalGenerator FGTPGEN __attribute__((section(".fgtpgen")));
 volatile APB_PAM3SignalGenerator FPAM3GEN __attribute__((section(".fpam3gen")));
 volatile APB_UART FUART __attribute__((section(".fuart")));
+volatile APB_SPIHostInterface FSPI __attribute__((section(".fspi")));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global constants

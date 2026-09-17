@@ -39,6 +39,9 @@ SECTIONS
 		. = ALIGN(1024);
 		KEEP (*(.fuart))
 
+		. = ALIGN(1024);
+		KEEP (*(.fspi))
+
 	} > FMC_APB1
 
 	/*

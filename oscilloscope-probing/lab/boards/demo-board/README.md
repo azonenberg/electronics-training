@@ -18,3 +18,5 @@ stackup: 8 layers SGS PG SGS JLC081611-2116?? going down to 6 probably wont save
 * No pulldowns on rail enables, so they all turn on without sequencing until the supervisor is flashed and out of reset
 * Not really a bug, but should have put DC blocks on PAM3 outputs so we don't need them scope side
 * LTC3374A MODE pin is strapped low which causes high ripple on GTY VTT (1.2V) rail due to light load, should have been high
+* Add lowpass filter to PAM3 outputs to simulate ethernet magnetics response
+* Missing solder paste apertures on USB connector mechanical pins and several PTH headers that could otherwise have been pin-in-paste soldered

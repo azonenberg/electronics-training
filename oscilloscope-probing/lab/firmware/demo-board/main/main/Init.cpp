@@ -34,6 +34,7 @@
 #include "DisplayTask.h"
 #include "ButtonTask.h"
 #include "RGBTask.h"
+#include "SPITask.h"
 #include "UARTTask.h"
 
 /**
@@ -137,15 +138,18 @@ void App_Init()
 	static LocalConsoleTask localConsoleTask;
 	static ButtonTask buttonTask;
 	static RGBTask rgbTask;
+	static SPITask spiTask;
 	static UARTTask uartTask;
 
 	g_tasks.push_back(&localConsoleTask);
 	g_tasks.push_back(&buttonTask);
 	g_tasks.push_back(&rgbTask);
+	g_tasks.push_back(&spiTask);
 	g_tasks.push_back(&uartTask);
 
 	g_timerTasks.push_back(&buttonTask);
 	g_timerTasks.push_back(&rgbTask);
+	g_timerTasks.push_back(&spiTask);
 	g_timerTasks.push_back(&uartTask);
 
 	g_rgbTask = &rgbTask;

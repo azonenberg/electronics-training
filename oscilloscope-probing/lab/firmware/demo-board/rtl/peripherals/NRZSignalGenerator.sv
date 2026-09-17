@@ -34,6 +34,9 @@ module NRZSignalGenerator(
 
 	input wire			ila_trig_out,
 	input wire			uart_tx,
+	input wire			spi_sck,
+	input wire			spi_mosi,
+	input wire			spi_cs_n,
 
 	output logic[3:0]	dout
 );
@@ -162,13 +165,6 @@ module NRZSignalGenerator(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output muxing
 
-	/*
-	MODE_I2C,
-	MODE_UART,
-	MODE_SPI,
-	MODE_PULSE,
-	*/
-
 	//Combinatorial mux input configuration
 	logic[8:0]	dout3_in;
 	logic[8:0]	dout2_in;
@@ -193,6 +189,12 @@ module NRZSignalGenerator(
 		dout1_in[MODE_UART]		= uart_tx;
 		dout0_in[MODE_UART]		= uart_tx;
 
+		//SPI
+		dout3_in[MODE_SPI]		= spi_mosi;
+		dout2_in[MODE_SPI]		= spi_sck;
+		dout1_in[MODE_SPI]		= spi_cs_n;
+		dout0_in[MODE_SPI]		= 1'b0;
+
 		//PRBS7
 		dout3_in[MODE_PRBS7]	= prbs7_out;
 		dout2_in[MODE_PRBS7]	= prbs7_out;
@@ -204,6 +206,8 @@ module NRZSignalGenerator(
 		dout2_in[MODE_PRBS31]	= prbs31_out;
 		dout1_in[MODE_PRBS31]	= prbs31_out;
 		dout0_in[MODE_PRBS31]	= prbs31_out;
+
+		//PULSE
 
 		//CLOCK
 		dout3_in[MODE_CLOCK]	= toggle;

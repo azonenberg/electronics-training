@@ -88,7 +88,7 @@ module PeripheralTop(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 bridging (0xc000_0000, 1 kB per peripheral)
 
-	localparam NUM_APB1_PERIPHERALS	= 10;
+	localparam NUM_APB1_PERIPHERALS	= 11;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1_devices[NUM_APB1_PERIPHERALS-1:0]();
@@ -263,6 +263,10 @@ module PeripheralTop(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_sma();
 	APB_CDC sync_apb_sma(.upstream(apb1_devices[5]), .downstream_pclk(clk_250mhz), .downstream(apb_sma));
 
+	wire	demo_sck;
+	wire	demo_mosi;
+	wire	demo_cs_n;
+
 	wire	demo_uart_tx;
 	wire	demo_uart_tx_clk250;
 	ThreeStageSynchronizer sync_uart_tx(
@@ -273,6 +277,9 @@ module PeripheralTop(
 
 		.ila_trig_out(ila_trig_out),
 		.uart_tx(demo_uart_tx_clk250),
+		.spi_sck(demo_sck),
+		.spi_mosi(demo_mosi),
+		.spi_cs_n(demo_cs_n),
 
 		.dout(coax_out) );
 
@@ -287,6 +294,9 @@ module PeripheralTop(
 
 		.ila_trig_out(ila_trig_out),
 		.uart_tx(demo_uart_tx_clk250),
+		.spi_sck(demo_sck),
+		.spi_mosi(demo_mosi),
+		.spi_cs_n(demo_cs_n),
 
 		.dout(clip_out) );
 
@@ -346,6 +356,21 @@ module PeripheralTop(
 		.apb(apb_uart),
 		.rx(1'b0),
 		.tx(demo_uart_tx)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB SPI muxable to test points (c000_2800)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_spi();
+	APB_CDC sync_apb_spi(.upstream(apb1_devices[10]), .downstream_pclk(clk_250mhz), .downstream(apb_spi));
+
+	APB_SPIHostInterface spi(
+		.apb(apb_spi),
+
+		.spi_sck(demo_sck),
+		.spi_mosi(demo_mosi),
+		.spi_miso(1'b0),
+		.spi_cs_n(demo_cs_n)
 	);
 
 endmodule
