@@ -43,6 +43,7 @@
 #include <APB_GPIO.h>
 #include <APB_SerialLED.h>
 #include <APB_SPIHostInterface.h>
+#include <APB_UART.h>
 #include <APB_XADC.h>
 
 #include <embedded-utils/LogSink.h>
@@ -170,6 +171,7 @@ extern volatile APB_NRZSignalGenerator FSMAGEN;
 extern volatile APB_NRZSignalGenerator FCLIPGEN;
 extern volatile APB_TransceiverSignalGenerator FGTPGEN;
 extern volatile APB_PAM3SignalGenerator FPAM3GEN;
+extern volatile APB_UART FUART;
 
 extern const char* g_nrzmodeNames[];
 extern const char* g_pam3modeNames[];

@@ -45,7 +45,7 @@ GPIOPin g_1v2_en(&GPIOC, 15, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 RailDescriptorWithEnableAndADC g_1v2("1V2", g_1v2_en, 8, 1.15, 1.25, 1.0, g_logTimer, 50);
 
 GPIOPin g_1v8_en(&GPIOH, 0, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
-RailDescriptorWithEnableAndADC g_1v8("1V8", g_1v8_en, 7, 1.7, 1.85, 1.0, g_logTimer, 50);
+RailDescriptorWithEnableAndADC g_1v8("1V8", g_1v8_en, 7, 1.7, 1.9, 1.0, g_logTimer, 50);
 
 GPIOPin g_3v3_en(&GPIOC, 14, GPIOPin::MODE_OUTPUT, GPIOPin::SLEW_SLOW);
 RailDescriptorWithEnableAndADC g_3v3("3V3", g_3v3_en, 9, 3.15, 3.35, 1.0, g_logTimer, 50);
@@ -117,10 +117,12 @@ void DemoPowerResetSupervisor::PrintRailVoltages()
 
 	LogIndenter li(g_log);
 
-	g_log("3V3: %d mV\n", static_cast<int>(g_3v3.PeekVoltage() * 1000));
-	g_log("1V8: %d mV\n", static_cast<int>(g_1v8.PeekVoltage() * 1000));
-	g_log("1V2: %d mV\n", static_cast<int>(g_1v2.PeekVoltage() * 1000));
-	g_log("1V0: %d mV\n", static_cast<int>(g_1v0.PeekVoltage() * 1000));
+	g_log("3V3:    %d mV\n", static_cast<int>(g_3v3.PeekVoltage() * 1000));
+	g_log("1V8:    %d mV\n", static_cast<int>(g_1v8.PeekVoltage() * 1000));
+	g_log("1V2:    %d mV\n", static_cast<int>(g_1v2.PeekVoltage() * 1000));
+	g_log("1V0:    %d mV\n", static_cast<int>(g_1v0.PeekVoltage() * 1000));
+
+	g_log("3V3_SB: %d mV\n", g_adc->GetSupplyVoltage());
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -194,6 +196,7 @@ void App_Init()
 			}
 		}
 
+		g_logTimer.Sleep(250);
 		g_log("Power is stable\n");
 	}
 

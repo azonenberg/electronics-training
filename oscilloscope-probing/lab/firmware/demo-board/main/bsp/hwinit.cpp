@@ -55,6 +55,7 @@ volatile APB_NRZSignalGenerator FSMAGEN __attribute__((section(".fsmagen")));
 volatile APB_NRZSignalGenerator FCLIPGEN __attribute__((section(".fclipgen")));
 volatile APB_TransceiverSignalGenerator FGTPGEN __attribute__((section(".fgtpgen")));
 volatile APB_PAM3SignalGenerator FPAM3GEN __attribute__((section(".fpam3gen")));
+volatile APB_UART FUART __attribute__((section(".fuart")));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Common global constants
@@ -244,7 +245,6 @@ void BSP_MainLoopIteration()
  */
 void InitITM()
 {
-	/*
 	g_log("Initializing ITM\n");
 
 	//Enable ITM, enable PC sampling, and turn on forwarding to the TPIU
@@ -253,7 +253,6 @@ void InitITM()
 		DWT::EnablePCSampling(DWT::PC_SAMPLE_SLOW);
 		ITM::EnableDwtForwarding();
 	#endif
-	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

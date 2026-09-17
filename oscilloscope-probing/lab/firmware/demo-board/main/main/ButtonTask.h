@@ -30,12 +30,12 @@
 #ifndef ButtonTask_h
 #define ButtonTask_h
 
-class ButtonTask : public Task
+class ButtonTask : public TimerTask
 {
 public:
 	ButtonTask();
 
-	virtual void Iteration() override;
+	virtual void OnTimer() override;
 
 protected:
 

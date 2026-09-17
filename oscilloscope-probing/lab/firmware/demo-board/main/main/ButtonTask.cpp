@@ -34,7 +34,8 @@
 // Construction / destruction
 
 ButtonTask::ButtonTask()
-	: m_buttonDown{0}
+	: TimerTask(0, 10 * 10)	//100 Hz update rate
+	, m_buttonDown{0}
 	, m_leftButton(&GPIOJ, 7, GPIOPin::MODE_INPUT, 0, false)
 	, m_rightButton(&GPIOJ, 11, GPIOPin::MODE_INPUT, 0, false)
 	, m_upButton(&GPIOJ, 6, GPIOPin::MODE_INPUT, 0, false)
@@ -49,11 +50,14 @@ ButtonTask::ButtonTask()
 
 	for(auto& b : m_buttons)
 		b->SetPullMode(GPIOPin::PULL_DOWN);
+
+	//Give the pulldowns time to do their thing before we read button state for the first time
+	g_logTimer.Sleep(25 * 10);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ButtonTask::Iteration()
+void ButtonTask::OnTimer()
 {
 	//Get current button state
 	bool down[5];

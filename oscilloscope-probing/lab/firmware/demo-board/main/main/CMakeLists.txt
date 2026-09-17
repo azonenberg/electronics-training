@@ -11,6 +11,7 @@ add_executable(main
 	RGBMenuPage.cpp
 	RGBTask.cpp
 	TransceiverMenuPage.cpp
+	UARTTask.cpp
 
 	globals.cpp
 	Init.cpp

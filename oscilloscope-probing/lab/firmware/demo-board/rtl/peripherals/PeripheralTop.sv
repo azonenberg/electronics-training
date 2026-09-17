@@ -88,7 +88,7 @@ module PeripheralTop(
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// APB1 bridging (0xc000_0000, 1 kB per peripheral)
 
-	localparam NUM_APB1_PERIPHERALS	= 9;
+	localparam NUM_APB1_PERIPHERALS	= 10;
 	localparam APB1_BLOCK_SIZE		= 32'h400;
 	localparam APB1_ADDR_WIDTH		= $clog2(APB1_BLOCK_SIZE);
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb1_devices[NUM_APB1_PERIPHERALS-1:0]();
@@ -263,7 +263,18 @@ module PeripheralTop(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_sma();
 	APB_CDC sync_apb_sma(.upstream(apb1_devices[5]), .downstream_pclk(clk_250mhz), .downstream(apb_sma));
 
-	NRZSignalGenerator sma(.apb(apb_sma), .ila_trig_out(ila_trig_out), .dout(coax_out) );
+	wire	demo_uart_tx;
+	wire	demo_uart_tx_clk250;
+	ThreeStageSynchronizer sync_uart_tx(
+		.clk_in(apb1.pclk), .din(demo_uart_tx), .clk_out(clk_250mhz), .dout(demo_uart_tx_clk250));
+
+	NRZSignalGenerator sma(
+		.apb(apb_sma),
+
+		.ila_trig_out(ila_trig_out),
+		.uart_tx(demo_uart_tx_clk250),
+
+		.dout(coax_out) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NRZ signal generator on probe clips (c000_1800)
@@ -271,7 +282,13 @@ module PeripheralTop(
 	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_clip();
 	APB_CDC sync_apb_clip(.upstream(apb1_devices[6]), .downstream_pclk(clk_250mhz), .downstream(apb_clip));
 
-	NRZSignalGenerator clip(.apb(apb_clip), .ila_trig_out(ila_trig_out), .dout(clip_out) );
+	NRZSignalGenerator clip(
+		.apb(apb_clip),
+
+		.ila_trig_out(ila_trig_out),
+		.uart_tx(demo_uart_tx_clk250),
+
+		.dout(clip_out) );
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GTP signal generator on probe clips (c000_1c00)
@@ -315,6 +332,20 @@ module PeripheralTop(
 
 		.pam3_tx_p(pam3_tx_p),
 		.pam3_tx_n(pam3_tx_n)
+	);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// APB UART muxable to test points (c000_2400)
+
+	APB #(.DATA_WIDTH(32), .ADDR_WIDTH(APB1_ADDR_WIDTH), .USER_WIDTH(0)) apb_uart();
+	APBRegisterSlice #(.DOWN_REG(1), .UP_REG(1)) regslice_apb_uart(
+		.upstream(apb1_devices[9]),
+		.downstream(apb_uart));
+
+	APB_UART uart(
+		.apb(apb_uart),
+		.rx(1'b0),
+		.tx(demo_uart_tx)
 	);
 
 endmodule

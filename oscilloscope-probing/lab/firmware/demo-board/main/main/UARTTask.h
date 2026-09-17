@@ -27,61 +27,21 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef ButtonTask_h
-#define ButtonTask_h
+#ifndef UARTTask_h
+#define UARTTask_h
 
-#include <core/Task.h>
-
-class ButtonTask : public Task
+class UARTTask : public TimerTask
 {
 public:
-	ButtonTask()
-		: m_powerButtonDown(false)
-		, m_resetButtonDown(false)
-		, m_pwrButton(&GPIOA, 6, GPIOPin::MODE_INPUT, 0, false)
-		, m_rstButton(&GPIOA, 7, GPIOPin::MODE_INPUT, 0, false)
-	{
-		m_pwrButton.SetPullMode(GPIOPin::PULL_DOWN);
-		m_rstButton.SetPullMode(GPIOPin::PULL_DOWN);
+	UARTTask();
 
-		//Give the pulldowns time to do their thing before we read button state for the first time
-		g_logTimer.Sleep(25 * 10);
-	}
-
-	virtual void Iteration()
-	{
-		bool down = m_pwrButton;
-		if(down && !m_powerButtonDown)
-		{
-			g_log("Power button pressed\n");
-			if(g_super.IsPowerOn())
-				g_super.PowerOff();
-			else
-				g_super.PowerOn();
-		}
-
-		m_powerButtonDown = down;
-
-		///
-
-		down = m_rstButton;
-
-		if(down && !m_resetButtonDown)
-		{
-			g_log("Reset button pressed, ignoring for now\n");
-		}
-
-		m_resetButtonDown = down;
-	}
+	virtual void OnTimer() override;
 
 protected:
-	bool m_powerButtonDown;
-	bool m_resetButtonDown;
+	APB_UARTInterface m_uart;
 
-	GPIOPin m_pwrButton;
-	GPIOPin m_rstButton;
+	int m_idx;
 };
 
+
 #endif
-
-

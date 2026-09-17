@@ -33,6 +33,7 @@ module NRZSignalGenerator(
 	APB.completer		apb,
 
 	input wire			ila_trig_out,
+	input wire			uart_tx,
 
 	output logic[3:0]	dout
 );
@@ -156,6 +157,9 @@ module NRZSignalGenerator(
 	end
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// I2C generator
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output muxing
 
 	/*
@@ -180,6 +184,14 @@ module NRZSignalGenerator(
 		dout0_in	= 0;
 
 		//MODE_OFF is just zero nothing needed there
+
+		//I2C
+
+		//UART
+		dout3_in[MODE_UART]		= uart_tx;
+		dout2_in[MODE_UART]		= uart_tx;
+		dout1_in[MODE_UART]		= uart_tx;
+		dout0_in[MODE_UART]		= uart_tx;
 
 		//PRBS7
 		dout3_in[MODE_PRBS7]	= prbs7_out;

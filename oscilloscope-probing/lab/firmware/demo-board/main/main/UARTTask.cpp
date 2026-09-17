@@ -27,61 +27,24 @@
 *                                                                                                                      *
 ***********************************************************************************************************************/
 
-#ifndef ButtonTask_h
-#define ButtonTask_h
+#include "demo.h"
+#include "UARTTask.h"
 
-#include <core/Task.h>
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Construction / destruction
 
-class ButtonTask : public Task
+UARTTask::UARTTask()
+	: TimerTask(0, 10 * 20)	//50 Hz update rate
+	, m_uart(&FUART, 1085)	//115200 @ 125 MHz PCLK
+	, m_idx(0)
 {
-public:
-	ButtonTask()
-		: m_powerButtonDown(false)
-		, m_resetButtonDown(false)
-		, m_pwrButton(&GPIOA, 6, GPIOPin::MODE_INPUT, 0, false)
-		, m_rstButton(&GPIOA, 7, GPIOPin::MODE_INPUT, 0, false)
-	{
-		m_pwrButton.SetPullMode(GPIOPin::PULL_DOWN);
-		m_rstButton.SetPullMode(GPIOPin::PULL_DOWN);
 
-		//Give the pulldowns time to do their thing before we read button state for the first time
-		g_logTimer.Sleep(25 * 10);
-	}
+}
 
-	virtual void Iteration()
-	{
-		bool down = m_pwrButton;
-		if(down && !m_powerButtonDown)
-		{
-			g_log("Power button pressed\n");
-			if(g_super.IsPowerOn())
-				g_super.PowerOff();
-			else
-				g_super.PowerOn();
-		}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		m_powerButtonDown = down;
-
-		///
-
-		down = m_rstButton;
-
-		if(down && !m_resetButtonDown)
-		{
-			g_log("Reset button pressed, ignoring for now\n");
-		}
-
-		m_resetButtonDown = down;
-	}
-
-protected:
-	bool m_powerButtonDown;
-	bool m_resetButtonDown;
-
-	GPIOPin m_pwrButton;
-	GPIOPin m_rstButton;
-};
-
-#endif
-
-
+void UARTTask::OnTimer()
+{
+	m_uart.Printf("hello world %d\n", m_idx);
+	m_idx ++;
+}
