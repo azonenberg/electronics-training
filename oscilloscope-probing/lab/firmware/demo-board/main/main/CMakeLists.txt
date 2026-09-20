@@ -1,7 +1,6 @@
 add_executable(main
 	AboutMenuPage.cpp
 	ButtonTask.cpp
-	ClocksMenuPage.cpp
 	DemoCLISessionContext.cpp
 	DisplayTask.cpp
 	MenuPageHandler.cpp

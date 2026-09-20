@@ -163,6 +163,17 @@ module NRZSignalGenerator(
 	// I2C generator
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Pulse generation
+
+	logic	pulse_out	= 0;
+	logic[15:0] pulsecount = 0;
+
+	always_ff @(posedge apb.pclk) begin
+		pulsecount		<= pulsecount + 1;
+		pulse_out		<= (pulsecount < 256);
+	end
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Output muxing
 
 	//Combinatorial mux input configuration
@@ -208,6 +219,10 @@ module NRZSignalGenerator(
 		dout0_in[MODE_PRBS31]	= prbs31_out;
 
 		//PULSE
+		dout3_in[MODE_PULSE]	= pulse_out;
+		dout2_in[MODE_PULSE]	= pulse_out;
+		dout1_in[MODE_PULSE]	= pulse_out;
+		dout0_in[MODE_PULSE]	= pulse_out;
 
 		//CLOCK
 		dout3_in[MODE_CLOCK]	= toggle;

@@ -52,7 +52,7 @@ ButtonTask::ButtonTask()
 		b->SetPullMode(GPIOPin::PULL_DOWN);
 
 	//Give the pulldowns time to do their thing before we read button state for the first time
-	g_logTimer.Sleep(25 * 10);
+	g_logTimer.Sleep(50 * 10);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

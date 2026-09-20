@@ -30,7 +30,6 @@
 #include "demo.h"
 
 #include "AboutMenuPage.h"
-#include "ClocksMenuPage.h"
 #include "NRZMenuPage.h"
 #include "PAM3MenuPage.h"
 #include "RGBMenuPage.h"
@@ -42,7 +41,6 @@
 //Forward declarations so they can go in the initialized vector
 extern MenuPageData g_aboutPage;
 extern MenuPageData g_clipPage;
-extern MenuPageData g_clockPage;
 extern MenuPageData g_dacPage;
 extern MenuPageData g_rgbPage;
 extern MenuPageData g_pam3Page;
@@ -54,10 +52,9 @@ etl::vector g_topLevelSidebar =
 {
 	&g_aboutPage,
 	&g_clipPage,
-	&g_clockPage,
-	&g_dacPage,
+	//&g_dacPage,
 	&g_pam3Page,
-	&g_pmodPage,
+	//&g_pmodPage,
 	&g_rgbPage,
 	&g_smaPage,
 	&g_transceiverPage
@@ -65,7 +62,6 @@ etl::vector g_topLevelSidebar =
 
 AboutMenuPage g_aboutHandler(&g_menu);
 NRZMenuPage g_clipHandler(&g_menu, &FCLIPGEN);
-ClocksMenuPage g_clocksHandler(&g_menu);
 PAM3MenuPage g_pam3Handler(&g_menu);
 RGBMenuPage g_rgbHandler(&g_menu);
 NRZMenuPage g_smaHandler(&g_menu, &FSMAGEN);
@@ -73,7 +69,6 @@ TransceiverMenuPage g_transceiverHandler(&g_menu);
 
 MenuPageData g_aboutPage		= { "About",	&g_aboutHandler};
 MenuPageData g_clipPage			= { "Clip",		&g_clipHandler};
-MenuPageData g_clockPage		= { "Clocks",	&g_clocksHandler};
 MenuPageData g_dacPage			= { "DAC",		nullptr};
 MenuPageData g_pam3Page			= { "PAM3 SMA",	&g_pam3Handler};
 MenuPageData g_pmodPage			= { "PMOD",		nullptr};
