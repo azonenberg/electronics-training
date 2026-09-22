@@ -20,3 +20,6 @@ stackup: 8 layers SGS PG SGS JLC081611-2116?? going down to 6 probably wont save
 * LTC3374A MODE pin is strapped low which causes high ripple on GTY VTT (1.2V) rail due to light load, should have been high
 * Add lowpass filter to PAM3 outputs to simulate ethernet magnetics response
 * Missing solder paste apertures on USB connector mechanical pins and several PTH headers that could otherwise have been pin-in-paste soldered
+
+NOTE NOTE NOTE
+Board 3 C122 has 10uf instead of 22
